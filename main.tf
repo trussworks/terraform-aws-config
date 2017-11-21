@@ -12,7 +12,7 @@
  * Usage:
  *
  *     module "aws_config" {
- *       source         = "../modules/aws_config"
+ *       source         = "trussworks/aws_config"
  *       s3_bucket_name = "truss-aws-logs"
  *       region         = "us-west-2"
  *       expiration     = 90
