@@ -13,8 +13,8 @@
  * ## Usage
  *
  *     module "aws_config" {
- *       source         = "trussworks/aws/config"
- *       s3_bucket_name = "my-aws-logs"
+ *       source             = "trussworks/aws/config"
+ *       config_logs_bucket = "my-aws-logs"
  *     }
  *
  */

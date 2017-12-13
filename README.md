@@ -12,8 +12,8 @@ The following AWS Config Rules are supported:
 ## Usage
 
     module "aws_config" {
-      source         = "trussworks/aws/config"
-      s3_bucket_name = "my-aws-logs"
+      source             = "trussworks/aws/config"
+      config_logs_bucket = "my-aws-logs"
     }
 
 
@@ -24,6 +24,7 @@ The following AWS Config Rules are supported:
 |------|-------------|:----:|:-----:|:-----:|
 | acm_days_to_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `14` | no |
 | config_delivery_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `Six_Hours` | no |
+| config_logs_bucket | The S3 bucket for AWS Config logs. | string | - | yes |
 | config_logs_prefix | The S3 prefix for AWS Config logs. | string | `config` | no |
 | config_max_execution_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `TwentyFour_Hours` | no |
 | password_max_age | Number of days before password expiration. | string | `90` | no |
@@ -33,5 +34,4 @@ The following AWS Config Rules are supported:
 | password_require_symbols | Require at least one symbol in password. | string | `true` | no |
 | password_require_uppercase | Require at least one uppercase character in password. | string | `true` | no |
 | password_reuse_prevention | Number of passwords before allowing reuse. | string | `24` | no |
-| s3_bucket_name | The name of the s3 bucket that will be used for AWS logs. | string | - | yes |
 

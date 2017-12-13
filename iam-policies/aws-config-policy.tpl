@@ -7,7 +7,7 @@
                 "s3:PutObject*"
             ],
             "Resource": [
-                "arn:aws:s3:::${bucket_name}/${config_logs_prefix}/AWSLogs/${account_id}/*"
+                "arn:aws:s3:::${config_logs_bucket}/${config_logs_prefix}/AWSLogs/${account_id}/*"
             ],
             "Condition": {
                 "StringLike": {
@@ -20,7 +20,7 @@
             "Action": [
                 "s3:GetBucketAcl"
             ],
-            "Resource": "arn:aws:s3:::${bucket_name}"
+            "Resource": "arn:aws:s3:::${config_logs_bucket}"
         }
     ]
 }

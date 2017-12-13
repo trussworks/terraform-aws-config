@@ -1,5 +1,5 @@
-variable "s3_bucket_name" {
-  description = "The name of the s3 bucket that will be used for AWS logs."
+variable "config_logs_bucket" {
+  description = "The S3 bucket for AWS Config logs."
   type        = "string"
 }
 

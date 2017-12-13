@@ -1,13 +1,13 @@
 // Get the access to the effective Account ID in which Terraform is working
 data "aws_caller_identity" "current" {}
 
-// Allows AWS Config IAM role to access the S3 bucket where
-// AWS Config records are stored
+// Allows AWS Config IAM role to access the S3 bucket where AWS Config records
+// are stored
 data "template_file" "aws_config_policy" {
   template = "${file("${path.module}/iam-policies/aws-config-policy.tpl")}"
 
   vars = {
-    bucket_name        = "${var.s3_bucket_name}"
+    config_logs_bucket = "${var.config_logs_bucket}"
     config_logs_prefix = "${var.config_logs_prefix}"
     account_id         = "${data.aws_caller_identity.current.account_id}"
   }
