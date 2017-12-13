@@ -1,5 +1,5 @@
 /**
- * Terraform module that sets up the AWS Config service and enables managed config rules
+ * Enables AWS Config and adds managed config rules with good defaults.
  *
  * The following AWS Config Rules are supported:
  *
