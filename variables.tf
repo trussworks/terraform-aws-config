@@ -23,7 +23,7 @@ variable "config_delivery_frequency" {
 
 variable "acm_days_to_expiration" {
   description = "Specify the number of days before the rule flags the ACM Certificate as noncompliant."
-  default     = 15
+  default     = 14
 }
 
 variable "password_require_uppercase" {
@@ -48,10 +48,10 @@ variable "password_require_numbers" {
 
 variable "password_min_length" {
   description = "Password minimum length."
-  default     = 12
+  default     = 14
 }
 
 variable "password_reuse_prevention" {
   description = "Number of passwords before allowing reuse."
-  default     = 1
+  default     = 24
 }

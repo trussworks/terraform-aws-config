@@ -22,7 +22,7 @@ The following AWS Config Rules are supported:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| acm_days_to_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `15` | no |
+| acm_days_to_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `14` | no |
 | config_delivery_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `Six_Hours` | no |
 | config_logs_prefix | The S3 prefix for AWS Config logs. | string | `config` | no |
 | config_max_execution_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `TwentyFour_Hours` | no |
