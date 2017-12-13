@@ -55,3 +55,8 @@ variable "password_reuse_prevention" {
   description = "Number of passwords before allowing reuse."
   default     = 24
 }
+
+variable "password_max_age" {
+  description = "Number of days before password expiration."
+  default     = 90
+}

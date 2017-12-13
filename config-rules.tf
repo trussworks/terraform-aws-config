@@ -9,6 +9,7 @@ data "template_file" "aws_config_iam_password_policy" {
     password_require_numbers   = "${var.password_require_numbers ? "true" : "false"}"
     password_min_length        = "${var.password_min_length}"
     password_reuse_prevention  = "${var.password_reuse_prevention}"
+    password_max_age           = "${var.password_max_age}"
   }
 }
 
