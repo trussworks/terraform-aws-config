@@ -8,9 +8,9 @@ resource "aws_config_configuration_recorder_status" "main" {
 }
 
 resource "aws_config_delivery_channel" "main" {
-  name               = "aws-config"
-  config_logs_bucket = "${var.config_logs_bucket}"
-  s3_key_prefix      = "${var.config_logs_prefix}"
+  name           = "aws-config"
+  s3_bucket_name = "${var.config_logs_bucket}"
+  s3_key_prefix  = "${var.config_logs_prefix}"
 
   snapshot_delivery_properties = {
     delivery_frequency = "${var.config_delivery_frequency}"
