@@ -1,3 +1,53 @@
+variable "elb_acm_certificate_required" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "instances_in_vpc" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "s3_bucket_public_write_prohibited" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "s3_bucket_public_read_prohibited" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "s3_bucket_ssl_requests_only" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "iam_user_group_membership_check" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "iam_group_has_users_check" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "am_user_no_policies_check" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "root_account_mfa_enabled" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "iam_password_policy" {
+  description = "Enable this rule"
+  default     = 0
+}
+
 variable "password_require_uppercase" {
   description = "Require at least one uppercase character in password."
   default     = true

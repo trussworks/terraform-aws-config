@@ -12,7 +12,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
 
 resource "aws_config_config_rule" "eip-attached" {
   name        = "eip-attached"
-  description = "[COST] [EC2] [VPC] Checks whether EIPs are being used"
+  description = "[COST] [EC2] [VPC] Checks whether EIPs are being used."
 
   source {
     owner             = "AWS"

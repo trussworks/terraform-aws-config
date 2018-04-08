@@ -25,6 +25,23 @@ data "template_file" "required_tags" {
   }
 }
 
+resource "aws_config_config_rule" "cloudtrail-enabled" {
+  name        = "cloudtrail-enabled"
+  description = "[MANAGEMENT] [CLOUDTRAIL] Ensure CloudTrail is enabled."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUD_TRAIL_ENABLED"
+  }
+
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
   name             = "acm-certificate-expiration-check"
   description      = "[MANAGEMENT] [ACM] Ensures ACM Certificates in your account are marked for expiration within the specified number of days"

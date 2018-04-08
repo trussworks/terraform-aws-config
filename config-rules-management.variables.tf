@@ -1,3 +1,18 @@
+variable "required_tags" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "cloudtrail_enabled" {
+  description = "Enable this rule"
+  default     = 0
+}
+
+variable "acm_certificate_expiration_check" {
+  description = "Enable this rule"
+  default     = 0
+}
+
 variable "acm_days_to_expiration" {
   description = "Specify the number of days before the rule flags the ACM Certificate as noncompliant."
   default     = 14
