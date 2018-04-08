@@ -27,7 +27,7 @@ The following AWS Config Rules are supported:
 | config_logs_bucket | The S3 bucket for AWS Config logs. | string | - | yes |
 | config_logs_prefix | The S3 prefix for AWS Config logs. | string | `config` | no |
 | config_max_execution_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `TwentyFour_Hours` | no |
-| password_max_age | Number of days before password expiration. | string | `90` | no |
+| password_max_age_days | Number of days before password expiration. | string | `90` | no |
 | password_min_length | Password minimum length. | string | `14` | no |
 | password_require_lowercase | Require at least one lowercase character in password. | string | `true` | no |
 | password_require_numbers | Require at least one number in password. | string | `true` | no |

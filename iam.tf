@@ -32,8 +32,7 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
  */
 
 resource "aws_iam_role" "main" {
-  name = "aws-config-role"
-
+  name               = "aws-config-role"
   assume_role_policy = "${data.aws_iam_policy_document.aws-config-role-policy.json}"
 }
 

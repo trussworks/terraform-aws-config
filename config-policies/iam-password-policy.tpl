@@ -5,5 +5,5 @@
     "RequireNumbers": "${password_require_numbers}",
     "MinimumPasswordLength": "${password_min_length}",
     "PasswordReusePrevention": "${password_reuse_prevention}",
-    "MaxPasswordAge": "${password_max_age}"
+    "MaxPasswordAge": "${password_max_age_days}"
 }
