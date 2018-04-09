@@ -14,44 +14,45 @@ data "template_file" "aws_config_iam_password_policy" {
 }
 
 #IAM
-resource "aws_config_config_rule" "iam-password-policy" {
-  name             = "iam-password-policy"
-  description      = "[SECURITY] [IAM] Ensure the account password policy for IAM users meets the specified requirements"
-  input_parameters = "${data.template_file.aws_config_iam_password_policy.rendered}"
+resource "aws_config_config_rule" "iam_password_policy" {
+  name                        = "iam_password_policy"
+  description                 = "[SECURITY] [IAM] Ensure the account password policy for IAM users meets the specified requirements."
+  input_parameters            = "${data.template_file.aws_config_iam_password_policy.rendered}"
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+  count                       = "${var.iam_password_policy}"
 
   source {
     owner             = "AWS"
     source_identifier = "IAM_PASSWORD_POLICY"
   }
 
-  maximum_execution_frequency = "${var.config_max_execution_frequency}"
-
   depends_on = [
     "aws_config_configuration_recorder.main",
     "aws_config_delivery_channel.main",
   ]
 }
 
-resource "aws_config_config_rule" "root-account-mfa-enabled" {
-  name        = "root-account-mfa-enabled"
-  description = "[SECURITY] [IAM] Ensure root AWS account has MFA enabled"
+resource "aws_config_config_rule" "root_account_mfa_enabled" {
+  name                        = "root_account_mfa_enabled"
+  description                 = "[SECURITY] [IAM] Ensure root AWS account has MFA enabled"
+  count                       = "${var.root_account_mfa_enabled}"
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
   source {
     owner             = "AWS"
     source_identifier = "ROOT_ACCOUNT_MFA_ENABLED"
   }
 
-  maximum_execution_frequency = "${var.config_max_execution_frequency}"
-
   depends_on = [
     "aws_config_configuration_recorder.main",
     "aws_config_delivery_channel.main",
   ]
 }
 
-resource "aws_config_config_rule" "iam-user-no-policies-check" {
-  name        = "iam-user-no-policies-check"
+resource "aws_config_config_rule" "iam_user_no_policies_check" {
+  name        = "iam_user_no_policies_check"
   description = "[SECURITY] [MANAGEMENT] [IAM] Ensure that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles."
+  count       = "${var.iam_user_no_policies_check}"
 
   source {
     owner             = "AWS"
@@ -61,9 +62,10 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "iam-group-has-users-check" {
-  name        = "iam-group-has-users-check"
+resource "aws_config_config_rule" "iam_group_has_users_check" {
+  name        = "iam_group_has_users_check"
   description = "[SECURITY] [MANAGEMENT] [IAM] Ensure that all IAM User Groups have at least one user."
+  count       = "${var.iam_group_has_users_check}"
 
   source {
     owner             = "AWS"
@@ -73,9 +75,10 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "iam-user-group-membership-check" {
-  name        = "iam-group-has-users-check"
+resource "aws_config_config_rule" "iam_user_group_membership_check" {
+  name        = "iam_user_group_membership_check"
   description = "[SECURITY] [MANAGEMENT] [IAM] Checks whether IAM users are members of at least one IAM group."
+  count       = "${var.iam_user_group_membership_check}"
 
   source {
     owner             = "AWS"
@@ -86,9 +89,10 @@ resource "aws_config_config_rule" "iam-user-group-membership-check" {
 }
 
 #S3
-resource "aws_config_config_rule" "s3-bucket-ssl-requests-only" {
-  name        = "s3-bucket-ssl-requests-only"
+resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
+  name        = "s3_bucket_ssl_requests_only"
   description = "[SECURITY] [S3] Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL)."
+  count       = "${var.s3_bucket_ssl_requests_only}"
 
   source {
     owner             = "AWS"
@@ -98,9 +102,10 @@ resource "aws_config_config_rule" "s3-bucket-ssl-requests-only" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "s3-bucket-public-read-prohibited" {
-  name        = "s3-bucket-public-read-prohibited"
+resource "aws_config_config_rule" "s3_bucket_public_read_prohibited" {
+  name        = "s3_bucket_public_read_prohibited"
   description = "[SECURITY] [S3] Checks that your Amazon S3 buckets do not allow public read access. If an Amazon S3 bucket policy or bucket ACL allows public read access, the bucket is noncompliant."
+  count       = "${var.s3_bucket_public_read_prohibited}"
 
   source {
     owner             = "AWS"
@@ -110,9 +115,10 @@ resource "aws_config_config_rule" "s3-bucket-public-read-prohibited" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
-  name        = "s3-bucket-public-write-prohibited"
+resource "aws_config_config_rule" "s3_bucket_public_write_prohibited" {
+  name        = "s3_bucket_public_write_prohibited"
   description = "[SECURITY] [S3] Checks that your Amazon S3 buckets do not allow public write access. If an Amazon S3 bucket policy or bucket ACL allows public write access, the bucket is noncompliant."
+  count       = "${var.s3_bucket_public_write_prohibited}"
 
   source {
     owner             = "AWS"
@@ -123,9 +129,10 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
 }
 
 #EC2
-resource "aws_config_config_rule" "instances-in-vpc" {
-  name        = "instances-in-vpc"
+resource "aws_config_config_rule" "instances_in_vpc" {
+  name        = "instances_in_vpc"
   description = "[SECURITY] [EC2] [VPC] Ensure all EC2 instances run in a VPC"
+  count       = "${var.instances_in_vpc}"
 
   source {
     owner             = "AWS"
@@ -138,9 +145,10 @@ resource "aws_config_config_rule" "instances-in-vpc" {
   ]
 }
 
-resource "aws_config_config_rule" "elb-acm-certificate-required" {
-  name        = "elb-acm-certificate-required"
-  description = "[SECURITY] [EC2] [ELB] Checks whether the Classic Load Balancers use SSL certificates provided by AWS Certificate Manager. To use this rule, use an SSL or HTTPS listener with your Classic Load Balancer. This rule is only applicable to Classic Load Balancers. This rule does not check Application Load Balancers and Network Load Balancers."
+resource "aws_config_config_rule" "elb_acm_certificate_required" {
+  name        = "elb_acm_certificate_required"
+  description = "[SECURITY] [EC2] [ELB] Checks whether the Classic Load Balancers use SSL certificates provided by AWS Certificate Manager."
+  count       = "${var.elb_acm_certificate_required}"
 
   source {
     owner             = "AWS"

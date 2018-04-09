@@ -18,7 +18,7 @@ The following AWS Config Rules are supported. By default all rules are disabled 
 | `s3_bucket_ssl_requests_only` | Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL). | `SECURITY` `S3` | `s3_bucket_ssl_requests_only = 1` |
 | `iam_user_group_membership_check` | Checks whether IAM users are members of at least one IAM group. | `SECURITY` `MANAGEMENT` `IAM` | `iam_user_group_membership_check = 1` |
 | `iam_group_has_users_check` | Ensure that all IAM User Groups have at least one user. | `SECURITY` `MANAGEMENT` `IAM` | `iam_group_has_users_check = 1` |
-| `am_user_no_policies_check` | Ensure that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles. | `SECURITY` `MANAGEMENT` `IAM` | `am_user_no_policies_check = 1` |
+| `iam_user_no_policies_check` | Ensure that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles. | `SECURITY` `MANAGEMENT` `IAM` | `iam_user_no_policies_check = 1` |
 | `root_account_mfa_enabled` | Ensure root AWS account has MFA enabled. | `SECURITY` `IAM` |  |
 | `iam_password_policy` | Ensure the account password policy for IAM users meets the specified requirements. | `SECURITY` `IAM` | `iam_password_policy = 1` |
 

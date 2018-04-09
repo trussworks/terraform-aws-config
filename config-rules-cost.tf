@@ -1,6 +1,7 @@
-resource "aws_config_config_rule" "ec2-volume-inuse-check" {
-  name        = "ec2-volume-inuse-check"
+resource "aws_config_config_rule" "ec2_volume_inuse_check" {
+  name        = "ec2_volume_inuse_check"
   description = "[COST] [EC2] [EBS] Checks whether EBS volumes are attached to EC2 instances"
+  count       = "${var.ec2_volume_inuse_check}"
 
   source {
     owner             = "AWS"
@@ -10,9 +11,10 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "eip-attached" {
-  name        = "eip-attached"
+resource "aws_config_config_rule" "eip_attached" {
+  name        = "eip_attached"
   description = "[COST] [EC2] [VPC] Checks whether EIPs are being used."
+  count       = "${var.eip_attached}"
 
   source {
     owner             = "AWS"

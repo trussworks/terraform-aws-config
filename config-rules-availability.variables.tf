@@ -3,7 +3,7 @@ variable "rds_multi_az_support" {
   default     = 0
 }
 
-variable "autoscaling_group_elb_healthcheck_required " {
+variable "autoscaling_group_elb_healthcheck_required" {
   description = "Enable this rule"
   default     = 0
 }

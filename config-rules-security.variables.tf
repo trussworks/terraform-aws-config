@@ -33,7 +33,7 @@ variable "iam_group_has_users_check" {
   default     = 0
 }
 
-variable "am_user_no_policies_check" {
+variable "iam_user_no_policies_check" {
   description = "Enable this rule"
   default     = 0
 }

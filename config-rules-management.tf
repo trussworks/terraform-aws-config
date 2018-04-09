@@ -25,9 +25,10 @@ data "template_file" "required_tags" {
   }
 }
 
-resource "aws_config_config_rule" "cloudtrail-enabled" {
-  name        = "cloudtrail-enabled"
+resource "aws_config_config_rule" "cloudtrail_enabled" {
+  name        = "cloudtrail_enabled"
   description = "[MANAGEMENT] [CLOUDTRAIL] Ensure CloudTrail is enabled."
+  count       = "${var.cloudtrail_enabled}"
 
   source {
     owner             = "AWS"
@@ -42,32 +43,30 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
   ]
 }
 
-resource "aws_config_config_rule" "acm-certificate-expiration-check" {
-  name             = "acm-certificate-expiration-check"
+resource "aws_config_config_rule" "acm_certificate_expiration_check" {
+  name             = "acm_certificate_expiration_check"
   description      = "[MANAGEMENT] [ACM] Ensures ACM Certificates in your account are marked for expiration within the specified number of days"
   input_parameters = "${data.template_file.aws_config_acm_certificate_expiration.rendered}"
+  count            = "${var.acm_certificate_expiration_check}"
 
   source {
     owner             = "AWS"
     source_identifier = "ACM_CERTIFICATE_EXPIRATION_CHECK"
   }
 
-  maximum_execution_frequency = "${var.config_max_execution_frequency}"
-
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
-resource "aws_config_config_rule" "required-tags" {
-  name             = "required-tags"
+resource "aws_config_config_rule" "required_tags" {
+  name             = "required_tags"
   description      = "[MANAGEMENT] [COST] Ensures that every resource has the required tags and values."
   input_parameters = "${data.template_file.required_tags.rendered}"
+  count            = "${var.required_tags}"
 
   source {
     owner             = "AWS"
     source_identifier = "REQUIRED_TAGS"
   }
-
-  maximum_execution_frequency = "${var.config_max_execution_frequency}"
 
   depends_on = ["aws_config_configuration_recorder.main"]
 }
