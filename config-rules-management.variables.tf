@@ -1,5 +1,5 @@
 variable "required_tags" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html) rule."
+  description = "`MANAGEMENT` `COST` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html) rule."
   default     = 0
 }
 
@@ -64,12 +64,12 @@ variable "required_tag_values_6" {
 }
 
 variable "cloudtrail_enabled" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html) rule."
+  description = "`MANAGEMENT` `CLOUDTRAIL` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html) rule."
   default     = 0
 }
 
 variable "acm_certificate_expiration_check" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html) rule."
+  description = "`MANAGEMENT` `ACM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html) rule."
   default     = 0
 }
 
@@ -79,7 +79,7 @@ variable "acm_days_to_expiration" {
 }
 
 variable "desired_instance_type" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/desired-instance-type.html) rule."
+  description = "`MANAGEMENT` `EC2` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/desired-instance-type.html) rule."
   default     = 0
 }
 
@@ -89,12 +89,12 @@ variable "desired_instance_types" {
 }
 
 variable "ec2_instance_detailed_monitoring_enabled" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-detailed-monitoring-enabled.html) rule."
+  description = "`MANAGEMENT` `EC2` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-detailed-monitoring-enabled.html) rule."
   default     = 0
 }
 
 variable "ec2_managedinstance_applications_required" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-applications-required.html) rule."
+  description = "`MANAGEMENT` `EC2` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-applications-required.html) rule."
   default     = 0
 }
 
@@ -109,7 +109,7 @@ variable "ec2_applications_required_required_application_names" {
 }
 
 variable "ec2_managedinstance_platform_check" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-platform-check.html) rule."
+  description = "`MANAGEMENT` `EC2` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-platform-check.html) rule."
   default     = 0
 }
 

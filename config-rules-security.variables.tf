@@ -1,50 +1,50 @@
 variable "elb_acm_certificate_required" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html) rule."
+  description = "`SECURITY` `EC2` `ELB` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html) rule."
   default     = 0
 }
 
 variable "instances_in_vpc" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instances-in-vpc.html) rule."
+  description = "`SECURITY` `EC2` `VPC` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instances-in-vpc.html) rule."
   default     = 0
 }
 
 variable "s3_bucket_public_write_prohibited" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) rule."
+  description = "`SECURITY` `S3` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) rule."
   default     = 0
 }
 
 variable "s3_bucket_public_read_prohibited" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html) rule."
+  description = "`SECURITY` `S3` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html) rule."
   default     = 0
 }
 
 variable "s3_bucket_ssl_requests_only" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html) rule."
+  description = "`SECURITY` `S3` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html) rule."
   default     = 0
 }
 
 variable "iam_user_group_membership_check" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-group-membership-check.html) rule."
+  description = "`SECURITY` `MANAGEMENT` `IAM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-group-membership-check.html) rule."
   default     = 0
 }
 
 variable "iam_group_has_users_check" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-group-has-users-check.html) rule."
+  description = "`SECURITY` `MANAGEMENT` `IAM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-group-has-users-check.html) rule."
   default     = 0
 }
 
 variable "iam_user_no_policies_check" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html) rule."
+  description = "`SECURITY` `MANAGEMENT` `IAM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html) rule."
   default     = 0
 }
 
 variable "root_account_mfa_enabled" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html) rule."
+  description = "`SECURITY` `IAM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html) rule."
   default     = 0
 }
 
 variable "iam_password_policy" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html) rule."
+  description = "`SECURITY` `IAM` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html) rule."
   default     = 0
 }
 
@@ -84,11 +84,11 @@ variable "password_max_age_days" {
 }
 
 variable "encrypted_volumes" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html) rule."
+  description = "`SECURITY` `EC2` `EBS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html) rule."
   default     = 0
 }
 
 variable "restricted_ssh" {
-  description = "Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html) rule."
+  description = "`SECURITY` `EC2` `SSH` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html) rule."
   default     = 0
 }
