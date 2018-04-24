@@ -25,6 +25,33 @@ data "template_file" "required_tags" {
   }
 }
 
+data "template_file" "desired_instance_type" {
+  template = "${file("${path.module}/config-policies/desired-instance-type.tpl")}"
+
+  vars = {
+    desired_instance_types = "${var.desired_instance_types}"
+  }
+}
+
+data "template_file" "ec2_managedinstance_applications_required" {
+  template = "${file("${path.module}/config-policies/ec2-managedinstance-applications-required.tpl")}"
+
+  vars = {
+    platform_type     = "${var.ec2_applications_required_platform_type}"
+    application_names = "${var.ec2_applications_required_required_application_names}"
+  }
+}
+
+data "template_file" "ec2_managedinstance_platform_check" {
+  template = "${file("${path.module}/config-policies/ec2-managedinstance-platform-check.tpl")}"
+
+  vars = {
+    platform_type    = "${var.ec2_platform_check_platform_type}"
+    platform_version = "${var.ec2_platform_check_platform_version}"
+    agent_version    = "${var.ec2_platform_check_agent_version}"
+  }
+}
+
 resource "aws_config_config_rule" "cloudtrail_enabled" {
   name        = "cloudtrail_enabled"
   description = "[MANAGEMENT] [CLOUDTRAIL] Ensure CloudTrail is enabled."
@@ -66,6 +93,61 @@ resource "aws_config_config_rule" "required_tags" {
   source {
     owner             = "AWS"
     source_identifier = "REQUIRED_TAGS"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "desired_instance_type" {
+  name             = "desired_instance_type"
+  description      = "[MANAGEMENT] [COST] Checks whether your EC2 instances are of the specified instance types."
+  input_parameters = "${data.template_file.desired_instance_type.rendered}"
+  count            = "${var.desired_instance_type}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DESIRED_INSTANCE_TYPE"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "ec2_instance_detailed_monitoring_enabled" {
+  name        = "ec2_instance_detailed_monitoring_enabled"
+  description = "[MANAGEMENT] [EC2] [CLOUDWATCH] Checks whether detailed monitoring is enabled for EC2 instances."
+  count       = "${var.ec2_instance_detailed_monitoring_enabled}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EC2_INSTANCE_DETAILED_MONITORING_ENABLED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "ec2_managedinstance_applications_required" {
+  name             = "ec2_managedinstance_applications_required"
+  description      = "[MANAGEMENT] [EC2] Checks whether all of the specified applications are installed on the instance. Optionally, specify the minimum acceptable version. You can also specify the platform to apply the rule only to instances running that platform."
+  input_parameters = "${data.template_file.ec2_managedinstance_applications_required.rendered}"
+  count            = "${var.ec2_managedinstance_applications_required}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EC2_MANAGEDINSTANCE_APPLICATIONS_REQUIRED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "ec2_managedinstance_platform_check" {
+  name             = "ec2_managedinstance_platform_check"
+  description      = "[MANAGEMENT] [EC2] Checks whether EC2 managed instances have the desired configurations."
+  input_parameters = "${data.template_file.ec2_managedinstance_platform_check.rendered}"
+  count            = "${var.ec2_managedinstance_platform_check}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EC2_MANAGEDINSTANCE_PLATFORM_CHECK"
   }
 
   depends_on = ["aws_config_configuration_recorder.main"]

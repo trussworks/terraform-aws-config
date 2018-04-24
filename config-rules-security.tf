@@ -160,3 +160,35 @@ resource "aws_config_config_rule" "elb_acm_certificate_required" {
     "aws_config_delivery_channel.main",
   ]
 }
+
+resource "aws_config_config_rule" "encrypted_volumes" {
+  name        = "encrypted_volumes"
+  description = "[SECURITY] [EC2] [EBS] Checks whether the EBS volumes that are in an attached state are encrypted. If you specify the ID of a KMS key for encryption using the kmsId parameter, the rule checks if the EBS volumes in an attached state are encrypted with that KMS key."
+  count       = "${var.encrypted_volumes}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ENCRYPTED_VOLUMES"
+  }
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
+resource "aws_config_config_rule" "restricted_ssh" {
+  name        = "restricted_ssh"
+  description = "[SECURITY] [EC2] [SSH]Checks whether security groups in use do not allow restricted incoming SSH traffic. This rule applies only to IPv4."
+  count       = "${var.restricted_ssh}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "restricted_ssh"
+  }
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}

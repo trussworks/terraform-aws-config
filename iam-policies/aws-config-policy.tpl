@@ -21,6 +21,12 @@
                 "s3:GetBucketAcl"
             ],
             "Resource": "arn:aws:s3:::${config_logs_bucket}"
+        },
+        {
+						"Sid": "AllowInvokeForLambdaFunctions",
+            "Effect": "Allow",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "*"
         }
     ]
 }
