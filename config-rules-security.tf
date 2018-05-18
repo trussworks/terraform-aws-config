@@ -184,7 +184,7 @@ resource "aws_config_config_rule" "restricted_ssh" {
 
   source {
     owner             = "AWS"
-    source_identifier = "restricted_ssh"
+    source_identifier = "RESTRICTED_SSH"
   }
 
   depends_on = [
