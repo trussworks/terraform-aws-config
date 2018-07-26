@@ -177,6 +177,22 @@ resource "aws_config_config_rule" "encrypted_volumes" {
   ]
 }
 
+resource "aws_config_config_rule" "rds_storage_encrypted" {
+  name        = "rds_storage_encrypted"
+  description = "[SECURITY] [RDS] Checks whether storage encryption is enabled for your RDS DB instances."
+  count       = "${var.rds_storage_encrypted}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_STORAGE_ENCRYPTED"
+  }
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
 resource "aws_config_config_rule" "restricted_ssh" {
   name        = "restricted_ssh"
   description = "[SECURITY] [EC2] [SSH]Checks whether security groups in use do not allow restricted incoming SSH traffic. This rule applies only to IPv4."

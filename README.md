@@ -59,6 +59,7 @@ If you need a rule that is currently not included in this module please open a P
 | password_require_uppercase | For `iam_password_policy` rule. Require at least one uppercase character in password. | string | `true` | no |
 | password_reuse_prevention | For `iam_password_policy` rule. For `iam_password_policy` rule. Number of passwords before allowing reuse. | string | `24` | no |
 | rds_multi_az_support | `AVAILABILITY` `RDS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html) rule. | string | `0` | no |
+| rds_storage_encrypted | `SECURITY` `RDS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html) rule. | string | `0` | no |
 | required_tag_key_1 | For `required_tags` rule. Required Tag 1 | string | `` | no |
 | required_tag_key_2 | For `required_tags` rule. Required Tag 2 | string | `` | no |
 | required_tag_key_3 | For `required_tags` rule. Required Tag 3 | string | `` | no |

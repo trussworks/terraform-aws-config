@@ -88,6 +88,11 @@ variable "encrypted_volumes" {
   default     = 0
 }
 
+variable "rds_storage_encrypted" {
+  description = "`SECURITY` `RDS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html) rule."
+  default     = 0
+}
+
 variable "restricted_ssh" {
   description = "`SECURITY` `EC2` `SSH` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html) rule."
   default     = 0
