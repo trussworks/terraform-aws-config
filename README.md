@@ -31,6 +31,10 @@ If you need a rule that is currently not included in this module please open a P
 | config_logs_bucket | The S3 bucket for AWS Config logs. | string | - | yes |
 | config_logs_prefix | The S3 prefix for AWS Config logs. | string | `config` | no |
 | config_max_execution_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `TwentyFour_Hours` | no |
+| db_backup_preferred_backup_window | For `db_instance_backup_enabled` rule. time range in which backups are created | string | `` | no |
+| db_backup_read_replicas | For `db_instance_backup_enabled` rule. Evaluates whether backups are enabled for read replicas | string | `` | no |
+| db_backup_retention_period | For `db_instance_backup_enabled` rule. The minimum retention period for backups | string | `` | no |
+| db_instance_backup_enabled | `MANAGEMENT` `RDS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html) rule. | string | `0` | no |
 | desired_instance_type | `MANAGEMENT` `EC2` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/desired-instance-type.html) rule. | string | `0` | no |
 | desired_instance_types | For `desired_instance_types` rule. Comma-separated list of EC2 instance types (for example, "t2.small, m4.large, i2.xlarge"). | string | `` | no |
 | ebs_optimized_instance | `PERFORMANCE` `EC2` `EBS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/ebs-optimized-instance.html) rule. | string | `0` | no |

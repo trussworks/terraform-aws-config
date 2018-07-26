@@ -52,6 +52,16 @@ data "template_file" "ec2_managedinstance_platform_check" {
   }
 }
 
+data "template_file" "db_instance_backup_enabled" {
+  template = "${file("${path.module}/config-policies/db-instance-backup-enabled.tpl")}"
+
+  vars = {
+    backup_retention_period = "${var.db_backup_retention_period}"
+    preferred_backup_window = "${var.db_backup_preferred_backup_window}"
+    "check_read_replicas"   = "${var.db_backup_read_replicas}"
+  }
+}
+
 resource "aws_config_config_rule" "cloudtrail_enabled" {
   name        = "cloudtrail_enabled"
   description = "[MANAGEMENT] [CLOUDTRAIL] Ensure CloudTrail is enabled."
@@ -151,4 +161,21 @@ resource "aws_config_config_rule" "ec2_managedinstance_platform_check" {
   }
 
   depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "db_instance_backup_enabled" {
+  name             = "db_instance_backup_enabled"
+  description      = "[MANAGEMENT] [RDS] Checks whether RDS DB instances have backups enabled. Optionally, the rule checks the backup retention period and the backup window."
+  input_parameters = "${data.template_file.db_instance_backup_enabled.rendered}"
+  count            = "${var.db_instance_backup_enabled}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DB_INSTANCE_BACKUP_ENABLED"
+  }
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
 }
