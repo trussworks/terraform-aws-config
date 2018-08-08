@@ -1,6 +1,7 @@
-/**
- * AWS Config Service
- */
+#
+# AWS Config Service
+#
+
 resource "aws_config_configuration_recorder_status" "main" {
   name       = "aws-config"
   is_enabled = true

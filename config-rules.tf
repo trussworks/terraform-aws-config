@@ -2,7 +2,7 @@ data "template_file" "aws_config_iam_password_policy" {
   template = "${file("${path.module}/config-policies/iam-password-policy.tpl")}"
 
   vars = {
-    // terraform will interpolate boolean as 0/1 and the config parameters expect "true" or "false"
+    # terraform will interpolate boolean as 0/1 and the config parameters expect "true" or "false"
     password_require_uppercase = "${var.password_require_uppercase ? "true" : "false"}"
     password_require_lowercase = "${var.password_require_lowercase ? "true" : "false"}"
     password_require_symbols   = "${var.password_require_symbols ? "true" : "false"}"
@@ -21,9 +21,9 @@ data "template_file" "aws_config_acm_certificate_expiration" {
   }
 }
 
-/**
- * AWS Config Rules
- */
+#
+# AWS Config Rules
+#
 
 resource "aws_config_config_rule" "iam-password-policy" {
   name             = "iam-password-policy"
@@ -126,6 +126,18 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
   source {
     owner             = "AWS"
     source_identifier = "IAM_USER_NO_POLICIES_CHECK"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "rds-storage-encrypted" {
+  name        = "rds-storage-encrypted"
+  description = "Checks whether storage encryption is enabled for your RDS DB instances."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
   depends_on = ["aws_config_configuration_recorder.main"]
