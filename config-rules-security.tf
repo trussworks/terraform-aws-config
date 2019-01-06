@@ -163,12 +163,28 @@ resource "aws_config_config_rule" "elb_acm_certificate_required" {
 
 resource "aws_config_config_rule" "encrypted_volumes" {
   name        = "encrypted_volumes"
-  description = "[SECURITY] [EC2] [EBS] Checks whether the EBS volumes that are in an attached state are encrypted. If you specify the ID of a KMS key for encryption using the kmsId parameter, the rule checks if the EBS volumes in an attached state are encrypted with that KMS key."
+  description = "[SECURITY] [EC2] [EBS] Checks whether the EBS volumes that are in an attached state are encrypted."
   count       = "${var.encrypted_volumes}"
 
   source {
     owner             = "AWS"
     source_identifier = "ENCRYPTED_VOLUMES"
+  }
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
+resource "aws_config_config_rule" "rds_storage_encrypted" {
+  name        = "rds_storage_encrypted"
+  description = "[SECURITY] [RDS] Checks whether storage encryption is enabled for your RDS DB instances."
+  count       = "${var.rds_storage_encrypted}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
   depends_on = [

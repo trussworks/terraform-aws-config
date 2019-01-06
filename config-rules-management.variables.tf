@@ -127,3 +127,24 @@ variable "ec2_platform_check_agent_version" {
   description = "For `ec2_platform_check_platform_type` rule. The version of the agent (for example, \"2.0.433.0\")."
   default     = ""
 }
+
+variable "db_instance_backup_enabled" {
+  description = "`MANAGEMENT` `RDS` Enable [this](https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html) rule."
+  description = "For `db_instance_backup_enabled` rule. The version of the agent (for example, \"2.0.433.0\")."
+  default     = 0
+}
+
+variable "db_backup_retention_period" {
+  description = "For `db_instance_backup_enabled` rule. The minimum retention period for backups"
+  default     = ""
+}
+
+variable "db_backup_preferred_backup_window" {
+  description = "For `db_instance_backup_enabled` rule. time range in which backups are created"
+  default     = ""
+}
+
+variable "db_backup_read_replicas" {
+  description = "For `db_instance_backup_enabled` rule. Evaluates whether backups are enabled for read replicas"
+  default     = ""
+}
