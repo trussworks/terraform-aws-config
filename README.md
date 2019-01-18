@@ -12,7 +12,7 @@ The following AWS Config Rules are supported:
 ## Usage
 
     module "aws_config" {
-      source             = "trussworks/aws/config"
+      source             = "trussworks/config/aws"
       config_logs_bucket = "my-aws-logs"
     }
 
