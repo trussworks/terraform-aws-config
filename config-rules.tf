@@ -142,3 +142,43 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 
   depends_on = ["aws_config_configuration_recorder.main"]
 }
+
+resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
+  name        = "rds-snapshots-public-prohibited"
+  description = "Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_SNAPSHOTS_PUBLIC_PROHIBITED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "guardduty-enabled-centralized" {
+  count = "${var.check_guard_duty}"
+
+  name        = "guardduty-enabled-centralized"
+  description = "Checks whether Amazon GuardDuty is enabled in your AWS account and region."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "GUARDDUTY_ENABLED_CENTRALIZED"
+  }
+
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
+  name        = "s3-bucket-public-write-prohibited"
+  description = "Checks that your S3 buckets do not allow public write access."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}

@@ -60,3 +60,8 @@ variable "password_max_age" {
   description = "Number of days before password expiration."
   default     = 90
 }
+
+variable "check_guard_duty" {
+  description = "Enable guardduty-enabled-centralized rule"
+  default     = false
+}
