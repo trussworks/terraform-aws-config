@@ -27,6 +27,7 @@ The following AWS Config Rules are supported:
 |------|-------------|:----:|:-----:|:-----:|
 | acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `"14"` | no |
 | check\_guard\_duty | Enable guardduty-enabled-centralized rule | string | `"false"` | no |
+| check\_rds\_public\_access | Enable rds-instance-public-access-check rule | string | `"false"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `"Six_Hours"` | no |
 | config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | string | `"config"` | no |

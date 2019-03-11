@@ -143,6 +143,20 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
+resource "aws_config_config_rule" "rds-instance-public-access-check" {
+  count = "${var.check_rds_public_access}"
+
+  name        = "rds-instance-public-access-check"
+  description = "Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible. The rule is non-compliant if the publiclyAccessible field is true in the instance configuration item."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_INSTANCE_PUBLIC_ACCESS_CHECK"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
 resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
   name        = "rds-snapshots-public-prohibited"
   description = "Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public."
