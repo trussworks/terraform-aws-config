@@ -65,3 +65,8 @@ variable "check_guard_duty" {
   description = "Enable guardduty-enabled-centralized rule"
   default     = false
 }
+
+variable "check_rds_public_access" {
+  description = "Enable rds-instance-public-access-check rule"
+  default     = false
+}
