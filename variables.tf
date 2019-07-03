@@ -70,3 +70,8 @@ variable "check_rds_public_access" {
   description = "Enable rds-instance-public-access-check rule"
   default     = false
 }
+
+variable "sns_topic_arn" {
+  description = "Optional. An SNS topic to stream configuration changes and notifications to."
+  default     = ""
+}

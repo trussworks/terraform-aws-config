@@ -16,10 +16,36 @@ The following AWS Config Rules are supported:
 
 ## Usage
 
-    module "aws_config" {
-      source             = "trussworks/config/aws"
-      config_logs_bucket = "my-aws-logs"
-    }
+```terraform
+resource "aws_s3_bucket" "aws_config_logs" {
+  bucket = "my-aws-config-logs"
+}
+
+resource "aws_sns_topic" "aws_config_sns_topic" {
+  name = "my-aws-config-sns-topic"
+}
+
+module "aws_config_default_region" {
+  source             = "trussworks/config/aws"
+  config_logs_bucket = "${aws_s3_bucket.aws_config_logs.id}"
+  sns_topic_arn      = "${aws_sns_topic.aws_config_sns_topic.arn}"
+}
+
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
+}
+
+module "aws_config_us_east_1" {
+  providers {
+    aws = "aws.us-east-1"
+  }
+
+  source             = "trussworks/config/aws"
+  config_logs_bucket = "${aws_s3_bucket.aws_config_logs.id}"
+  sns_topic_arn      = "${aws_sns_topic.aws_config_sns_topic.arn}
+}
+```
 
 ## Inputs
 
@@ -39,5 +65,6 @@ The following AWS Config Rules are supported:
 | password\_require\_symbols | Require at least one symbol in password. | string | `"true"` | no |
 | password\_require\_uppercase | Require at least one uppercase character in password. | string | `"true"` | no |
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | string | `"24"` | no |
+| sns\_topic\_arn | The ARN of the SNS topic to send notifications to | string | `""` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
