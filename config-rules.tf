@@ -144,7 +144,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 }
 
 resource "aws_config_config_rule" "rds-instance-public-access-check" {
-  count = "${var.check_rds_public_access}"
+  count = "${var.check_rds_public_access ? 1 : 0}"
 
   name        = "rds-instance-public-access-check"
   description = "Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible. The rule is non-compliant if the publiclyAccessible field is true in the instance configuration item."
@@ -170,7 +170,7 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
 }
 
 resource "aws_config_config_rule" "guardduty-enabled-centralized" {
-  count = "${var.check_guard_duty}"
+  count = "${var.check_guard_duty ? 1 : 0}"
 
   name        = "guardduty-enabled-centralized"
   description = "Checks whether Amazon GuardDuty is enabled in your AWS account and region."

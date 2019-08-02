@@ -1,3 +1,15 @@
+variable "config_aggregator_name" {
+  description = "The name of the aggregator."
+  type        = "string"
+  default     = "organization"
+}
+
+variable "aggregate_organization" {
+  description = "Aggregate compliance data by organization"
+  type        = "string"
+  default     = "false"
+}
+
 variable "config_logs_bucket" {
   description = "The S3 bucket for AWS Config logs."
   type        = "string"
