@@ -24,7 +24,12 @@ data "template_file" "aws_config_policy" {
         "Sid": "AWSConfigBucketDelivery",
         "Effect": "Allow",
         "Action": "s3:PutObject",
-        "Resource": "$${resource}"
+        "Resource": "$${resource}",
+        "Condition": {
+          "StringLike": {
+            "s3:x-amz-acl": "bucket-owner-full-control"
+          }
+        }
     }
   ]
 }
