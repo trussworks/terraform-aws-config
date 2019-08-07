@@ -82,3 +82,18 @@ variable "check_rds_public_access" {
   description = "Enable rds-instance-public-access-check rule"
   default     = false
 }
+
+variable "check_multi_region_cloud_trail" {
+  description = "Enable multi-region-cloud-trail-enabled rule"
+  default     = false
+}
+
+variable "check_cloud_trail_encryption" {
+  description = "Enable cloud-trail-encryption-enabled rule"
+  default     = false
+}
+
+variable "check_cloud_trail_log_file_validation" {
+  description = "Enable cloud-trail-log-file-validation-enabled rule"
+  default     = false
+}
