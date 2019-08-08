@@ -27,7 +27,10 @@ The following AWS Config Rules are supported:
 |------|-------------|:----:|:-----:|:-----:|
 | acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `"14"` | no |
 | aggregate\_organization | Aggregate compliance data by organization | string | `"false"` | no |
+| check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | string | `"false"` | no |
+| check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | string | `"false"` | no |
 | check\_guard\_duty | Enable guardduty-enabled-centralized rule | string | `"false"` | no |
+| check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | string | `"false"` | no |
 | check\_rds\_public\_access | Enable rds-instance-public-access-check rule | string | `"false"` | no |
 | config\_aggregator\_name | The name of the aggregator. | string | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `"Six_Hours"` | no |
