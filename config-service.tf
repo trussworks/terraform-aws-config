@@ -3,13 +3,13 @@
 #
 
 resource "aws_config_configuration_recorder_status" "main" {
-  name       = "aws-config"
+  name       = "aws-config-${var.region}"
   is_enabled = true
   depends_on = [aws_config_delivery_channel.main]
 }
 
 resource "aws_config_delivery_channel" "main" {
-  name           = "aws-config"
+  name           = "aws-config-${var.region}"
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.config_logs_prefix
 
@@ -21,7 +21,7 @@ resource "aws_config_delivery_channel" "main" {
 }
 
 resource "aws_config_configuration_recorder" "main" {
-  name     = "aws-config"
+  name     = "aws-config-${var.region}"
   role_arn = aws_iam_role.main.arn
 
   recording_group {

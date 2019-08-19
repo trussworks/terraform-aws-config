@@ -71,3 +71,7 @@ variable "check_rds_public_access" {
   default     = false
 }
 
+variable "region" {
+  description = "AWS region"
+  type = "string"
+}
