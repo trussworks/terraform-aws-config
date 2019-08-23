@@ -42,6 +42,9 @@ resource "aws_iam_policy_attachment" "managed-policy" {
   name       = "aws-config-managed-policy-${var.region}"
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
+    lifecycle {
+    ignore_changes = ["roles"]
+  }
 }
 
 resource "aws_iam_policy" "aws-config-policy" {
