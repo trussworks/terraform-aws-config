@@ -43,7 +43,7 @@ resource "aws_iam_policy_attachment" "managed-policy" {
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
     lifecycle {
-    ignore_changes = ["roles"]
+    ignore_changes = ["roles"] # multiregional hack
   }
 }
 
