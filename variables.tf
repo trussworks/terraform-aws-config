@@ -97,3 +97,8 @@ variable "check_cloud_trail_log_file_validation" {
   description = "Enable cloud-trail-log-file-validation-enabled rule"
   default     = false
 }
+
+variable "check_eip_attached" {
+  description = "Enable eip-attached rule"
+  default     = false
+}

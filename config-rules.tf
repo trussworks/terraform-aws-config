@@ -262,3 +262,17 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
 
   depends_on = ["aws_config_configuration_recorder.main"]
 }
+
+resource "aws_config_config_rule" "eip_attached" {
+  count = "${var.check_eip_attached ? 1 : 0}"
+
+  name        = "eip-attached"
+  description = "Checks whether all Elastic IP addresses that are allocated to a VPC are attached to EC2 instances or in-use elastic network interfaces (ENIs)."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EIP_ATTACHED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
