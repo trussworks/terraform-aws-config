@@ -72,6 +72,6 @@ variable "check_rds_public_access" {
 }
 
 variable "sns_topic_arn" {
-  description = "Optional. An SNS topic to stream configuration changes and notifications to."
+  description = "An SNS topic to stream configuration changes and notifications to."
   default     = ""
 }
