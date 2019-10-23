@@ -16,7 +16,6 @@ The following AWS Config Rules are supported:
 
 ## Usage
 
-```terraform
 resource "aws_s3_bucket" "aws_config_logs" {
   bucket = "my-aws-config-logs"
 }
@@ -45,7 +44,6 @@ module "aws_config_us_east_1" {
   config_logs_bucket = "${aws_s3_bucket.aws_config_logs.id}"
   sns_topic_arn      = "${aws_sns_topic.aws_config_sns_topic.arn}
 }
-```
 
 ## Inputs
 
