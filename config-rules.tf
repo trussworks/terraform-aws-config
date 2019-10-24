@@ -60,6 +60,60 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
   ]
 }
 
+resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
+  count       = "${var.check_multi_region_cloud_trail ? 1 : 0}"
+  name        = "multi-region-cloud-trail-enabled"
+  description = "Checks that there is at least one multi-region AWS CloudTrail. The rule is NON_COMPLIANT if the trails do not match inputs parameters."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "MULTI_REGION_CLOUD_TRAIL_ENABLED"
+  }
+
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
+resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
+  count       = "${var.check_cloud_trail_encryption ? 1 : 0}"
+  name        = "cloud-trail-encryption-enabled"
+  description = "Checks whether AWS CloudTrail is configured to use the server side encryption (SSE) AWS Key Management Service (AWS KMS) customer master key (CMK) encryption. The rule is COMPLIANT if the KmsKeyId is defined."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUD_TRAIL_ENCRYPTION_ENABLED"
+  }
+
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
+resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
+  count       = "${var.check_cloud_trail_log_file_validation ? 1 : 0}"
+  name        = "cloud-trail-log-file-validation-enabled"
+  description = "Checks whether AWS CloudTrail creates a signed digest file with logs. AWS recommends that the file validation must be enabled on all trails. The rule is NON_COMPLIANT if the validation is not enabled."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUD_TRAIL_LOG_FILE_VALIDATION_ENABLED"
+  }
+
+  maximum_execution_frequency = "${var.config_max_execution_frequency}"
+
+  depends_on = [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main",
+  ]
+}
+
 resource "aws_config_config_rule" "instances-in-vpc" {
   name        = "instances-in-vpc"
   description = "Ensure all EC2 instances run in a VPC"
@@ -131,6 +185,18 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
   depends_on = ["aws_config_configuration_recorder.main"]
 }
 
+resource "aws_config_config_rule" "iam-group-has-users-check" {
+  name        = "iam-group-has-users-check"
+  description = "Checks whether IAM groups have at least one IAM user."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_GROUP_HAS_USERS_CHECK"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
 resource "aws_config_config_rule" "rds-storage-encrypted" {
   name        = "rds-storage-encrypted"
   description = "Checks whether storage encryption is enabled for your RDS DB instances."
@@ -144,7 +210,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 }
 
 resource "aws_config_config_rule" "rds-instance-public-access-check" {
-  count = "${var.check_rds_public_access}"
+  count = "${var.check_rds_public_access ? 1 : 0}"
 
   name        = "rds-instance-public-access-check"
   description = "Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible. The rule is non-compliant if the publiclyAccessible field is true in the instance configuration item."
@@ -170,7 +236,7 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
 }
 
 resource "aws_config_config_rule" "guardduty-enabled-centralized" {
-  count = "${var.check_guard_duty}"
+  count = "${var.check_guard_duty ? 1 : 0}"
 
   name        = "guardduty-enabled-centralized"
   description = "Checks whether Amazon GuardDuty is enabled in your AWS account and region."
@@ -192,6 +258,20 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
   source {
     owner             = "AWS"
     source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
+  }
+
+  depends_on = ["aws_config_configuration_recorder.main"]
+}
+
+resource "aws_config_config_rule" "eip_attached" {
+  count = "${var.check_eip_attached ? 1 : 0}"
+
+  name        = "eip-attached"
+  description = "Checks whether all Elastic IP addresses that are allocated to a VPC are attached to EC2 instances or in-use elastic network interfaces (ENIs)."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EIP_ATTACHED"
   }
 
   depends_on = ["aws_config_configuration_recorder.main"]

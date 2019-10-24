@@ -1,3 +1,15 @@
+variable "config_aggregator_name" {
+  description = "The name of the aggregator."
+  type        = "string"
+  default     = "organization"
+}
+
+variable "aggregate_organization" {
+  description = "Aggregate compliance data by organization"
+  type        = "string"
+  default     = "false"
+}
+
 variable "config_logs_bucket" {
   description = "The S3 bucket for AWS Config logs."
   type        = "string"
@@ -74,4 +86,23 @@ variable "check_rds_public_access" {
 variable "sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
   default     = ""
+
+variable "check_multi_region_cloud_trail" {
+  description = "Enable multi-region-cloud-trail-enabled rule"
+  default     = false
+}
+
+variable "check_cloud_trail_encryption" {
+  description = "Enable cloud-trail-encryption-enabled rule"
+  default     = false
+}
+
+variable "check_cloud_trail_log_file_validation" {
+  description = "Enable cloud-trail-log-file-validation-enabled rule"
+  default     = false
+}
+
+variable "check_eip_attached" {
+  description = "Enable eip-attached rule"
+  default     = false
 }
