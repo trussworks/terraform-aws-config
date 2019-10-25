@@ -86,6 +86,7 @@ variable "check_rds_public_access" {
 variable "sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
   default     = ""
+}
 
 variable "check_multi_region_cloud_trail" {
   description = "Enable multi-region-cloud-trail-enabled rule"

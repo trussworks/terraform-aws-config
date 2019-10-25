@@ -13,6 +13,7 @@ The following AWS Config Rules are supported:
 * root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
 * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
 * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
+* sns_topic_arn: The ARN of the SNS topic to send notifications to.
 
 ## Usage
 
@@ -69,6 +70,12 @@ module "aws_config_us_east_1" {
 | password\_require\_symbols | Require at least one symbol in password. | string | `"true"` | no |
 | password\_require\_uppercase | Require at least one uppercase character in password. | string | `"true"` | no |
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | string | `"24"` | no |
-| sns\_topic\_arn | The ARN of the SNS topic to send notifications to | string | `""` | no |
+| sns\_topic\_arn | An SNS topic to stream configuration changes and notifications to. | string | `""` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| role\_arn | The ARN of the IAM role used |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

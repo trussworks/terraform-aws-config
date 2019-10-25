@@ -13,13 +13,38 @@
  * * root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
  * * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
  * * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
+ * * sns_topic_arn: The ARN of the SNS topic to send notifications to.
  *
  * ## Usage
  *
- *     module "aws_config" {
- *       source             = "trussworks/config/aws"
- *       config_logs_bucket = "my-aws-logs"
- *     }
+ * resource "aws_s3_bucket" "aws_config_logs" {
+ *   bucket = "my-aws-config-logs"
+ * }
+ *
+ * resource "aws_sns_topic" "aws_config_sns_topic" {
+ *   name = "my-aws-config-sns-topic"
+ * }
+ *
+ * module "aws_config_default_region" {
+ *   source             = "trussworks/config/aws"
+ *   config_logs_bucket = "${aws_s3_bucket.aws_config_logs.id}"
+ *   sns_topic_arn      = "${aws_sns_topic.aws_config_sns_topic.arn}"
+ * }
+ *
+ * provider "aws" {
+ *   alias  = "us-east-1"
+ *   region = "us-east-1"
+ * }
+ *
+ * module "aws_config_us_east_1" {
+ *   providers {
+ *     aws = "aws.us-east-1"
+ *   }
+ *
+ *   source             = "trussworks/config/aws"
+ *   config_logs_bucket = "${aws_s3_bucket.aws_config_logs.id}"
+ *   sns_topic_arn      = "${aws_sns_topic.aws_config_sns_topic.arn}
+ * }
  *
  */
 
