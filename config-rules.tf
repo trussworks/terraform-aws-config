@@ -15,7 +15,7 @@ data "template_file" "aws_config_iam_password_policy" {
 
 data "template_file" "aws_config_acm_certificate_expiration" {
   template = file(
-    "${path.module}/config-policies/acm-certificate-expiration.tpl",
+    "${path.module}/config-policies/acm-certificate-expiration.tpl"
   )
 
   vars = {
