@@ -15,7 +15,7 @@ The following AWS Config Rules are supported:
 
 ## Terraform Versions
 
-Terraform 0.12. Pin module version to ~> 2.x. Submit pull-requests to master branch.
+Terraform 0.12. Pin module version to ~> 2.x Submit pull-requests to master branch.
 
 Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terraform011 branch.
 
@@ -70,14 +70,4 @@ Or with aws-vault:
 
 ```text
 AWS_VAULT_KEYCHAIN_NAME=<NAME> aws-vault exec <PROFILE> -- make test
-```
-
-By default, terratest will attempt to create the test buckets in a random AWS
-region. To use a specific region, set the `TERRATEST_REGION` environment
-variable.
-
-Example:
-
-```text
-    export TERRATEST_REGION=us-west-2
 ```
