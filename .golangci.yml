@@ -1,0 +1,12 @@
+linters:
+  enable:
+     - gosec
+     - golint
+     - gofmt
+     - goimports
+     - govet
+     - varcheck
+     - typecheck
+     - structcheck
+     - deadcode
+     - ineffassign
