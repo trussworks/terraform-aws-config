@@ -1,4 +1,3 @@
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 Enables AWS Config and adds managed config rules with good defaults.
 
 The following AWS Config Rules are supported:
@@ -16,11 +15,14 @@ The following AWS Config Rules are supported:
 
 ## Usage
 
-    module "aws_config" {
-      source             = "trussworks/config/aws"
-      config_logs_bucket = "my-aws-logs"
-    }
+```hcl
+module "aws_config" {
+  source             = "trussworks/config/aws"
+  config_logs_bucket = "my-aws-logs"
+}
+```
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
