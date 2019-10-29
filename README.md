@@ -13,6 +13,12 @@ The following AWS Config Rules are supported:
 * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
 * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
 
+## Terraform Versions
+
+Terraform 0.12. Pin module version to ~> 2.x. Submit pull-requests to master branch.
+
+Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terraform011 branch.
+
 ## Usage
 
 ```hcl
@@ -49,3 +55,29 @@ module "aws_config" {
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | string | `"24"` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Testing
+
+[Terratest](https://github.com/gruntwork-io/terratest) is being used for
+automated testing with this module. Tests in the `test` folder can be run
+locally by running the following command:
+
+```text
+make test
+```
+
+Or with aws-vault:
+
+```text
+AWS_VAULT_KEYCHAIN_NAME=<NAME> aws-vault exec <PROFILE> -- make test
+```
+
+By default, terratest will attempt to create the test buckets in a random AWS
+region. To use a specific region, set the `TERRATEST_REGION` environment
+variable.
+
+Example:
+
+```text
+    export TERRATEST_REGION=us-west-2
+```

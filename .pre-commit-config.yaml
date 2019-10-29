@@ -21,3 +21,10 @@ repos:
     hooks:
       - id: terraform_docs
       - id: terraform_fmt
+
+  - repo: git://github.com/golangci/golangci-lint
+    rev: v1.21.0
+    hooks:
+      - id: golangci-lint
+        entry: golangci-lint run --verbose
+        verbose: true
