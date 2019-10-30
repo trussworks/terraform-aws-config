@@ -56,7 +56,15 @@ module "aws_config" {
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-## Testing
+## Developer Setup
+
+Install dependencies (macOS)
+
+```shell
+brew install pre-commit go terraform terraform-docs
+```
+
+### Testing
 
 [Terratest](https://github.com/gruntwork-io/terratest) is being used for
 automated testing with this module. Tests in the `test` folder can be run
