@@ -103,3 +103,14 @@ variable "check_eip_attached" {
   default     = false
 }
 
+variable "required_tags_resource_types" {
+  description = "Resource types to check for tags."
+  type        = list(string)
+}
+
+variable "required_tags" {
+  description = "A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional."
+  type        = map(string)
+  default     = {}
+}
+
