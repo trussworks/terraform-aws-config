@@ -59,6 +59,8 @@ github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79/go.mod h1:Fecb
 github.com/gruntwork-io/gruntwork-cli v0.5.1/go.mod h1:IBX21bESC1/LGoV7jhXKUnTQTZgQ6dYRsoj/VqxUSZQ=
 github.com/gruntwork-io/terratest v0.22.2 h1:rIuiDbe5Ur+EYePWtqtzsdXojUfJECXdD92hQRKY5sk=
 github.com/gruntwork-io/terratest v0.22.2/go.mod h1:veL2PxiS2Z5S63ERnyiIY/sxgmXJpZD8YZybiqvduwQ=
+github.com/gruntwork-io/terratest v0.22.3 h1:MReIa0Fz/BYe31A9SlCO9SIarO2pWNjlcDed6JAZASo=
+github.com/gruntwork-io/terratest v0.22.3/go.mod h1:veL2PxiS2Z5S63ERnyiIY/sxgmXJpZD8YZybiqvduwQ=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.3/go.mod h1:iADmTwqILo4mZ8BN3D2Q6+9jd8WM5uGBxy+E8yxSoD4=
