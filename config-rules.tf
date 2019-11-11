@@ -279,3 +279,20 @@ resource "aws_config_config_rule" "eip_attached" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
+resource "aws_config_config_rule" "required-tags" {
+  name        = "required-tags"
+  description = "Checks if resources are deployed with configured tags."
+
+  scope {
+    compliance_resource_types = var.required_tags_resource_types
+  }
+
+  input_parameters = "${jsonencode(var.required_tags)}"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
