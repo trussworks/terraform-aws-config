@@ -112,6 +112,7 @@ variable "check_eip_attached" {
 variable "required_tags_resource_types" {
   description = "Resource types to check for tags."
   type        = list(string)
+  default     = []
 }
 
 variable "required_tags" {
