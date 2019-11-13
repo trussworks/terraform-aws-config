@@ -46,6 +46,7 @@ module "aws_config" {
 | config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | string | `"config"` | no |
 | config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `"TwentyFour_Hours"` | no |
+| config\_name | The name of the AWS Config instance. | string | `"aws-config"` | no |
 | password\_max\_age | Number of days before password expiration. | string | `"90"` | no |
 | password\_min\_length | Password minimum length. | string | `"14"` | no |
 | password\_require\_lowercase | Require at least one lowercase character in password. | string | `"true"` | no |

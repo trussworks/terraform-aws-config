@@ -15,6 +15,7 @@ module "config_logs" {
 module "config" {
   source = "../../"
 
+  config_name        = var.config_name
   config_logs_bucket = "${module.config_logs.aws_logs_bucket}"
   config_logs_prefix = "config"
 }
