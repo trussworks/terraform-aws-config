@@ -21,9 +21,13 @@ Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terrafor
 
 ## Usage
 
+**Note: This module sets up AWS IAM Roles and Policies, which are globally namespaced. If you plan to have multiple instances of AWS Config, make sure they have unique values for `config_name`.**
+
 ```hcl
 module "aws_config" {
-  source             = "trussworks/config/aws"
+  source = "trussworks/config/aws"
+
+  config_name        = "my-aws-config"
   config_logs_bucket = "my-aws-logs"
 }
 ```
