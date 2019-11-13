@@ -280,6 +280,8 @@ resource "aws_config_config_rule" "eip_attached" {
 }
 
 resource "aws_config_config_rule" "required-tags" {
+  count = var.check_required_tags ? 1 : 0
+
   name        = "required-tags"
   description = "Checks if resources are deployed with configured tags."
 

@@ -109,6 +109,11 @@ variable "check_eip_attached" {
   default     = false
 }
 
+variable "check_required_tags" {
+  description = "Enable required-tags rule"
+  default     = false
+}
+
 variable "required_tags_resource_types" {
   description = "Resource types to check for tags."
   type        = list(string)
