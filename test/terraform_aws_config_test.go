@@ -14,7 +14,7 @@ import (
 func TestTerraformAwsConfig(t *testing.T) {
 	t.Parallel()
 
-	// In order to run multiple tests in parallell we need to copy the module to temp folders
+	// In order to run multiple tests in parallel we need to copy the module to temp folders
 	// so that the state files don't run into .terraform and kill our tests
 	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/simple")
 
@@ -49,7 +49,7 @@ func TestTerraformAwsConfig(t *testing.T) {
 func TestRequiredTags(t *testing.T) {
 	t.Parallel()
 
-	// In order to run multiple tests in parallell we need to copy the module to temp folders
+	// In order to run multiple tests in parallel we need to copy the module to temp folders
 	// so that the state files don't run into .terraform and kill our tests
 	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/required-tags")
 
