@@ -21,9 +21,13 @@ Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terrafor
 
 ## Usage
 
+**Note: This module sets up AWS IAM Roles and Policies, which are globally namespaced. If you plan to have multiple instances of AWS Config, make sure they have unique values for `config_name`.**
+
 ```hcl
 module "aws_config" {
-  source             = "trussworks/config/aws"
+  source = "trussworks/config/aws"
+
+  config_name        = "my-aws-config"
   config_logs_bucket = "my-aws-logs"
 }
 ```
@@ -46,6 +50,7 @@ module "aws_config" {
 | config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | string | `"config"` | no |
 | config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `"TwentyFour_Hours"` | no |
+| config\_name | The name of the AWS Config instance. | string | `"aws-config"` | no |
 | password\_max\_age | Number of days before password expiration. | string | `"90"` | no |
 | password\_min\_length | Password minimum length. | string | `"14"` | no |
 | password\_require\_lowercase | Require at least one lowercase character in password. | string | `"true"` | no |
