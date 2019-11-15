@@ -45,6 +45,7 @@ module "aws_config" {
 | check\_guard\_duty | Enable guardduty-enabled-centralized rule | string | `"false"` | no |
 | check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | string | `"false"` | no |
 | check\_rds\_public\_access | Enable rds-instance-public-access-check rule | string | `"false"` | no |
+| check\_required\_tags | Enable required-tags rule | string | `"false"` | no |
 | config\_aggregator\_name | The name of the aggregator. | string | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `"Six_Hours"` | no |
 | config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
@@ -58,6 +59,8 @@ module "aws_config" {
 | password\_require\_symbols | Require at least one symbol in password. | string | `"true"` | no |
 | password\_require\_uppercase | Require at least one uppercase character in password. | string | `"true"` | no |
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | string | `"24"` | no |
+| required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | map(string) | `{}` | no |
+| required\_tags\_resource\_types | Resource types to check for tags. | list(string) | `[]` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
