@@ -66,23 +66,23 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 #
 
 resource "aws_iam_role" "main" {
-  name               = "aws-config-role"
+  name               = "${var.config_name}-role"
   assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
 }
 
 resource "aws_iam_policy_attachment" "managed-policy" {
-  name       = "aws-config-managed-policy"
+  name       = "${var.config_name}-managed-policy"
   roles      = [aws_iam_role.main.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
 }
 
 resource "aws_iam_policy" "aws-config-policy" {
-  name   = "aws-config-policy"
+  name   = "${var.config_name}-policy"
   policy = data.template_file.aws_config_policy.rendered
 }
 
 resource "aws_iam_policy_attachment" "aws-config-policy" {
-  name       = "aws-config-policy"
+  name       = "${var.config_name}-policy"
   roles      = [aws_iam_role.main.name]
   policy_arn = aws_iam_policy.aws-config-policy.arn
 }
