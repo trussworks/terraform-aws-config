@@ -117,6 +117,7 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
 }
 
 resource "aws_config_config_rule" "instances-in-vpc" {
+  count       = var.check_instances_in_vpc ? 1 : 0
   name        = "instances-in-vpc"
   description = "Ensure all EC2 instances run in a VPC"
 
@@ -149,6 +150,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 }
 
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
+  count            = var.check_acm_certificate_expiration_check ? 1 : 0
   name             = "acm-certificate-expiration-check"
   description      = "Ensures ACM Certificates in your account are marked for expiration within the specified number of days"
   input_parameters = data.template_file.aws_config_acm_certificate_expiration.rendered
@@ -164,6 +166,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 }
 
 resource "aws_config_config_rule" "ec2-volume-inuse-check" {
+  count       = var.check_ec2_volume_inuse_check ? 1 : 0
   name        = "ec2-volume-inuse-check"
   description = "Checks whether EBS volumes are attached to EC2 instances"
 
@@ -188,6 +191,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
 }
 
 resource "aws_config_config_rule" "iam-group-has-users-check" {
+  count       = var.check_iam_group_has_users_check ? 1 : 0
   name        = "iam-group-has-users-check"
   description = "Checks whether IAM groups have at least one IAM user."
 
@@ -294,6 +298,51 @@ resource "aws_config_config_rule" "required-tags" {
   source {
     owner             = "AWS"
     source_identifier = "REQUIRED_TAGS"
+  }
+}
+
+
+#
+# The rules that follow have been taken from the following module:
+#  https://github.com/osodevops/aws-terraform-module-config-rules/blob/master/aws_config_rules.tf
+#
+
+data "template_file" "aws_config_ami_approved_tag" {
+  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
+
+  vars = {
+    ami_required_tag_key_value = var.ami_required_tag_key_value
+  }
+}
+
+#==================================================
+# 0.1	Checks whether running instances are using specified AMIs.
+#==================================================
+resource "aws_config_config_rule" "approved-amis-by-tag" {
+  count             = var.check_approved_amis_by_tag ? 1 : 0
+  name              = "approved-amis-by-tag"
+  description       = "Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
+  input_parameters  = "${data.template_file.aws_config_ami_approved_tag.rendered}"
+
+  source {
+    owner               = "AWS"
+    source_identifier   = "APPROVED_AMIS_BY_TAG"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+#==================================================
+# 0.3	Ensure EBS volumes that are in an attached state are encrypted.
+#==================================================
+resource "aws_config_config_rule" "ec2-encrypted-volumes" {
+  count         = var.check_ec2_encrypted_volumes ? 1 : 0
+  name          = "ec2-volumes-must-be-encrypted"
+  description   = "Evaluates whether EBS volumes that are in an attached state are encrypted. Optionally, you can specify the ID of a KMS key to use to encrypt the volume."
+
+  source {
+    owner               = "AWS"
+    source_identifier   = "ENCRYPTED_VOLUMES"
   }
 
   depends_on = [aws_config_configuration_recorder.main]

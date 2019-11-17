@@ -126,3 +126,43 @@ variable "required_tags" {
   default     = {}
 }
 
+variable "check_instances_in_vpc" {
+  description = "Enable instances-in-vpc"
+  default     = true
+}
+
+variable "check_acm_certificate_expiration_check" {
+  description = "Enable acm-certificate-expiration-check"
+  default     = true
+}
+
+variable "check_iam_group_has_users_check" {
+  description = "Enable iam-group-has-users-check"
+  default     = true
+}
+
+variable "check_ec2_volume_inuse_check" {
+  description = "Enable ec2-volume-inuse-check"
+  default     = true
+}
+
+variable "check_approved_amis_by_tag" {
+  description = "Enable approved-amis-by-tag"
+  default     = false
+}
+
+variable "ami_required_tag_key_value" {
+  description = "Tag key and value which AMI has to have to be compliant: Example: tag-key:tag-value"
+  type        = "string"
+  default     = ""
+}
+
+variable "check_ec2_encrypted_volumes" {
+  description = "Enable ec2-encrypted-volumes"
+  default     = false
+}
+
+variable "check_rds_storage_encrypted" {
+  description = "Enable rds-storage-encrypted"
+  default     = false
+}
