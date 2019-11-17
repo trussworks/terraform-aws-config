@@ -37,18 +37,26 @@ module "aws_config" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
 | acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `"14"` | no |
 | aggregate\_organization | Aggregate compliance data by organization | string | `"false"` | no |
+| ami\_required\_tag\_key\_value | Tag key and value which AMI has to have to be compliant: Example: tag-key:tag-value | string | `""` | no |
+| check\_acm\_certificate\_expiration\_check | Enable acm-certificate-expiration-check | string | `"true"` | no |
+| check\_approved\_amis\_by\_tag | Enable approved-amis-by-tag | string | `"false"` | no |
 | check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | string | `"false"` | no |
 | check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | string | `"false"` | no |
+| check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes | string | `"false"` | no |
+| check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check | string | `"true"` | no |
 | check\_eip\_attached | Enable eip-attached rule | string | `"false"` | no |
 | check\_guard\_duty | Enable guardduty-enabled-centralized rule | string | `"false"` | no |
+| check\_iam\_group\_has\_users\_check | Enable iam-group-has-users-check | string | `"true"` | no |
+| check\_instances\_in\_vpc | Enable instances-in-vpc | string | `"true"` | no |
 | check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | string | `"false"` | no |
 | check\_rds\_public\_access | Enable rds-instance-public-access-check rule | string | `"false"` | no |
+| check\_rds\_storage\_encrypted | Enable rds-storage-encrypted | string | `"false"` | no |
 | check\_required\_tags | Enable required-tags rule | string | `"false"` | no |
 | config\_aggregator\_name | The name of the aggregator. | string | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `"Six_Hours"` | no |
-| config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | string | `"config"` | no |
 | config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `"TwentyFour_Hours"` | no |
 | config\_name | The name of the AWS Config instance. | string | `"aws-config"` | no |
