@@ -9,6 +9,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestTerraformAwsConfig(t *testing.T) {
@@ -44,6 +45,9 @@ func TestTerraformAwsConfig(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
+	requiredTagsRuleARN := terraform.Output(t, terraformOptions, "required_tags_rule_arn")
+	assert.Empty(t, requiredTagsRuleARN)
+
 }
 
 func TestRequiredTags(t *testing.T) {
@@ -76,4 +80,8 @@ func TestRequiredTags(t *testing.T) {
 	defer aws.EmptyS3Bucket(t, awsRegion, expectedConfigLogsBucket)
 
 	terraform.InitAndApply(t, terraformOptions)
+
+	requiredTagsRuleARN := terraform.Output(t, terraformOptions, "required_tags_rule_arn")
+	assert.NotEmpty(t, requiredTagsRuleARN)
+
 }
