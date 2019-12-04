@@ -70,6 +70,12 @@ module "aws_config" {
 | required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | map(string) | `{}` | no |
 | required\_tags\_resource\_types | Resource types to check for tags. | list(string) | `[]` | no |
 
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| required\_tags\_rule\_arn | The ARN of the required-tags config rule. |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Developer Setup
