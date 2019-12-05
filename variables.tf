@@ -12,8 +12,8 @@ variable "config_aggregator_name" {
 
 variable "aggregate_organization" {
   description = "Aggregate compliance data by organization"
-  type        = string
-  default     = "false"
+  type        = bool
+  default     = false
 }
 
 variable "config_logs_bucket" {
@@ -23,14 +23,14 @@ variable "config_logs_bucket" {
 
 variable "config_logs_prefix" {
   description = "The S3 prefix for AWS Config logs."
-  default     = "config"
   type        = string
+  default     = "config"
 }
 
 variable "config_max_execution_frequency" {
   description = "The maximum frequency with which AWS Config runs evaluations for a rule."
-  default     = "TwentyFour_Hours"
   type        = string
+  default     = "TwentyFour_Hours"
 }
 
 variable "config_delivery_frequency" {
@@ -79,6 +79,11 @@ variable "password_max_age" {
   default     = 90
 }
 
+variable "check_root_account_mfa_enabled" {
+  description = "Enable root-account-mfa-enabled rule"
+  default     = false
+}
+
 variable "check_guard_duty" {
   description = "Enable guardduty-enabled-centralized rule"
   default     = false
@@ -91,6 +96,11 @@ variable "check_rds_public_access" {
 
 variable "check_multi_region_cloud_trail" {
   description = "Enable multi-region-cloud-trail-enabled rule"
+  default     = false
+}
+
+variable "check_cloudtrail_enabled" {
+  description = "Enable cloudtrail-enabled rule"
   default     = false
 }
 
@@ -126,3 +136,63 @@ variable "required_tags" {
   default     = {}
 }
 
+variable "check_instances_in_vpc" {
+  description = "Enable instances-in-vpc rule"
+  default     = true
+}
+
+variable "check_acm_certificate_expiration_check" {
+  description = "Enable acm-certificate-expiration-check rule"
+  default     = true
+}
+
+variable "check_iam_password_policy" {
+  description = "Enable iam-password-policy rule"
+  default     = true
+}
+
+variable "check_iam_group_has_users_check" {
+  description = "Enable iam-group-has-users-check rule"
+  default     = true
+}
+
+variable "check_iam_user_no_policies_check" {
+  description = "Enable iam-user-no-policies-check rule"
+  default     = true
+}
+
+variable "check_ec2_volume_inuse_check" {
+  description = "Enable ec2-volume-inuse-check rule"
+  default     = true
+}
+
+variable "check_approved_amis_by_tag" {
+  description = "Enable approved-amis-by-tag rule"
+  default     = false
+}
+
+variable "ami_required_tag_key_value" {
+  description = "Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2"
+  type        = string
+  default     = ""
+}
+
+variable "check_ec2_encrypted_volumes" {
+  description = "Enable ec2-encrypted-volumes rule"
+  default     = true
+}
+
+variable "check_rds_storage_encrypted" {
+  description = "Enable rds-storage-encrypted rule"
+  default     = true
+}
+
+variable "check_rds_snapshots_public_prohibited" {
+  description = "Enable rds-snapshots-public-prohibited rule"
+  default     = true
+}
+
+variable "check_s3_bucket_public_write_prohibited" {
+  description = "Enable s3-bucket-public-write-prohibited rule"
+  default     = true
+}
