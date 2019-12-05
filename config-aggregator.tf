@@ -41,4 +41,3 @@ resource "aws_config_configuration_aggregator" "organization" {
     role_arn    = aws_iam_role.aggregator[0].arn
   }
 }
-

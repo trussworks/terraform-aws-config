@@ -23,11 +23,20 @@ data "template_file" "aws_config_acm_certificate_expiration" {
   }
 }
 
+data "template_file" "aws_config_ami_approved_tag" {
+  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
+
+  vars = {
+    ami_required_tag_key_value = var.ami_required_tag_key_value
+  }
+}
+
 #
 # AWS Config Rules
 #
 
 resource "aws_config_config_rule" "iam-password-policy" {
+  count            = var.check_iam_password_policy ? 1 : 0
   name             = "iam-password-policy"
   description      = "Ensure the account password policy for IAM users meets the specified requirements"
   input_parameters = data.template_file.aws_config_iam_password_policy.rendered
@@ -46,6 +55,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
+  count       = var.check_cloudtrail_enabled ? 1 : 0
   name        = "cloudtrail-enabled"
   description = "Ensure CloudTrail is enabled"
 
@@ -133,6 +143,7 @@ resource "aws_config_config_rule" "instances-in-vpc" {
 }
 
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
+  count       = var.check_root_account_mfa_enabled ? 1 : 0
   name        = "root-account-mfa-enabled"
   description = "Ensure root AWS account has MFA enabled"
 
@@ -179,6 +190,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
 }
 
 resource "aws_config_config_rule" "iam-user-no-policies-check" {
+  count       = var.check_iam_user_no_policies_check ? 1 : 0
   name        = "iam-user-no-policies-check"
   description = "Ensure that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles."
 
@@ -204,6 +216,7 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
 }
 
 resource "aws_config_config_rule" "rds-storage-encrypted" {
+  count       = var.check_rds_storage_encrypted ? 1 : 0
   name        = "rds-storage-encrypted"
   description = "Checks whether storage encryption is enabled for your RDS DB instances."
 
@@ -216,8 +229,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 }
 
 resource "aws_config_config_rule" "rds-instance-public-access-check" {
-  count = var.check_rds_public_access ? 1 : 0
-
+  count       = var.check_rds_public_access ? 1 : 0
   name        = "rds-instance-public-access-check"
   description = "Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible. The rule is non-compliant if the publiclyAccessible field is true in the instance configuration item."
 
@@ -230,6 +242,7 @@ resource "aws_config_config_rule" "rds-instance-public-access-check" {
 }
 
 resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
+  count       = var.check_rds_snapshots_public_prohibited ? 1 : 0
   name        = "rds-snapshots-public-prohibited"
   description = "Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public."
 
@@ -242,8 +255,7 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
 }
 
 resource "aws_config_config_rule" "guardduty-enabled-centralized" {
-  count = var.check_guard_duty ? 1 : 0
-
+  count       = var.check_guard_duty ? 1 : 0
   name        = "guardduty-enabled-centralized"
   description = "Checks whether Amazon GuardDuty is enabled in your AWS account and region."
 
@@ -258,6 +270,7 @@ resource "aws_config_config_rule" "guardduty-enabled-centralized" {
 }
 
 resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
+  count       = var.check_s3_bucket_public_write_prohibited ? 1 : 0
   name        = "s3-bucket-public-write-prohibited"
   description = "Checks that your S3 buckets do not allow public write access."
 
@@ -270,8 +283,7 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
 }
 
 resource "aws_config_config_rule" "eip_attached" {
-  count = var.check_eip_attached ? 1 : 0
-
+  count       = var.check_eip_attached ? 1 : 0
   name        = "eip-attached"
   description = "Checks whether all Elastic IP addresses that are allocated to a VPC are attached to EC2 instances or in-use elastic network interfaces (ENIs)."
 
@@ -284,8 +296,7 @@ resource "aws_config_config_rule" "eip_attached" {
 }
 
 resource "aws_config_config_rule" "required-tags" {
-  count = var.check_required_tags ? 1 : 0
-
+  count       = var.check_required_tags ? 1 : 0
   name        = "required-tags"
   description = "Checks if resources are deployed with configured tags."
 
@@ -293,56 +304,38 @@ resource "aws_config_config_rule" "required-tags" {
     compliance_resource_types = var.required_tags_resource_types
   }
 
-  input_parameters = "${jsonencode(var.required_tags)}"
+  input_parameters = jsonencode(var.required_tags)
 
   source {
     owner             = "AWS"
     source_identifier = "REQUIRED_TAGS"
   }
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
-
-#
-# The rules that follow have been taken from the following module:
-#  https://github.com/osodevops/aws-terraform-module-config-rules/blob/master/aws_config_rules.tf
-#
-
-data "template_file" "aws_config_ami_approved_tag" {
-  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
-
-  vars = {
-    ami_required_tag_key_value = var.ami_required_tag_key_value
-  }
-}
-
-#==================================================
-# 0.1	Checks whether running instances are using specified AMIs.
-#==================================================
 resource "aws_config_config_rule" "approved-amis-by-tag" {
-  count             = var.check_approved_amis_by_tag ? 1 : 0
-  name              = "approved-amis-by-tag"
-  description       = "Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
-  input_parameters  = "${data.template_file.aws_config_ami_approved_tag.rendered}"
+  count            = var.check_approved_amis_by_tag ? 1 : 0
+  name             = "approved-amis-by-tag"
+  description      = "Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
+  input_parameters = data.template_file.aws_config_ami_approved_tag.rendered
 
   source {
-    owner               = "AWS"
-    source_identifier   = "APPROVED_AMIS_BY_TAG"
+    owner             = "AWS"
+    source_identifier = "APPROVED_AMIS_BY_TAG"
   }
 
   depends_on = [aws_config_configuration_recorder.main]
 }
 
-#==================================================
-# 0.3	Ensure EBS volumes that are in an attached state are encrypted.
-#==================================================
 resource "aws_config_config_rule" "ec2-encrypted-volumes" {
-  count         = var.check_ec2_encrypted_volumes ? 1 : 0
-  name          = "ec2-volumes-must-be-encrypted"
-  description   = "Evaluates whether EBS volumes that are in an attached state are encrypted. Optionally, you can specify the ID of a KMS key to use to encrypt the volume."
+  count       = var.check_ec2_encrypted_volumes ? 1 : 0
+  name        = "ec2-volumes-must-be-encrypted"
+  description = "Evaluates whether EBS volumes that are in an attached state are encrypted. Optionally, you can specify the ID of a KMS key to use to encrypt the volume."
 
   source {
-    owner               = "AWS"
-    source_identifier   = "ENCRYPTED_VOLUMES"
+    owner             = "AWS"
+    source_identifier = "ENCRYPTED_VOLUMES"
   }
 
   depends_on = [aws_config_configuration_recorder.main]

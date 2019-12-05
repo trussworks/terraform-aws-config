@@ -19,6 +19,7 @@ module "config" {
   config_logs_bucket = "${module.config_logs.aws_logs_bucket}"
   config_logs_prefix = "config"
 
+  check_required_tags          = true
   required_tags_resource_types = ["S3::Bucket"]
   required_tags = {
     tag1Key   = "Automation"
