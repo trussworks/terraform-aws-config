@@ -101,7 +101,7 @@ variable "check_multi_region_cloud_trail" {
 
 variable "check_cloudtrail_enabled" {
   description = "Enable cloudtrail-enabled rule"
-  default     = false
+  default     = true
 }
 
 variable "check_cloud_trail_encryption" {

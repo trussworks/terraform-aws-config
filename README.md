@@ -54,7 +54,7 @@ module "aws_config" {
 | check\_approved\_amis\_by\_tag | Enable approved-amis-by-tag rule | string | `"false"` | no |
 | check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | string | `"false"` | no |
 | check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | string | `"false"` | no |
-| check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | string | `"false"` | no |
+| check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | string | `"true"` | no |
 | check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes rule | string | `"true"` | no |
 | check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check rule | string | `"true"` | no |
 | check\_eip\_attached | Enable eip-attached rule | string | `"false"` | no |
