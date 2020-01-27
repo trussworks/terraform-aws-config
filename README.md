@@ -43,48 +43,55 @@ module "aws_config" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.40.0 |
+| template | >= 2.0 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | string | `"14"` | no |
-| aggregate\_organization | Aggregate compliance data by organization | bool | `"false"` | no |
-| ami\_required\_tag\_key\_value | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | string | `""` | no |
-| check\_acm\_certificate\_expiration\_check | Enable acm-certificate-expiration-check rule | string | `"true"` | no |
-| check\_approved\_amis\_by\_tag | Enable approved-amis-by-tag rule | string | `"false"` | no |
-| check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | string | `"false"` | no |
-| check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | string | `"false"` | no |
-| check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | string | `"true"` | no |
-| check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes rule | string | `"true"` | no |
-| check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check rule | string | `"true"` | no |
-| check\_eip\_attached | Enable eip-attached rule | string | `"false"` | no |
-| check\_guard\_duty | Enable guardduty-enabled-centralized rule | string | `"false"` | no |
-| check\_iam\_group\_has\_users\_check | Enable iam-group-has-users-check rule | string | `"true"` | no |
-| check\_iam\_password\_policy | Enable iam-password-policy rule | string | `"true"` | no |
-| check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | string | `"true"` | no |
-| check\_instances\_in\_vpc | Enable instances-in-vpc rule | string | `"true"` | no |
-| check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | string | `"false"` | no |
-| check\_rds\_public\_access | Enable rds-instance-public-access-check rule | string | `"false"` | no |
-| check\_rds\_snapshots\_public\_prohibited | Enable rds-snapshots-public-prohibited rule | string | `"true"` | no |
-| check\_rds\_storage\_encrypted | Enable rds-storage-encrypted rule | string | `"true"` | no |
-| check\_required\_tags | Enable required-tags rule | string | `"false"` | no |
-| check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | string | `"false"` | no |
-| check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | string | `"true"` | no |
-| config\_aggregator\_name | The name of the aggregator. | string | `"organization"` | no |
-| config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | string | `"Six_Hours"` | no |
-| config\_logs\_bucket | The S3 bucket for AWS Config logs. | string | n/a | yes |
-| config\_logs\_prefix | The S3 prefix for AWS Config logs. | string | `"config"` | no |
-| config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | string | `"TwentyFour_Hours"` | no |
-| config\_name | The name of the AWS Config instance. | string | `"aws-config"` | no |
-| password\_max\_age | Number of days before password expiration. | string | `"90"` | no |
-| password\_min\_length | Password minimum length. | string | `"14"` | no |
-| password\_require\_lowercase | Require at least one lowercase character in password. | string | `"true"` | no |
-| password\_require\_numbers | Require at least one number in password. | string | `"true"` | no |
-| password\_require\_symbols | Require at least one symbol in password. | string | `"true"` | no |
-| password\_require\_uppercase | Require at least one uppercase character in password. | string | `"true"` | no |
-| password\_reuse\_prevention | Number of passwords before allowing reuse. | string | `"24"` | no |
-| required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | map(string) | `{}` | no |
-| required\_tags\_resource\_types | Resource types to check for tags. | list(string) | `[]` | no |
+|------|-------------|------|---------|:-----:|
+| acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
+| aggregate\_organization | Aggregate compliance data by organization | `bool` | `false` | no |
+| ami\_required\_tag\_key\_value | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
+| check\_acm\_certificate\_expiration\_check | Enable acm-certificate-expiration-check rule | `bool` | `true` | no |
+| check\_approved\_amis\_by\_tag | Enable approved-amis-by-tag rule | `bool` | `false` | no |
+| check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | `bool` | `false` | no |
+| check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
+| check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | `bool` | `true` | no |
+| check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
+| check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
+| check\_eip\_attached | Enable eip-attached rule | `bool` | `false` | no |
+| check\_guard\_duty | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
+| check\_iam\_group\_has\_users\_check | Enable iam-group-has-users-check rule | `bool` | `true` | no |
+| check\_iam\_password\_policy | Enable iam-password-policy rule | `bool` | `true` | no |
+| check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
+| check\_instances\_in\_vpc | Enable instances-in-vpc rule | `bool` | `true` | no |
+| check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
+| check\_rds\_public\_access | Enable rds-instance-public-access-check rule | `bool` | `false` | no |
+| check\_rds\_snapshots\_public\_prohibited | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
+| check\_rds\_storage\_encrypted | Enable rds-storage-encrypted rule | `bool` | `true` | no |
+| check\_required\_tags | Enable required-tags rule | `bool` | `false` | no |
+| check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
+| check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
+| config\_aggregator\_name | The name of the aggregator. | `string` | `"organization"` | no |
+| config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
+| config\_logs\_bucket | The S3 bucket for AWS Config logs. | `string` | n/a | yes |
+| config\_logs\_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
+| config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
+| config\_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
+| password\_max\_age | Number of days before password expiration. | `number` | `90` | no |
+| password\_min\_length | Password minimum length. | `number` | `14` | no |
+| password\_require\_lowercase | Require at least one lowercase character in password. | `bool` | `true` | no |
+| password\_require\_numbers | Require at least one number in password. | `bool` | `true` | no |
+| password\_require\_symbols | Require at least one symbol in password. | `bool` | `true` | no |
+| password\_require\_uppercase | Require at least one uppercase character in password. | `bool` | `true` | no |
+| password\_reuse\_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
+| required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
+| required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
 
 ## Outputs
 
