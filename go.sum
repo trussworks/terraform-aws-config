@@ -48,6 +48,7 @@ github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578/go.mod h1:uGdko
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
+github.com/aws/aws-lambda-go v1.13.3/go.mod h1:4UKl9IzQMoD+QF79YdCuzCwp8VbmG4VAQwij/eHl5CU=
 github.com/aws/aws-sdk-go v1.16.26/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/aws/aws-sdk-go v1.27.1 h1:MXnqY6SlWySaZAqNnXThOvjRFdiiOuKtC6i7baFdNdU=
 github.com/aws/aws-sdk-go v1.27.1/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
@@ -194,6 +195,8 @@ github.com/gruntwork-io/gruntwork-cli v0.5.1 h1:mVmVsFubUSLSCO8bGigI63HXzvzkC0uW
 github.com/gruntwork-io/gruntwork-cli v0.5.1/go.mod h1:IBX21bESC1/LGoV7jhXKUnTQTZgQ6dYRsoj/VqxUSZQ=
 github.com/gruntwork-io/terratest v0.23.4 h1:3H8/gS4XJvy3AwPyvil3yMMeiBB6FrGP9IvJI6e2uis=
 github.com/gruntwork-io/terratest v0.23.4/go.mod h1:ds4v1EDndcBq3zNUPs1uot0YGWDbk++I5KPSOSJ6df4=
+github.com/gruntwork-io/terratest v0.24.2 h1:ZL7s7ZaVPRds+HqtPFh8gXjFVpKRNAAbwyVPYx3lH50=
+github.com/gruntwork-io/terratest v0.24.2/go.mod h1:0MCPUGIgQaAXOmw0qRLqyIXs8q6yoNPB3aZt4SkdH0M=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.3/go.mod h1:iADmTwqILo4mZ8BN3D2Q6+9jd8WM5uGBxy+E8yxSoD4=
