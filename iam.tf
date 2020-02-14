@@ -37,9 +37,10 @@ data "template_file" "aws_config_policy" {
 JSON
 
   vars = {
-    bucket_arn = format("arn:aws:s3:::%s", var.config_logs_bucket)
+    bucket_arn = format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
     resource = format(
-      "arn:aws:s3:::%s/%s/AWSLogs/%s/Config/*",
+      "arn:%s:s3:::%s/%s/AWSLogs/%s/Config/*",
+      data.aws_partition.current.partition,
       var.config_logs_bucket,
       var.config_logs_prefix,
       data.aws_caller_identity.current.account_id,
@@ -73,7 +74,7 @@ resource "aws_iam_role" "main" {
 resource "aws_iam_policy_attachment" "managed-policy" {
   name       = "${var.config_name}-managed-policy"
   roles      = [aws_iam_role.main.name]
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
+  policy_arn = format("arn:%s:iam::aws:policy/service-role/AWSConfigRole", data.aws_partition.current.partition)
 }
 
 resource "aws_iam_policy" "aws-config-policy" {
