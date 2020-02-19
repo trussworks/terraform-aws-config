@@ -24,7 +24,7 @@ func TestTerraformAwsConfig(t *testing.T) {
 
 	// AWS only supports one configuration recorder per region.
 	// Each test will need to specify a different region.
-	awsRegion := "us-west-2"
+	awsRegion := "ca-central-1"
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: tempTestFolder,
@@ -62,7 +62,7 @@ func TestRequiredTags(t *testing.T) {
 
 	// AWS only supports one configuration recorder per region.
 	// Each test will need to specify a different region.
-	awsRegion := "us-east-1"
+	awsRegion := "eu-west-1"
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: tempTestFolder,
