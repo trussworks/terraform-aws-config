@@ -196,3 +196,8 @@ variable "check_s3_bucket_public_write_prohibited" {
   description = "Enable s3-bucket-public-write-prohibited rule"
   default     = true
 }
+
+variable "check_cloudwatch_log_group_encrypted" {
+  description = "Enable cloudwatch-log-group-encryption rule"
+  default     = true
+}
