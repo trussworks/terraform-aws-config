@@ -2,59 +2,59 @@
 
 Enables AWS Config and adds managed config rules with good defaults.
 
-The following AWS Config Rules are supported:
+## Supported AWS Config Rules
 
-## ACM
+### ACM
 
 * acm-certificate-expiration-check: Ensure ACM Certificates in your account are marked for expiration within the specified number of days.
 
-## AMI
+### AMI
 
 * approved-amis-by-tag: Checks whether running instances are using specified AMIs.
 
-## CloudTrail
+### CloudTrail
 
 * cloudtrail-enabled: Ensure CloudTrail is enabled.
 * cloud-trail-encryption-enabled: Ensure CloudTrail is configured to use server side encryption (SSE) with AWS KMS or CMK encryption.
 * cloud-trail-log-file-validation-enabled: Checks whether AWS CloudTrail creates a signed digest file with logs.
 * multi-region-cloud-trail-enabled: Ensure that there is at least one multi-region AWS CloudTrail enabled.
 
-## CloudWatch Logs
+### CloudWatch Logs
 
 * cloudwatch-log-group-encryption: Ensure that CloudWatch Logs are encrypted.
 
-## EC2
+### EC2
 
 * ec2-encrypted-volumes: Evaluates whether EBS volumes that are in an attached state are encrypted.
 * ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances
 
-## VPC
+### VPC
 
 * eip_attached: Checks whether all EIP addresses that are allocated to a VPC are attached to EC2 or in-use ENIs.
 * instances-in-vpc: Ensure all EC2 instances run in a VPC.
 
-## GuardDuty
+### GuardDuty
 
 * guardduty-enabled-centralized: Checks whether Amazon GuardDuty is enabled in your AWS account and region.
 
-## IAM
+### IAM
 
 * iam-password-policy: Ensure the account password policy for IAM users meets the specified requirements.
 * iam-user-no-policies-check: Ensure that none of your IAM users have policies attached; IAM users must inherit permissions from IAM groups or roles.
 * iam-group-has-users-check: Checks whether IAM groups have at least one IAM user.
 * root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
 
-## Tagging
+### Tagging
 
 * required-tags: Checks if resources are deployed with configured tags.
 
-## RDS
+### RDS
 
 * rds-instance-public-access-check: Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible.
 * rds-snapshots-public-prohibited: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public.
 * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
 
-## S3
+### S3
 
 * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
 
