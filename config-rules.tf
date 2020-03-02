@@ -354,3 +354,17 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "iam_root_access_key" {
+  count = var.check_iam_root_access_key_check ? 1 : 0
+
+  name        = "iam-root-access-key"
+  description = "Checks whether the root user access key is available. The rule is COMPLIANT if the user access key does not exist"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_ROOT_ACCESS_KEY_CHECK"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

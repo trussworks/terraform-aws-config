@@ -43,6 +43,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 * iam-user-no-policies-check: Ensure that none of your IAM users have policies attached; IAM users must inherit permissions from IAM groups or roles.
 * iam-group-has-users-check: Checks whether IAM groups have at least one IAM user.
 * root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
+* iam-root-access-key: Ensure root AWS account does not have Access Keys.
 
 ### Tagging
 
@@ -104,6 +105,7 @@ module "aws_config" {
 | check\_guard\_duty | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | check\_iam\_group\_has\_users\_check | Enable iam-group-has-users-check rule | `bool` | `true` | no |
 | check\_iam\_password\_policy | Enable iam-password-policy rule | `bool` | `true` | no |
+| check\_iam\_root\_access\_key | Enable iam-root-access-key rule | `bool` | `true` | no |
 | check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
 | check\_instances\_in\_vpc | Enable instances-in-vpc rule | `bool` | `true` | no |
 | check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |

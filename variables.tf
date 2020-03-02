@@ -230,3 +230,9 @@ variable "check_cloudwatch_log_group_encrypted" {
   type        = bool
   default     = true
 }
+
+variable "check_iam_root_access_key" {
+  description = "Enable iam-root-access-key rule"
+  type        = bool
+  default     = true
+}
