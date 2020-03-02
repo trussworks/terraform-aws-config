@@ -99,6 +99,7 @@ module "aws_config" {
 | check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
 | check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | `bool` | `true` | no |
 | check\_cloudwatch\_log\_group\_encrypted | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
+| check\_ebs\_snapshot\_public\_restorable | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
 | check\_eip\_attached | Enable eip-attached rule | `bool` | `false` | no |

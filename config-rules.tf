@@ -168,6 +168,19 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
+resource "aws_config_config_rule" "ebs_snapshot_public_restorable" {
+  count       = var.check_ebs_snapshot_public_restorable ? 1 : 0
+  name        = "ebs-snapshot-public-restorable"
+  description = "Checks whether Amazon Elastic Block Store snapshots are not publicly restorable"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EBS_SNAPSHOT_PUBLIC_RESTORABLE_CHECK"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
 resource "aws_config_config_rule" "iam-user-no-policies-check" {
   count       = var.check_iam_user_no_policies_check ? 1 : 0
   name        = "iam-user-no-policies-check"

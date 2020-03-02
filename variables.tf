@@ -236,3 +236,9 @@ variable "check_iam_root_access_key" {
   type        = bool
   default     = true
 }
+
+variable "check_ebs_snapshot_public_restorable" {
+  description = "Enable ebs-snapshot-public-restorable rule"
+  type        = bool
+  default     = true
+}
