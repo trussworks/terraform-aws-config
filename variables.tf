@@ -242,3 +242,9 @@ variable "check_ebs_snapshot_public_restorable" {
   type        = bool
   default     = true
 }
+
+variable "check_vpc_default_security_group_closed" {
+  description = "Enable vpc-default-security-group-closed rule"
+  type        = bool
+  default     = true
+}

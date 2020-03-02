@@ -360,3 +360,17 @@ resource "aws_config_config_rule" "iam_root_access_key" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "vpc_default_security_group_closed" {
+  count = var.check_vpc_default_security_group_closed ? 1 : 0
+
+  name        = "vpc-default-security-group-closed"
+  description = "Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "VPC_DEFAULT_SECURITY_GROUP_CLOSED"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

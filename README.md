@@ -26,12 +26,14 @@ Enables AWS Config and adds managed config rules with good defaults.
 ### EC2
 
 * ec2-encrypted-volumes: Evaluates whether EBS volumes that are in an attached state are encrypted.
-* ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances
+* ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances.
+* ebs-snapshot-public-restorable-check: Checks whether Amazon Elastic Block Store snapshots are not publicly restorable.
 
 ### VPC
 
-* eip_attached: Checks whether all EIP addresses that are allocated to a VPC are attached to EC2 or in-use ENIs.
+* eip-attached: Checks whether all EIP addresses that are allocated to a VPC are attached to EC2 or in-use ENIs.
 * instances-in-vpc: Ensure all EC2 instances run in a VPC.
+* vpc-default-security-group-closed: Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic.
 
 ### GuardDuty
 
@@ -116,6 +118,7 @@ module "aws_config" {
 | check\_required\_tags | Enable required-tags rule | `bool` | `false` | no |
 | check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
 | check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
+| check\_vpc\_default\_security\_group\_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
 | config\_aggregator\_name | The name of the aggregator. | `string` | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
 | config\_logs\_bucket | The S3 bucket for AWS Config logs. | `string` | n/a | yes |
