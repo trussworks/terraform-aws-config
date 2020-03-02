@@ -4,7 +4,7 @@
 
 module "config_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 3"
+  version = "~> 5"
 
   s3_bucket_name     = "${var.config_logs_bucket}"
   region             = "${var.region}"
