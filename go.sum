@@ -193,8 +193,6 @@ github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgf
 github.com/grpc-ecosystem/grpc-gateway v1.9.5/go.mod h1:vNeuVxBJEsws4ogUvrchl83t/GYV9WGTSLVdBhOQFDY=
 github.com/gruntwork-io/gruntwork-cli v0.5.1 h1:mVmVsFubUSLSCO8bGigI63HXzvzkC0uWXzm4dd9pXRg=
 github.com/gruntwork-io/gruntwork-cli v0.5.1/go.mod h1:IBX21bESC1/LGoV7jhXKUnTQTZgQ6dYRsoj/VqxUSZQ=
-github.com/gruntwork-io/terratest v0.23.4 h1:3H8/gS4XJvy3AwPyvil3yMMeiBB6FrGP9IvJI6e2uis=
-github.com/gruntwork-io/terratest v0.23.4/go.mod h1:ds4v1EDndcBq3zNUPs1uot0YGWDbk++I5KPSOSJ6df4=
 github.com/gruntwork-io/terratest v0.24.2 h1:ZL7s7ZaVPRds+HqtPFh8gXjFVpKRNAAbwyVPYx3lH50=
 github.com/gruntwork-io/terratest v0.24.2/go.mod h1:0MCPUGIgQaAXOmw0qRLqyIXs8q6yoNPB3aZt4SkdH0M=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=

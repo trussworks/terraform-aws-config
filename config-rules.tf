@@ -340,3 +340,17 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
+  count = var.check_cloudwatch_log_group_encrypted ? 1 : 0
+
+  name        = "cloudwatch_log_group-encrypted"
+  description = "Checks whether a log group in Amazon CloudWatch Logs is encrypted. The rule is NON_COMPLIANT if CloudWatch Logs has a log group without encryption enabled"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
