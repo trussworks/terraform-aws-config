@@ -230,3 +230,21 @@ variable "check_cloudwatch_log_group_encrypted" {
   type        = bool
   default     = true
 }
+
+variable "check_iam_root_access_key" {
+  description = "Enable iam-root-access-key rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ebs_snapshot_public_restorable" {
+  description = "Enable ebs-snapshot-public-restorable rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_vpc_default_security_group_closed" {
+  description = "Enable vpc-default-security-group-closed rule"
+  type        = bool
+  default     = true
+}

@@ -48,10 +48,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
@@ -66,10 +63,7 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
@@ -84,10 +78,7 @@ resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
@@ -102,10 +93,7 @@ resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
@@ -120,10 +108,7 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "instances-in-vpc" {
@@ -136,10 +121,7 @@ resource "aws_config_config_rule" "instances-in-vpc" {
     source_identifier = "INSTANCES_IN_VPC"
   }
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
@@ -154,10 +136,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
@@ -184,6 +163,19 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   source {
     owner             = "AWS"
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ebs_snapshot_public_restorable" {
+  count       = var.check_ebs_snapshot_public_restorable ? 1 : 0
+  name        = "ebs-snapshot-public-restorable"
+  description = "Checks whether Amazon Elastic Block Store snapshots are not publicly restorable"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EBS_SNAPSHOT_PUBLIC_RESTORABLE_CHECK"
   }
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -350,6 +342,34 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
   source {
     owner             = "AWS"
     source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "iam_root_access_key" {
+  count = var.check_iam_root_access_key ? 1 : 0
+
+  name        = "iam-root-access-key"
+  description = "Checks whether the root user access key is available. The rule is COMPLIANT if the user access key does not exist"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_ROOT_ACCESS_KEY_CHECK"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "vpc_default_security_group_closed" {
+  count = var.check_vpc_default_security_group_closed ? 1 : 0
+
+  name        = "vpc-default-security-group-closed"
+  description = "Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "VPC_DEFAULT_SECURITY_GROUP_CLOSED"
   }
 
   depends_on = [aws_config_configuration_recorder.main]
