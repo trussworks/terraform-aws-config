@@ -118,6 +118,7 @@ module "aws_config" {
 | check\_required\_tags | Enable required-tags rule | `bool` | `false` | no |
 | check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
 | check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
+| check\_s3\_bucket\_ssl\_requests\_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
 | check\_vpc\_default\_security\_group\_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
 | config\_aggregator\_name | The name of the aggregator. | `string` | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
