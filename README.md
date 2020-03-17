@@ -60,6 +60,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 ### S3
 
 * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
+* s3-bucket-ssl-requests-only: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
 
 ## Terraform Versions
 
