@@ -143,6 +143,19 @@ module "aws_config" {
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
+## Upgrade Paths
+
+### Upgrading from 2.3.0 to 2.4.x
+
+Version 2.4.0 changed how AWS Config IAM polcies would be attached to IAM roles. When applying the upgrade, you will likely see a race condition resulting in the following error
+
+```text
+Error: Provider produced inconsistent result after apply
+```
+
+A second `terraform apply` should resolve the issue.
+
+
 ## Developer Setup
 
 Install dependencies (macOS)
