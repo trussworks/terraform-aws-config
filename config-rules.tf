@@ -374,3 +374,17 @@ resource "aws_config_config_rule" "vpc_default_security_group_closed" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
+  count = var.check_s3_bucket_ssl_requests_only ? 1 : 0
+
+  name        = "s3-bucket-ssl-requests-only"
+  description = "Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL)."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
+  }
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

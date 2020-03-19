@@ -248,3 +248,9 @@ variable "check_vpc_default_security_group_closed" {
   type        = bool
   default     = true
 }
+
+variable "check_s3_bucket_ssl_requests_only" {
+  description = "Enable s3-bucket-ssl-requests-only rule"
+  type        = bool
+  default     = true
+}
