@@ -69,6 +69,7 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 resource "aws_iam_role" "main" {
   name               = "${var.config_name}-role"
   assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
+  tags               = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "managed-policy" {
