@@ -256,7 +256,7 @@ variable "check_s3_bucket_ssl_requests_only" {
 }
 
 variable "tags" {
-  description = "tags to apply to the creates resources."
+  description = "Tags to apply to AWS Config resources"
   type        = map(string)
   default     = {}
 }
