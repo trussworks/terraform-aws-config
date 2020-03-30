@@ -28,4 +28,9 @@ module "config" {
     tag2Key   = "Environment"
     tag3Value = "Terratest"
   }
+
+  tags = {
+    "Automation" = "Terraform"
+    "Name"       = var.config_name
+  }
 }
