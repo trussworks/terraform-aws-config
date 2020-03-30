@@ -136,11 +136,13 @@ module "aws_config" {
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
 | required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
+| tags | tags to apply to the creates resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| aws\_config\_role\_arn | The ARN of the AWS config role. |
 | required\_tags\_rule\_arn | The ARN of the required-tags config rule. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
