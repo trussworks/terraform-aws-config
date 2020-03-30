@@ -136,7 +136,7 @@ module "aws_config" {
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
 | required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
-| tags | tags to apply to the creates resources. | `map(string)` | `{}` | no |
+| tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
