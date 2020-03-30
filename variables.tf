@@ -254,3 +254,9 @@ variable "check_s3_bucket_ssl_requests_only" {
   type        = bool
   default     = true
 }
+
+variable "tags" {
+  description = "tags to apply to the creates resources."
+  type        = map(string)
+  default     = {}
+}

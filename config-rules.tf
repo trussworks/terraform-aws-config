@@ -48,6 +48,8 @@ resource "aws_config_config_rule" "iam-password-policy" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -62,6 +64,8 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -78,6 +82,8 @@ resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -92,6 +98,8 @@ resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -108,6 +116,8 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -120,6 +130,8 @@ resource "aws_config_config_rule" "instances-in-vpc" {
     owner             = "AWS"
     source_identifier = "INSTANCES_IN_VPC"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -135,6 +147,8 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -152,6 +166,8 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -164,6 +180,8 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
     owner             = "AWS"
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -178,6 +196,8 @@ resource "aws_config_config_rule" "ebs_snapshot_public_restorable" {
     source_identifier = "EBS_SNAPSHOT_PUBLIC_RESTORABLE_CHECK"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -190,6 +210,8 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
     owner             = "AWS"
     source_identifier = "IAM_USER_NO_POLICIES_CHECK"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -204,6 +226,8 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
     source_identifier = "IAM_GROUP_HAS_USERS_CHECK"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -216,6 +240,8 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
     owner             = "AWS"
     source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -230,6 +256,8 @@ resource "aws_config_config_rule" "rds-instance-public-access-check" {
     source_identifier = "RDS_INSTANCE_PUBLIC_ACCESS_CHECK"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -242,6 +270,8 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
     owner             = "AWS"
     source_identifier = "RDS_SNAPSHOTS_PUBLIC_PROHIBITED"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -258,6 +288,8 @@ resource "aws_config_config_rule" "guardduty-enabled-centralized" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -271,6 +303,8 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
     source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -283,6 +317,8 @@ resource "aws_config_config_rule" "eip_attached" {
     owner             = "AWS"
     source_identifier = "EIP_ATTACHED"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -303,6 +339,8 @@ resource "aws_config_config_rule" "required-tags" {
     source_identifier = "REQUIRED_TAGS"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -317,6 +355,8 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
     source_identifier = "APPROVED_AMIS_BY_TAG"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -329,6 +369,8 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
     owner             = "AWS"
     source_identifier = "ENCRYPTED_VOLUMES"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -344,6 +386,8 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
     source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -357,6 +401,8 @@ resource "aws_config_config_rule" "iam_root_access_key" {
     owner             = "AWS"
     source_identifier = "IAM_ROOT_ACCESS_KEY_CHECK"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -372,6 +418,8 @@ resource "aws_config_config_rule" "vpc_default_security_group_closed" {
     source_identifier = "VPC_DEFAULT_SECURITY_GROUP_CLOSED"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -385,6 +433,8 @@ resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
     owner             = "AWS"
     source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
