@@ -260,3 +260,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "include_global_resource_types" {
+  description = "Specifies whether AWS Config includes all supported types of global resources with the resources that it records."
+  type        = bool
+  default     = true
+}
