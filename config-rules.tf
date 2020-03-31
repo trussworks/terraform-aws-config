@@ -48,10 +48,9 @@ resource "aws_config_config_rule" "iam-password-policy" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
@@ -66,10 +65,9 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
@@ -84,10 +82,9 @@ resource "aws_config_config_rule" "multi-region-cloud-trail-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
@@ -102,10 +99,9 @@ resource "aws_config_config_rule" "cloud-trail-encryption-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
@@ -120,10 +116,9 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "instances-in-vpc" {
@@ -136,10 +131,9 @@ resource "aws_config_config_rule" "instances-in-vpc" {
     source_identifier = "INSTANCES_IN_VPC"
   }
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
@@ -154,10 +148,9 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
-  depends_on = [
-    aws_config_configuration_recorder.main,
-    aws_config_delivery_channel.main,
-  ]
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
@@ -173,6 +166,8 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -185,6 +180,23 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
     owner             = "AWS"
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
   }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ebs_snapshot_public_restorable" {
+  count       = var.check_ebs_snapshot_public_restorable ? 1 : 0
+  name        = "ebs-snapshot-public-restorable"
+  description = "Checks whether Amazon Elastic Block Store snapshots are not publicly restorable"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EBS_SNAPSHOT_PUBLIC_RESTORABLE_CHECK"
+  }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -199,6 +211,8 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
     source_identifier = "IAM_USER_NO_POLICIES_CHECK"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -211,6 +225,8 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
     owner             = "AWS"
     source_identifier = "IAM_GROUP_HAS_USERS_CHECK"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -225,6 +241,8 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
     source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -238,6 +256,8 @@ resource "aws_config_config_rule" "rds-instance-public-access-check" {
     source_identifier = "RDS_INSTANCE_PUBLIC_ACCESS_CHECK"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -250,6 +270,8 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
     owner             = "AWS"
     source_identifier = "RDS_SNAPSHOTS_PUBLIC_PROHIBITED"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -266,6 +288,8 @@ resource "aws_config_config_rule" "guardduty-enabled-centralized" {
 
   maximum_execution_frequency = var.config_max_execution_frequency
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -279,6 +303,8 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
     source_identifier = "S3_BUCKET_PUBLIC_WRITE_PROHIBITED"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -291,6 +317,8 @@ resource "aws_config_config_rule" "eip_attached" {
     owner             = "AWS"
     source_identifier = "EIP_ATTACHED"
   }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
@@ -311,6 +339,8 @@ resource "aws_config_config_rule" "required-tags" {
     source_identifier = "REQUIRED_TAGS"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -325,6 +355,8 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
     source_identifier = "APPROVED_AMIS_BY_TAG"
   }
 
+  tags = var.tags
+
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -337,6 +369,72 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
     owner             = "AWS"
     source_identifier = "ENCRYPTED_VOLUMES"
   }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
+  count = var.check_cloudwatch_log_group_encrypted ? 1 : 0
+
+  name        = "cloudwatch_log_group-encrypted"
+  description = "Checks whether a log group in Amazon CloudWatch Logs is encrypted. The rule is NON_COMPLIANT if CloudWatch Logs has a log group without encryption enabled"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "iam_root_access_key" {
+  count = var.check_iam_root_access_key ? 1 : 0
+
+  name        = "iam-root-access-key"
+  description = "Checks whether the root user access key is available. The rule is COMPLIANT if the user access key does not exist"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_ROOT_ACCESS_KEY_CHECK"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "vpc_default_security_group_closed" {
+  count = var.check_vpc_default_security_group_closed ? 1 : 0
+
+  name        = "vpc-default-security-group-closed"
+  description = "Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "VPC_DEFAULT_SECURITY_GROUP_CLOSED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
+  count = var.check_s3_bucket_ssl_requests_only ? 1 : 0
+
+  name        = "s3-bucket-ssl-requests-only"
+  description = "Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL)."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
+  }
+
+  tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }

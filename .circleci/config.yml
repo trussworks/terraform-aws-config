@@ -2,7 +2,7 @@ version: 2
 jobs:
   validate:
     docker:
-      - image: trussworks/circleci-docker-primary:40076395a6e6a349f92caa92c4de614e105fe672
+      - image: trussworks/circleci-docker-primary:4013bb8c2428b3e2755d90a922abb2a6cea37ab4
     steps:
       - checkout
       - restore_cache:
@@ -10,7 +10,7 @@ jobs:
             - pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
       - run:
           name: Run pre-commit tests
-          command: pre-commit run --all-files
+          command: pre-commit run --all-files --show-diff-on-failure
       - save_cache:
           key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
           paths:

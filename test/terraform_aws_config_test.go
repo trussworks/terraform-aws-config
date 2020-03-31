@@ -5,7 +5,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
@@ -39,9 +38,6 @@ func TestTerraformAwsConfig(t *testing.T) {
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
-
-	// Empty config_logs_bucket before terraform destroy
-	defer aws.EmptyS3Bucket(t, awsRegion, expectedConfigLogsBucket)
 
 	terraform.InitAndApply(t, terraformOptions)
 
@@ -77,7 +73,6 @@ func TestRequiredTags(t *testing.T) {
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
-	defer aws.EmptyS3Bucket(t, awsRegion, expectedConfigLogsBucket)
 
 	terraform.InitAndApply(t, terraformOptions)
 
