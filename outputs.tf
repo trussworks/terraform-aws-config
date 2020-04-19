@@ -4,6 +4,6 @@ output "required_tags_rule_arn" {
 }
 
 output "aws_config_role_arn" {
-  description = "The ARN of the AWS config role."
+  description = "The ARN of the AWS config IAM role."
   value       = aws_iam_role.main.arn
 }

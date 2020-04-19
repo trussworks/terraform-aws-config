@@ -21,6 +21,17 @@ variable "config_logs_bucket" {
   type        = string
 }
 
+variable "sns_topic_arn" {  
+  description = "An SNS topic to stream configuration changes and notifications to."
+  default     = ""
+}
+
+variable "sns_topic_arn_enabled" {  
+  description = "An SNS topic to stream configuration changes and notifications to."
+  type = string
+  default     = false
+}
+
 variable "config_logs_prefix" {
   description = "The S3 prefix for AWS Config logs."
   type        = string

@@ -1,3 +1,37 @@
+data "aws_region" "current" {}
+
+
+#############
+# SNS CONFIG
+#############
+
+data "aws_iam_policy_document" "allow_sns_publish" {
+  count = var.sns_topic_arn_enabled ? 0 : 1
+
+  statement {
+    actions   = ["sns:Publish"]
+    resources = [var.sns_topic_arn]
+  }
+}
+
+resource "aws_iam_policy" "allow_sns_publish" {
+  count = var.sns_topic_arn_enabled ? 0 : 1
+  name   = "aws-config-${data.aws_region.current.name}-sns"
+  policy = data.aws_iam_policy_document.allow_sns_publish.*.json[count.index]
+}
+
+resource "aws_iam_role_policy_attachment" "allows_sns_publish" {
+  count      = var.sns_topic_arn_enabled ? 0 : 1
+  policy_arn = aws_iam_policy.allow_sns_publish.*.arn[count.index]
+  role       = aws_iam_role.main.name
+}
+
+
+
+#############
+# AWS CONFIG
+#############
+
 # Get the access to the effective Account ID in which Terraform is working.
 data "aws_caller_identity" "current" {
 }
@@ -86,3 +120,4 @@ resource "aws_iam_role_policy_attachment" "aws-config-policy" {
   role       = aws_iam_role.main.name
   policy_arn = aws_iam_policy.aws-config-policy.arn
 }
+
