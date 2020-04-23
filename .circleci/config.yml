@@ -32,22 +32,6 @@ jobs:
           paths:
             - "~/go/pkg/mod"
 
-  validate:
-    docker:
-      - image: trussworks/circleci-docker-primary:4013bb8c2428b3e2755d90a922abb2a6cea37ab4
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
-      - run:
-          name: Run pre-commit tests
-          command: pre-commit run --all-files --show-diff-on-failure
-      - save_cache:
-          key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
-          paths:
-            - ~/.cache/pre-commit
-
 workflows:
   version: 2
   validate:
