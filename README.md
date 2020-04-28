@@ -84,6 +84,14 @@ module "aws_config" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+| aws | >= 2.40.0 |
+| template | >= 2.0 |
+
 ## Providers
 
 | Name | Version |
@@ -94,7 +102,7 @@ module "aws_config" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
 | aggregate\_organization | Aggregate compliance data by organization | `bool` | `false` | no |
 | ami\_required\_tag\_key\_value | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
