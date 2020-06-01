@@ -10,3 +10,7 @@ update_configs:
     # Apply dependencies label to PRs
     default_labels:
       - "dependencies"
+    automerged_updates:
+      - match:
+          dependency_type: "all"
+          update_type: "all"
