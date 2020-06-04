@@ -137,6 +137,7 @@ module "aws_config" {
 | config\_logs\_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
 | config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
 | config\_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
+| config\_sns\_topic\_arn | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | include\_global\_resource\_types | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
 | password\_max\_age | Number of days before password expiration. | `number` | `90` | no |
 | password\_min\_length | Password minimum length. | `number` | `14` | no |
@@ -147,7 +148,6 @@ module "aws_config" {
 | password\_reuse\_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
 | required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
-| sns\_topic\_arn | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 
 ## Outputs

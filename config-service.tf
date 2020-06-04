@@ -12,7 +12,7 @@ resource "aws_config_delivery_channel" "main" {
   name           = var.config_name
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.config_logs_prefix
-  sns_topic_arn  = var.sns_topic_arn
+  sns_topic_arn  = var.config_sns_topic_arn
 
   snapshot_delivery_properties {
     delivery_frequency = var.config_delivery_frequency
