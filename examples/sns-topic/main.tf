@@ -1,10 +1,12 @@
+data "aws_partition" "current" {}
+
 #
 # AWS Config Logs Bucket
 #
 
 module "config_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 5"
+  version = "~> 8"
 
   s3_bucket_name     = var.config_logs_bucket
   region             = var.region
@@ -17,9 +19,30 @@ module "config_logs" {
 # SNS Topic
 #
 
+data "aws_iam_policy_document" "config" {
+  statement {
+    effect = "Allow"
+    principals {
+      type        = "AWS"
+      identifiers = [module.config.aws_config_role_arn]
+    }
+    actions   = ["SNS:Publish"]
+    resources = [aws_sns_topic.config.arn]
+  }
+}
+
 resource "aws_sns_topic" "config" {
   name = var.config_name
 }
+
+resource "aws_sns_topic_policy" "config" {
+  arn    = aws_sns_topic.config.arn
+  policy = data.aws_iam_policy_document.config.json
+}
+
+#
+# AWS Config
+#
 
 module "config" {
   source = "../../"
