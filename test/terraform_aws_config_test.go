@@ -80,3 +80,32 @@ func TestRequiredTags(t *testing.T) {
 	assert.NotEmpty(t, requiredTagsRuleARN)
 
 }
+
+func TestSnsTopic(t *testing.T) {
+	t.Parallel()
+
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/sns-topic")
+
+	configName := fmt.Sprintf("aws-config-%s", strings.ToLower(random.UniqueId()))
+	expectedConfigLogsBucket := fmt.Sprintf("terratest-%s", configName)
+
+	// AWS only supports one configuration recorder per region.
+	// Each test will need to specify a different region.
+	awsRegion := "eu-west-2"
+
+	terraformOptions := &terraform.Options{
+		TerraformDir: tempTestFolder,
+		Vars: map[string]interface{}{
+			"region":             awsRegion,
+			"config_logs_bucket": expectedConfigLogsBucket,
+			"config_name":        configName,
+		},
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": awsRegion,
+		},
+	}
+
+	defer terraform.Destroy(t, terraformOptions)
+
+	terraform.InitAndApply(t, terraformOptions)
+}
