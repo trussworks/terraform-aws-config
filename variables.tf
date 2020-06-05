@@ -269,6 +269,6 @@ variable "include_global_resource_types" {
 
 variable "config_sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
-  type        = "string"
+  type        = string
   default     = null
 }
