@@ -155,6 +155,7 @@ module "aws_config" {
 | Name | Description |
 |------|-------------|
 | aws\_config\_role\_arn | The ARN of the AWS config role. |
+| aws\_config\_role\_name | The name of the IAM role used by AWS config |
 | required\_tags\_rule\_arn | The ARN of the required-tags config rule. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
