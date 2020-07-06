@@ -28,6 +28,7 @@ data "template_file" "aws_config_acm_certificate_expiration" {
 #
 
 resource "aws_config_config_rule" "iam-password-policy" {
+  count = var.active == true ? 1 : 0
   name             = "iam-password-policy"
   description      = "Ensure the account password policy for IAM users meets the specified requirements"
   input_parameters = data.template_file.aws_config_iam_password_policy.rendered
@@ -46,6 +47,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
 }
 
 resource "aws_config_config_rule" "cloudtrail-enabled" {
+  count = var.active == true ? 1 : 0
   name        = "cloudtrail-enabled"
   description = "Ensure CloudTrail is enabled"
 
@@ -63,6 +65,7 @@ resource "aws_config_config_rule" "cloudtrail-enabled" {
 }
 
 resource "aws_config_config_rule" "instances-in-vpc" {
+  count = var.active == true ? 1 : 0
   name        = "instances-in-vpc"
   description = "Ensure all EC2 instances run in a VPC"
 
@@ -78,6 +81,7 @@ resource "aws_config_config_rule" "instances-in-vpc" {
 }
 
 resource "aws_config_config_rule" "root-account-mfa-enabled" {
+  count = var.active == true ? 1 : 0
   name        = "root-account-mfa-enabled"
   description = "Ensure root AWS account has MFA enabled"
 
@@ -95,6 +99,7 @@ resource "aws_config_config_rule" "root-account-mfa-enabled" {
 }
 
 resource "aws_config_config_rule" "acm-certificate-expiration-check" {
+  count = var.active == true ? 1 : 0
   name             = "acm-certificate-expiration-check"
   description      = "Ensures ACM Certificates in your account are marked for expiration within the specified number of days"
   input_parameters = data.template_file.aws_config_acm_certificate_expiration.rendered
@@ -110,6 +115,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
 }
 
 resource "aws_config_config_rule" "ec2-volume-inuse-check" {
+  count = var.active == true ? 1 : 0
   name        = "ec2-volume-inuse-check"
   description = "Checks whether EBS volumes are attached to EC2 instances"
 
@@ -122,6 +128,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
 }
 
 resource "aws_config_config_rule" "iam-user-no-policies-check" {
+  count = var.active == true ? 1 : 0
   name        = "iam-user-no-policies-check"
   description = "Ensure that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles."
 
@@ -134,6 +141,7 @@ resource "aws_config_config_rule" "iam-user-no-policies-check" {
 }
 
 resource "aws_config_config_rule" "rds-storage-encrypted" {
+  count = var.active == true ? 1 : 0
   name        = "rds-storage-encrypted"
   description = "Checks whether storage encryption is enabled for your RDS DB instances."
 
@@ -146,7 +154,7 @@ resource "aws_config_config_rule" "rds-storage-encrypted" {
 }
 
 resource "aws_config_config_rule" "rds-instance-public-access-check" {
-  count = var.check_rds_public_access == true ? 1 : 0
+  count = var.check_rds_public_access == true && var.active == true ? 1 : 0
 
   name        = "rds-instance-public-access-check"
   description = "Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible. The rule is non-compliant if the publiclyAccessible field is true in the instance configuration item."
@@ -160,6 +168,7 @@ resource "aws_config_config_rule" "rds-instance-public-access-check" {
 }
 
 resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
+  count = var.active == true ? 1 : 0
   name        = "rds-snapshots-public-prohibited"
   description = "Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public."
 
@@ -172,7 +181,7 @@ resource "aws_config_config_rule" "rds-snapshots-public-prohibited" {
 }
 
 resource "aws_config_config_rule" "guardduty-enabled-centralized" {
-  count = var.check_guard_duty == true ? 1 : 0 
+  count = var.check_guard_duty == true && var.active == true ? 1 : 0 
 
   name        = "guardduty-enabled-centralized"
   description = "Checks whether Amazon GuardDuty is enabled in your AWS account and region."
@@ -188,6 +197,7 @@ resource "aws_config_config_rule" "guardduty-enabled-centralized" {
 }
 
 resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
+  count = var.active == true ? 1 : 0
   name        = "s3-bucket-public-write-prohibited"
   description = "Checks that your S3 buckets do not allow public write access."
 

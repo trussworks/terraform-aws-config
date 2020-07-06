@@ -75,3 +75,7 @@ variable "region" {
   description = "AWS region"
   type = "string"
 }
+
+variable "active" {
+  default = true
+}
