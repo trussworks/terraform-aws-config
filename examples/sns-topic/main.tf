@@ -6,7 +6,7 @@ data "aws_partition" "current" {}
 
 module "config_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 8"
+  version = "~> 9"
 
   s3_bucket_name     = var.config_logs_bucket
   region             = var.region
