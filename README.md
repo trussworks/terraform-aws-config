@@ -88,7 +88,7 @@ module "aws_config" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.0 |
+| terraform | >= 0.12.7, < 0.14 |
 | aws | >= 2.70, < 4.0 |
 | template | >= 2.0 |
 
