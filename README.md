@@ -64,7 +64,9 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ## Terraform Versions
 
-Terraform 0.12. Pin module version to ~> 2.x Submit pull-requests to master branch.
+Terraform 0.13. Pin module version to ~> 4.x. Submit pull-requests to master branch.
+
+Terraform 0.12. Pin module version to ~> 3.0. Submit pull-requests to terraform012 branch.
 
 Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terraform011 branch.
 
