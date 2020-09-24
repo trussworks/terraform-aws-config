@@ -74,7 +74,7 @@ resource "aws_iam_role" "main" {
 
 resource "aws_iam_role_policy_attachment" "managed-policy" {
   role       = aws_iam_role.main.name
-  policy_arn = format("arn:%s:iam::aws:policy/service-role/AWSConfigRole", data.aws_partition.current.partition)
+  policy_arn = format("arn:%s:iam::aws:policy/service-role/AWS_ConfigRole", data.aws_partition.current.partition)
 }
 
 resource "aws_iam_policy" "aws-config-policy" {
