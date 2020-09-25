@@ -39,9 +39,10 @@ JSON
   vars = {
     bucket_arn = format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
     resource = format(
-      "arn:%s:s3:::%s/%s/AWSLogs/%s/Config/*",
+      "arn:%s:s3:::%s%s%s/AWSLogs/%s/Config/*",
       data.aws_partition.current.partition,
       var.config_logs_bucket,
+      var.config_logs_prefix == "" ? "" : "/",
       var.config_logs_prefix,
       data.aws_caller_identity.current.account_id,
     )
