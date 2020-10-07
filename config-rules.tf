@@ -24,7 +24,7 @@ data "template_file" "aws_config_acm_certificate_expiration" {
 }
 
 data "template_file" "aws_config_ami_approved_tag" {
-  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
+  template = file("${path.module}/config-policies/ami-approved-tag.tpl")
 
   vars = {
     ami_required_tag_key_value = var.ami_required_tag_key_value
