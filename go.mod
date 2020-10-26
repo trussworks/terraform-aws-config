@@ -3,6 +3,6 @@ module github.com/trussworks/terraform-aws-config
 go 1.14
 
 require (
-	github.com/gruntwork-io/terratest v0.30.11
+	github.com/gruntwork-io/terratest v0.30.13
 	github.com/stretchr/testify v1.6.1
 )
