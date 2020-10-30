@@ -25,5 +25,10 @@
 
 provider "aws" {
   region  = var.region
+<<<<<<< HEAD
   version = "~> 3.0.0"
 }
+=======
+  version = "~> 2.67.0"
+}
+>>>>>>> master
