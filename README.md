@@ -124,11 +124,13 @@ module "aws_config" {
 | check\_iam\_root\_access\_key | Enable iam-root-access-key rule | `bool` | `true` | no |
 | check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
 | check\_instances\_in\_vpc | Enable instances-in-vpc rule | `bool` | `true` | no |
+| check\_mfa\_enabled\_for\_iam\_console\_access | Enable mfa-enabled-for-iam-console-access rule | `bool` | `false` | no |
 | check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
 | check\_rds\_public\_access | Enable rds-instance-public-access-check rule | `bool` | `false` | no |
 | check\_rds\_snapshots\_public\_prohibited | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
 | check\_rds\_storage\_encrypted | Enable rds-storage-encrypted rule | `bool` | `true` | no |
 | check\_required\_tags | Enable required-tags rule | `bool` | `false` | no |
+| check\_restricted\_ssh | Enable restricted-ssh rule | `bool` | `false` | no |
 | check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
 | check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
 | check\_s3\_bucket\_ssl\_requests\_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |

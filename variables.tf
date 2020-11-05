@@ -255,6 +255,18 @@ variable "check_s3_bucket_ssl_requests_only" {
   default     = true
 }
 
+variable "check_mfa_enabled_for_iam_console_access" {
+  description = "Enable mfa-enabled-for-iam-console-access rule"
+  type        = bool
+  default     = false
+}
+
+variable "check_restricted_ssh" {
+  description = "Enable restricted-ssh rule"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "Tags to apply to AWS Config resources"
   type        = map(string)
