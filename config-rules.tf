@@ -438,3 +438,35 @@ resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "mfa_enabled_for_iam_console_access" {
+  count = var.check_mfa_enabled_for_iam_console_access ? 1 : 0
+
+  name        = "mfa-enabled-for-iam-console-access"
+  description = "Checks whether AWS Multi-Factor Authentication (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password. The rule is compliant if MFA is enabled."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "restricted_ssh" {
+  count = var.check_restricted_ssh ? 1 : 0
+
+  name        = "restricted-ssh"
+  description = "Checks whether security groups that are in use disallow unrestricted incoming SSH traffic."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "INCOMING_SSH_DISABLED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
