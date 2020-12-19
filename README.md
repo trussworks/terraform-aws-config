@@ -68,8 +68,6 @@ Terraform 0.13. Pin module version to ~> 4.x. Submit pull-requests to master bra
 
 Terraform 0.12. Pin module version to ~> 3.0. Submit pull-requests to terraform012 branch.
 
-Terraform 0.11. Pin module version to ~> 1.5.1. Submit pull-requests to terraform011 branch.
-
 ## Usage
 
 **Note: This module sets up AWS IAM Roles and Policies, which are globally namespaced. If you plan to have multiple instances of AWS Config, make sure they have unique values for `config_name`.**
@@ -90,15 +88,15 @@ module "aws_config" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.7, < 0.14 |
-| aws | >= 2.70, < 4.0 |
+| terraform | >= 0.12.7 |
+| aws | >= 2.70 |
 | template | >= 2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.70, < 4.0 |
+| aws | >= 2.70 |
 | template | >= 2.0 |
 
 ## Inputs
