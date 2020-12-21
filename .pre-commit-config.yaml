@@ -1,6 +1,6 @@
 repos:
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+    rev: v3.4.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -12,7 +12,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: git://github.com/igorshubovych/markdownlint-cli
-    rev: v0.25.0
+    rev: v0.26.0
     hooks:
       - id: markdownlint
 
