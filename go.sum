@@ -221,8 +221,8 @@ github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgf
 github.com/grpc-ecosystem/grpc-gateway v1.9.5/go.mod h1:vNeuVxBJEsws4ogUvrchl83t/GYV9WGTSLVdBhOQFDY=
 github.com/gruntwork-io/gruntwork-cli v0.7.0 h1:YgSAmfCj9c61H+zuvHwKfYUwlMhu5arnQQLM4RH+CYs=
 github.com/gruntwork-io/gruntwork-cli v0.7.0/go.mod h1:jp6Z7NcLF2avpY8v71fBx6hds9eOFPELSuD/VPv7w00=
-github.com/gruntwork-io/terratest v0.32.1 h1:Uho3H7VWD4tEulWov7pWW90V3XATLKxSh88AtrxTYvU=
-github.com/gruntwork-io/terratest v0.32.1/go.mod h1:PlvB/MeCTUE9gX2Eabx/GAFjfuFL8kR8gfwxxn2B15Q=
+github.com/gruntwork-io/terratest v0.32.3 h1:GSe/mkSQe0rD7Z92NKTUjDKg2FBuy0w82Ttd5gcK7kU=
+github.com/gruntwork-io/terratest v0.32.3/go.mod h1:PlvB/MeCTUE9gX2Eabx/GAFjfuFL8kR8gfwxxn2B15Q=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.1.0 h1:B9UzwGQJehnUY1yNrnwREHc3fGbC2xefo8g4TbElacI=
