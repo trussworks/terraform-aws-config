@@ -17,7 +17,7 @@ variable "aggregate_organization" {
 }
 
 variable "config_logs_bucket" {
-  description = "The S3 bucket for AWS Config logs."
+  description = "The S3 bucket for AWS Config logs. If you have set enable_config_recorder to false then this can be an empty string."
   type        = string
 }
 
