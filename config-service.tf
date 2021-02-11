@@ -3,12 +3,16 @@
 #
 
 resource "aws_config_configuration_recorder_status" "main" {
+  count = var.enable_config_recorder ? 1 : 0
+
   name       = var.config_name
   is_enabled = true
   depends_on = [aws_config_delivery_channel.main]
 }
 
 resource "aws_config_delivery_channel" "main" {
+  count = var.enable_config_recorder ? 1 : 0
+
   name           = var.config_name
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.config_logs_prefix
@@ -22,8 +26,10 @@ resource "aws_config_delivery_channel" "main" {
 }
 
 resource "aws_config_configuration_recorder" "main" {
+  count = var.enable_config_recorder ? 1 : 0
+
   name     = var.config_name
-  role_arn = aws_iam_role.main.arn
+  role_arn = aws_iam_role.main[count.index].arn
 
   recording_group {
     all_supported                 = true

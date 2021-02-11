@@ -284,3 +284,9 @@ variable "config_sns_topic_arn" {
   type        = string
   default     = null
 }
+
+variable "enable_config_recorder" {
+  description = "Enables configuring the AWS Config recorder resources in this module."
+  type        = bool
+  default     = true
+}
