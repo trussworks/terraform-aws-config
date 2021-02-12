@@ -17,7 +17,7 @@ variable "aggregate_organization" {
 }
 
 variable "config_logs_bucket" {
-  description = "The S3 bucket for AWS Config logs."
+  description = "The S3 bucket for AWS Config logs. If you have set enable_config_recorder to false then this can be an empty string."
   type        = string
 }
 
@@ -283,4 +283,10 @@ variable "config_sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
   type        = string
   default     = null
+}
+
+variable "enable_config_recorder" {
+  description = "Enables configuring the AWS Config recorder resources in this module."
+  type        = bool
+  default     = true
 }

@@ -5,10 +5,10 @@ output "required_tags_rule_arn" {
 
 output "aws_config_role_arn" {
   description = "The ARN of the AWS config role."
-  value       = aws_iam_role.main.arn
+  value       = concat(aws_iam_role.main.*.arn, [""])[0]
 }
 
 output "aws_config_role_name" {
   description = "The name of the IAM role used by AWS config"
-  value       = aws_iam_role.main.name
+  value       = concat(aws_iam_role.main.*.name, [""])[0]
 }
