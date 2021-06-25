@@ -186,6 +186,21 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
+resource "aws_config_config_rule" "ec2-imdsv2-check" {
+  count       = var.check_ec2_imdsv2 ? 1 : 0
+  name        = "ec2-imdsv2-check"
+  description = "Checks if EC2 instances metadata is configured with IMDSv2 or not"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EC2_IMDSV2_CHECK"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
 resource "aws_config_config_rule" "ebs_snapshot_public_restorable" {
   count       = var.check_ebs_snapshot_public_restorable ? 1 : 0
   name        = "ebs-snapshot-public-restorable"

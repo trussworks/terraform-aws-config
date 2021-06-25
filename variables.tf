@@ -290,3 +290,9 @@ variable "enable_config_recorder" {
   type        = bool
   default     = true
 }
+
+variable "check_ec2_imdsv2" {
+  description = "Enable IMDSv2 rule"
+  type        = bool
+  default     = false
+}
