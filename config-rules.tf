@@ -187,7 +187,7 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
 }
 
 resource "aws_config_config_rule" "ec2-imdsv2-check" {
-  count       = var.check_ec2-imdsv2-check ? 1 : 0
+  count       = var.check_ec2_imdsv2 ? 1 : 0
   name        = "ec2-imdsv2-check"
   description = "Checks if EC2 instances metadata is configured with IMDSv2 or not"
 
