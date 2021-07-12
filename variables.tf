@@ -278,6 +278,11 @@ variable "include_global_resource_types" {
   type        = bool
   default     = true
 }
+variable "resource_types" {
+  description = "Select the types of resources that you want AWS Config to record."
+  type        = list(string)
+  default     = null
+}
 
 variable "config_sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
