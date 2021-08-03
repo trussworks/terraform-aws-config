@@ -1,35 +1,29 @@
-data "template_file" "aws_config_iam_password_policy" {
-  template = file("${path.module}/config-policies/iam-password-policy.tpl")
-
-  vars = {
-    # terraform will interpolate boolean as 0/1 and the config parameters expect "true" or "false"
-    password_require_uppercase = var.password_require_uppercase ? "true" : "false"
-    password_require_lowercase = var.password_require_lowercase ? "true" : "false"
-    password_require_symbols   = var.password_require_symbols ? "true" : "false"
-    password_require_numbers   = var.password_require_numbers ? "true" : "false"
-    password_min_length        = var.password_min_length
-    password_reuse_prevention  = var.password_reuse_prevention
-    password_max_age           = var.password_max_age
-  }
-}
-
-data "template_file" "aws_config_acm_certificate_expiration" {
-  template = file(
-    "${path.module}/config-policies/acm-certificate-expiration.tpl"
+locals {
+  aws_config_iam_password_policy = templatefile("${path.module}/config-policies/iam-password-policy.tpl",
+    {
+      password_require_uppercase = var.password_require_uppercase ? "true" : "false"
+      password_require_lowercase = var.password_require_lowercase ? "true" : "false"
+      password_require_symbols   = var.password_require_symbols ? "true" : "false"
+      password_require_numbers   = var.password_require_numbers ? "true" : "false"
+      password_min_length        = var.password_min_length
+      password_reuse_prevention  = var.password_reuse_prevention
+      password_max_age           = var.password_max_age
+    }
   )
 
-  vars = {
-    acm_days_to_expiration = var.acm_days_to_expiration
-  }
+  aws_config_acm_certificate_expiration = templatefile("${path.module}/config-policies/acm-certificate-expiration.tpl",
+    {
+      acm_days_to_expiration = var.acm_days_to_expiration
+    }
+  )
+
+  aws_config_ami_approved_tag = templatefile("${path.module}/config-policies/ami-approved-tag.tpl",
+    {
+      ami_required_tag_key_value = var.ami_required_tag_key_value
+    }
+  )
 }
 
-data "template_file" "aws_config_ami_approved_tag" {
-  template = file("${path.module}/config-policies/ami-approved-tag.tpl")
-
-  vars = {
-    ami_required_tag_key_value = var.ami_required_tag_key_value
-  }
-}
 
 #
 # AWS Config Rules
@@ -39,7 +33,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
   count            = var.check_iam_password_policy ? 1 : 0
   name             = "iam-password-policy"
   description      = "Ensure the account password policy for IAM users meets the specified requirements"
-  input_parameters = data.template_file.aws_config_iam_password_policy.rendered
+  input_parameters = local.aws_config_iam_password_policy
 
   source {
     owner             = "AWS"
@@ -157,7 +151,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
   count            = var.check_acm_certificate_expiration_check ? 1 : 0
   name             = "acm-certificate-expiration-check"
   description      = "Ensures ACM Certificates in your account are marked for expiration within the specified number of days"
-  input_parameters = data.template_file.aws_config_acm_certificate_expiration.rendered
+  input_parameters = local.aws_config_acm_certificate_expiration
 
   source {
     owner             = "AWS"
@@ -363,7 +357,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
   count            = var.check_approved_amis_by_tag ? 1 : 0
   name             = "approved-amis-by-tag"
   description      = "Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
-  input_parameters = data.template_file.aws_config_ami_approved_tag.rendered
+  input_parameters = local.aws_config_ami_approved_tag
 
   source {
     owner             = "AWS"

@@ -4,48 +4,48 @@ data "aws_caller_identity" "current" {
 
 # Allow the AWS Config role to deliver logs to configured S3 Bucket.
 # Derived from IAM Policy document found at https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
-data "template_file" "aws_config_policy" {
-  template = <<JSON
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-        "Sid": "AWSConfigBucketPermissionsCheck",
-        "Effect": "Allow",
-        "Action": "s3:GetBucketAcl",
-        "Resource": "$${bucket_arn}"
-    },
-    {
-        "Sid": "AWSConfigBucketExistenceCheck",
-        "Effect": "Allow",
-        "Action": "s3:ListBucket",
-        "Resource": "$${bucket_arn}"
-    },
-    {
-        "Sid": "AWSConfigBucketDelivery",
-        "Effect": "Allow",
-        "Action": "s3:PutObject",
-        "Resource": "$${resource}",
-        "Condition": {
-          "StringLike": {
-            "s3:x-amz-acl": "bucket-owner-full-control"
-          }
-        }
-    }
-  ]
-}
-JSON
 
-  vars = {
-    bucket_arn = format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
-    resource = format(
-      "arn:%s:s3:::%s%s%s/AWSLogs/%s/Config/*",
-      data.aws_partition.current.partition,
-      var.config_logs_bucket,
-      var.config_logs_prefix == "" ? "" : "/",
-      var.config_logs_prefix,
-      data.aws_caller_identity.current.account_id,
-    )
+data "aws_iam_policy_document" "aws_config_policy" {
+  statement {
+    sid    = "AWSConfigBucketPermissionsCheck"
+    effect = "Allow"
+    actions = [
+      "s3:GetBucketAcl",
+    ]
+    resources = [
+      format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
+    ]
+  }
+
+
+  statement {
+    sid    = "AWSConfigBucketExistenceCheck"
+    effect = "Allow"
+    actions = [
+      "s3:ListBucket"
+    ]
+    resources = [
+      format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
+    ]
+  }
+  statement {
+    sid     = "AWSConfigBucketDelivery"
+    effect  = "Allow"
+    actions = ["s3:PutObject"]
+    resources = [
+      format("arn:%s:s3:::%s%s%s/AWSLogs/%s/Config/*",
+        data.aws_partition.current.partition,
+        var.config_logs_bucket,
+        var.config_logs_prefix == "" ? "" : "/",
+        var.config_logs_prefix,
+        data.aws_caller_identity.current.account_id
+      )
+    ]
+    condition {
+      test     = "StringLike"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
   }
 }
 
@@ -86,7 +86,7 @@ resource "aws_iam_policy" "aws-config-policy" {
   count = var.enable_config_recorder ? 1 : 0
 
   name   = "${var.config_name}-policy"
-  policy = data.template_file.aws_config_policy.rendered
+  policy = data.aws_iam_policy_document.aws_config_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "aws-config-policy" {
