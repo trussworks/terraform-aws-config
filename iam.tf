@@ -7,10 +7,21 @@ data "aws_caller_identity" "current" {
 
 data "aws_iam_policy_document" "aws_config_policy" {
   statement {
-    sid    = "AWSConfigBucketPermissionsAndExistenceCheck"
+    sid    = "AWSConfigBucketPermissionsCheck"
     effect = "Allow"
     actions = [
       "s3:GetBucketAcl",
+    ]
+    resources = [
+      format("arn:%s:s3:::%s", data.aws_partition.current.partition, var.config_logs_bucket)
+    ]
+  }
+
+
+  statement {
+    sid    = "AWSConfigBucketExistenceCheck"
+    effect = "Allow"
+    actions = [
       "s3:ListBucket"
     ]
     resources = [
