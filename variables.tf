@@ -296,3 +296,9 @@ variable "check_ec2_imdsv2" {
   type        = bool
   default     = false
 }
+
+variable "resource_types" {
+  description = "A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types."
+  type        = list(string)
+  default     = []
+}

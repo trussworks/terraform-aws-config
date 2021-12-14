@@ -32,7 +32,8 @@ resource "aws_config_configuration_recorder" "main" {
   role_arn = aws_iam_role.main[count.index].arn
 
   recording_group {
-    all_supported                 = true
-    include_global_resource_types = var.include_global_resource_types
+    all_supported                 = length(var.resource_types) == 0 ? true : false
+    include_global_resource_types = length(var.resource_types) == 0 ? var.include_global_resource_types : null
+    resource_types                = length(var.resource_types) == 0 ? null : var.resource_types
   }
 }
