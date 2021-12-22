@@ -22,6 +22,12 @@ locals {
       ami_required_tag_key_value = var.ami_required_tag_key_value
     }
   )
+
+  aws_config_cloudwatch_log_group_retention_period = templatefile("${path.module}/config-policies/cloudwatch-log-retention.tpl",
+    {
+      cw_loggroup_retention_period = var.cw_loggroup_retention_period
+    }
+  )
 }
 
 
@@ -393,6 +399,22 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
   source {
     owner             = "AWS"
     source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "cw_loggroup_retention_period_check" {
+  count            = var.cw_loggroup_retention_period_check ? 1 : 0
+  name             = "cloudwatch_log_group-retention"
+  description      = "Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days. The rule is NON_COMPLIANT if the retention period is not set or is less than the configured retention period."
+  input_parameters = local.aws_config_cloudwatch_log_group_retention_period
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CW_LOGGROUP_RETENTION_PERIOD_CHECK"
   }
 
   tags = var.tags
