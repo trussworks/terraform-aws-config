@@ -231,7 +231,7 @@ variable "check_cloudwatch_log_group_encrypted" {
   default     = true
 }
 
-variable "cw_loggroup_retention_period_check" {
+variable "check_cw_loggroup_retention_period" {
   description = "Enable cloudwatch-log-group-retention-period-check rule"
   type        = bool
   default     = false

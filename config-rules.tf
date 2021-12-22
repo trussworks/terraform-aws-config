@@ -407,7 +407,7 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
 }
 
 resource "aws_config_config_rule" "cw_loggroup_retention_period_check" {
-  count = var.cw_loggroup_retention_period_check ? 1 : 0
+  count = var.check_cw_loggroup_retention_period ? 1 : 0
 
   name        = "cloudwatch_log_group-retention"
   description = "Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days. The rule is NON_COMPLIANT if the retention period is not set or is less than the configured retention period."
