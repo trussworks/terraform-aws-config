@@ -111,6 +111,7 @@ No modules.
 | [aws_config_config_rule.cloud-trail-log-file-validation-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloudtrail-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloudwatch_log_group_encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.cw_loggroup_retention_period_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-imdsv2-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -191,6 +192,8 @@ No modules.
 | <a name="input_config_max_execution_frequency"></a> [config\_max\_execution\_frequency](#input\_config\_max\_execution\_frequency) | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
+| <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
+| <a name="input_cw_loggroup_retention_period_check"></a> [cw\_loggroup\_retention\_period\_check](#input\_cw\_loggroup\_retention\_period\_check) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
