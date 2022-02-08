@@ -33,12 +33,11 @@ data "aws_iam_policy_document" "aws_config_policy" {
     effect  = "Allow"
     actions = ["s3:PutObject"]
     resources = [
-      format("arn:%s:s3:::%s%s%s/AWSLogs/%s/Config/*",
+      format("arn:%s:s3:::%s%s%s/AWSLogs/*/Config/*",
         data.aws_partition.current.partition,
         var.config_logs_bucket,
         var.config_logs_prefix == "" ? "" : "/",
-        var.config_logs_prefix,
-        data.aws_caller_identity.current.account_id
+        var.config_logs_prefix
       )
     ]
     condition {
