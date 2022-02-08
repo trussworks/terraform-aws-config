@@ -17,7 +17,7 @@ variable "aggregate_organization" {
 }
 
 variable "config_logs_bucket" {
-  description = "The S3 bucket for AWS Config logs."
+  description = "The S3 bucket for AWS Config logs. If you have set enable_config_recorder to false then this can be an empty string."
   type        = string
 }
 
@@ -231,6 +231,18 @@ variable "check_cloudwatch_log_group_encrypted" {
   default     = true
 }
 
+variable "check_cw_loggroup_retention_period" {
+  description = "Enable cloudwatch-log-group-retention-period-check rule"
+  type        = bool
+  default     = false
+}
+
+variable "cw_loggroup_retention_period" {
+  description = "Retention period for cloudwatch logs in number of days"
+  type        = number
+  default     = 3653
+}
+
 variable "check_iam_root_access_key" {
   description = "Enable iam-root-access-key rule"
   type        = bool
@@ -255,6 +267,18 @@ variable "check_s3_bucket_ssl_requests_only" {
   default     = true
 }
 
+variable "check_mfa_enabled_for_iam_console_access" {
+  description = "Enable mfa-enabled-for-iam-console-access rule"
+  type        = bool
+  default     = false
+}
+
+variable "check_restricted_ssh" {
+  description = "Enable restricted-ssh rule"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "Tags to apply to AWS Config resources"
   type        = map(string)
@@ -271,4 +295,16 @@ variable "config_sns_topic_arn" {
   description = "An SNS topic to stream configuration changes and notifications to."
   type        = string
   default     = null
+}
+
+variable "enable_config_recorder" {
+  description = "Enables configuring the AWS Config recorder resources in this module."
+  type        = bool
+  default     = true
+}
+
+variable "check_ec2_imdsv2" {
+  description = "Enable IMDSv2 rule"
+  type        = bool
+  default     = false
 }

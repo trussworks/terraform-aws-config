@@ -1,35 +1,35 @@
-data "template_file" "aws_config_iam_password_policy" {
-  template = file("${path.module}/config-policies/iam-password-policy.tpl")
-
-  vars = {
-    # terraform will interpolate boolean as 0/1 and the config parameters expect "true" or "false"
-    password_require_uppercase = var.password_require_uppercase ? "true" : "false"
-    password_require_lowercase = var.password_require_lowercase ? "true" : "false"
-    password_require_symbols   = var.password_require_symbols ? "true" : "false"
-    password_require_numbers   = var.password_require_numbers ? "true" : "false"
-    password_min_length        = var.password_min_length
-    password_reuse_prevention  = var.password_reuse_prevention
-    password_max_age           = var.password_max_age
-  }
-}
-
-data "template_file" "aws_config_acm_certificate_expiration" {
-  template = file(
-    "${path.module}/config-policies/acm-certificate-expiration.tpl"
+locals {
+  aws_config_iam_password_policy = templatefile("${path.module}/config-policies/iam-password-policy.tpl",
+    {
+      password_require_uppercase = var.password_require_uppercase ? "true" : "false"
+      password_require_lowercase = var.password_require_lowercase ? "true" : "false"
+      password_require_symbols   = var.password_require_symbols ? "true" : "false"
+      password_require_numbers   = var.password_require_numbers ? "true" : "false"
+      password_min_length        = var.password_min_length
+      password_reuse_prevention  = var.password_reuse_prevention
+      password_max_age           = var.password_max_age
+    }
   )
 
-  vars = {
-    acm_days_to_expiration = var.acm_days_to_expiration
-  }
+  aws_config_acm_certificate_expiration = templatefile("${path.module}/config-policies/acm-certificate-expiration.tpl",
+    {
+      acm_days_to_expiration = var.acm_days_to_expiration
+    }
+  )
+
+  aws_config_ami_approved_tag = templatefile("${path.module}/config-policies/ami-approved-tag.tpl",
+    {
+      ami_required_tag_key_value = var.ami_required_tag_key_value
+    }
+  )
+
+  aws_config_cloudwatch_log_group_retention_period = templatefile("${path.module}/config-policies/cloudwatch-log-retention.tpl",
+    {
+      cw_loggroup_retention_period = var.cw_loggroup_retention_period
+    }
+  )
 }
 
-data "template_file" "aws_config_ami_approved_tag" {
-  template = "${file("${path.module}/config-policies/ami-approved-tag.tpl")}"
-
-  vars = {
-    ami_required_tag_key_value = var.ami_required_tag_key_value
-  }
-}
 
 #
 # AWS Config Rules
@@ -39,7 +39,7 @@ resource "aws_config_config_rule" "iam-password-policy" {
   count            = var.check_iam_password_policy ? 1 : 0
   name             = "iam-password-policy"
   description      = "Ensure the account password policy for IAM users meets the specified requirements"
-  input_parameters = data.template_file.aws_config_iam_password_policy.rendered
+  input_parameters = local.aws_config_iam_password_policy
 
   source {
     owner             = "AWS"
@@ -157,7 +157,7 @@ resource "aws_config_config_rule" "acm-certificate-expiration-check" {
   count            = var.check_acm_certificate_expiration_check ? 1 : 0
   name             = "acm-certificate-expiration-check"
   description      = "Ensures ACM Certificates in your account are marked for expiration within the specified number of days"
-  input_parameters = data.template_file.aws_config_acm_certificate_expiration.rendered
+  input_parameters = local.aws_config_acm_certificate_expiration
 
   source {
     owner             = "AWS"
@@ -179,6 +179,21 @@ resource "aws_config_config_rule" "ec2-volume-inuse-check" {
   source {
     owner             = "AWS"
     source_identifier = "EC2_VOLUME_INUSE_CHECK"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ec2-imdsv2-check" {
+  count       = var.check_ec2_imdsv2 ? 1 : 0
+  name        = "ec2-imdsv2-check"
+  description = "Checks if EC2 instances metadata is configured with IMDSv2 or not"
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EC2_IMDSV2_CHECK"
   }
 
   tags = var.tags
@@ -348,7 +363,7 @@ resource "aws_config_config_rule" "approved-amis-by-tag" {
   count            = var.check_approved_amis_by_tag ? 1 : 0
   name             = "approved-amis-by-tag"
   description      = "Checks whether running instances are using specified AMIs. Running instances that dont have at least one of the specified tags are noncompliant"
-  input_parameters = data.template_file.aws_config_ami_approved_tag.rendered
+  input_parameters = local.aws_config_ami_approved_tag
 
   source {
     owner             = "AWS"
@@ -384,6 +399,24 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
   source {
     owner             = "AWS"
     source_identifier = "CLOUDWATCH_LOG_GROUP_ENCRYPTED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "cw_loggroup_retention_period_check" {
+  count = var.check_cw_loggroup_retention_period ? 1 : 0
+
+  name        = "cloudwatch_log_group-retention"
+  description = "Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days. The rule is NON_COMPLIANT if the retention period is not set or is less than the configured retention period."
+
+  input_parameters = local.aws_config_cloudwatch_log_group_retention_period
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CW_LOGGROUP_RETENTION_PERIOD_CHECK"
   }
 
   tags = var.tags
@@ -432,6 +465,38 @@ resource "aws_config_config_rule" "s3_bucket_ssl_requests_only" {
   source {
     owner             = "AWS"
     source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "mfa_enabled_for_iam_console_access" {
+  count = var.check_mfa_enabled_for_iam_console_access ? 1 : 0
+
+  name        = "mfa-enabled-for-iam-console-access"
+  description = "Checks whether AWS Multi-Factor Authentication (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password. The rule is compliant if MFA is enabled."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "restricted_ssh" {
+  count = var.check_restricted_ssh ? 1 : 0
+
+  name        = "restricted-ssh"
+  description = "Checks whether security groups that are in use disallow unrestricted incoming SSH traffic."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "INCOMING_SSH_DISABLED"
   }
 
   tags = var.tags
