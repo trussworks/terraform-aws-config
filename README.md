@@ -112,6 +112,7 @@ No modules.
 | [aws_config_config_rule.cloudtrail-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloudwatch_log_group_encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cw_loggroup_retention_period_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.db-instance-backup-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-imdsv2-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -163,6 +164,7 @@ No modules.
 | <a name="input_check_cloud_trail_log_file_validation"></a> [check\_cloud\_trail\_log\_file\_validation](#input\_check\_cloud\_trail\_log\_file\_validation) | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
 | <a name="input_check_cloudtrail_enabled"></a> [check\_cloudtrail\_enabled](#input\_check\_cloudtrail\_enabled) | Enable cloudtrail-enabled rule | `bool` | `true` | no |
 | <a name="input_check_cloudwatch_log_group_encrypted"></a> [check\_cloudwatch\_log\_group\_encrypted](#input\_check\_cloudwatch\_log\_group\_encrypted) | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
+| <a name="input_check_db_instance_backup_enabled"></a> [check\_db\_instance\_backup\_enabled](#input\_check\_db\_instance\_backup\_enabled) | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
