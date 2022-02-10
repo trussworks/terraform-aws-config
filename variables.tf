@@ -99,6 +99,13 @@ variable "check_guard_duty" {
   default     = false
 }
 
+variable "check_db_instance_backup_enabled" {
+  description = "Enable check-db-backup-enabled rule"
+  type        = bool
+  default     = false
+}
+
+
 variable "check_rds_public_access" {
   description = "Enable rds-instance-public-access-check rule"
   type        = bool

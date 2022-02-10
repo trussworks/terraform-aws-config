@@ -246,6 +246,21 @@ resource "aws_config_config_rule" "iam-group-has-users-check" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
+resource "aws_config_config_rule" "db-instance-backup-enabled" {
+  count       = var.check_db_instance_backup_enabled ? 1 : 0
+  name        = "db-instance-backup-enabled"
+  description = "Checks whether RDS DB instances have backups enabled. Optionally, the rule checks the backup retention period and the backup window."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DB_INSTANCE_BACKUP_ENABLED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
 resource "aws_config_config_rule" "rds-storage-encrypted" {
   count       = var.check_rds_storage_encrypted ? 1 : 0
   name        = "rds-storage-encrypted"
