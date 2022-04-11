@@ -25,5 +25,4 @@
 
 provider "aws" {
   region  = var.region
-  version = ">= 4.9.0"
 }
