@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com"]
+      identifiers = ["config.amazonaws.com", "ssm.amazonaws.com"]
     }
 
     effect = "Allow"
@@ -34,29 +34,29 @@ data "aws_iam_policy_document" "aws-config-role-policy" {
 
 resource "aws_iam_role" "main" {
   count = var.active == true ? 1 : 0
-  name = "aws-config-role-${var.region}"
+  name  = "aws-config-role-${var.region}"
 
   assume_role_policy = data.aws_iam_policy_document.aws-config-role-policy.json
 }
 
 resource "aws_iam_policy_attachment" "managed-policy" {
-  count = var.active == true ? 1 : 0
+  count      = var.active == true ? 1 : 0
   name       = "aws-config-managed-policy-${var.region}"
   roles      = [aws_iam_role.main.0.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
-    lifecycle {
+  lifecycle {
     ignore_changes = ["roles"] # multiregional hack
   }
 }
 
 resource "aws_iam_policy" "aws-config-policy" {
-  count = var.active == true ? 1 : 0
+  count  = var.active == true ? 1 : 0
   name   = "aws-config-policy-${var.region}"
   policy = data.template_file.aws_config_policy.rendered
 }
 
 resource "aws_iam_policy_attachment" "aws-config-policy" {
-  count = var.active == true ? 1 : 0
+  count      = var.active == true ? 1 : 0
   name       = "aws-config-policy-${var.region}"
   roles      = [aws_iam_role.main.0.name]
   policy_arn = aws_iam_policy.aws-config-policy.0.arn

@@ -21,6 +21,14 @@
                 "s3:GetBucketAcl"
             ],
             "Resource": "arn:aws:s3:::${config_logs_bucket}"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketVersioning"
+            ],
+            "Resource": "*"
         }
     ]
 }

@@ -209,3 +209,105 @@ resource "aws_config_config_rule" "s3-bucket-public-write-prohibited" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
+resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
+  count       = var.active == true ? 1 : 0
+  name        = "s3-bucket-server-side-encryption-enabled"
+  description = "Checks that your Amazon S3 bucket either has S3 default encryption enabled or that the S3 bucket policy explicitly denies put-object requests without server side encryption."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED"
+  }
+
+  # maximum_execution_frequency = var.config_max_execution_frequency
+
+  depends_on = [
+    aws_config_configuration_recorder.main,
+    aws_config_delivery_channel.main,
+  ]
+}
+
+resource "aws_config_remediation_configuration" "s3-bucket-server-side-encryption-enabled" {
+  count            = var.active == true ? 1 : 0
+  config_rule_name = aws_config_config_rule.s3-bucket-server-side-encryption-enabled[0].name
+  resource_type    = "AWS::S3::Bucket"
+  target_type      = "SSM_DOCUMENT"
+  target_id        = "AWS-EnableS3BucketEncryption"
+  target_version   = "1"
+
+  parameter {
+    name         = "AutomationAssumeRole"
+    static_value = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-config-role-${var.region}"
+  }
+  parameter {
+    name           = "BucketName"
+    resource_value = "RESOURCE_ID"
+  }
+  parameter {
+    name         = "SSEAlgorithm"
+    static_value = "AES256"
+  }
+
+  automatic                  = true
+  maximum_automatic_attempts = 5
+  retry_attempt_seconds      = 600
+
+  execution_controls {
+    ssm_controls {
+      concurrent_execution_rate_percentage = 10
+      error_percentage                     = 20
+    }
+  }
+}
+
+
+resource "aws_config_config_rule" "s3-bucket-versioning-enabled" {
+  count       = var.active == true ? 1 : 0
+  name        = "s3-bucket-versioning-enabled"
+  description = "Checks whether versioning is enabled for your S3 buckets."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_VERSIONING_ENABLED"
+  }
+
+  # maximum_execution_frequency = var.config_max_execution_frequency
+
+  depends_on = [
+    aws_config_configuration_recorder.main,
+    aws_config_delivery_channel.main,
+  ]
+}
+
+resource "aws_config_remediation_configuration" "s3-bucket-versioning-enabled" {
+  count            = var.active == true ? 1 : 0
+  config_rule_name = aws_config_config_rule.s3-bucket-versioning-enabled[0].name
+  resource_type    = "AWS::S3::Bucket"
+  target_type      = "SSM_DOCUMENT"
+  target_id        = "AWS-ConfigureS3BucketVersioning"
+  target_version   = "1"
+
+  parameter {
+    name         = "AutomationAssumeRole"
+    static_value = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-config-role-${var.region}"
+  }
+  parameter {
+    name           = "BucketName"
+    resource_value = "RESOURCE_ID"
+  }
+  parameter {
+    name         = "VersioningState"
+    static_value = "Enabled"
+  }
+
+  automatic                  = true
+  maximum_automatic_attempts = 5
+  retry_attempt_seconds      = 600
+
+  execution_controls {
+    ssm_controls {
+      concurrent_execution_rate_percentage = 10
+      error_percentage                     = 20
+    }
+  }
+}
