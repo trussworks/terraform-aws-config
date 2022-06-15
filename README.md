@@ -163,6 +163,7 @@ No modules.
 | <a name="input_check_cloud_trail_log_file_validation"></a> [check\_cloud\_trail\_log\_file\_validation](#input\_check\_cloud\_trail\_log\_file\_validation) | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
 | <a name="input_check_cloudtrail_enabled"></a> [check\_cloudtrail\_enabled](#input\_check\_cloudtrail\_enabled) | Enable cloudtrail-enabled rule | `bool` | `true` | no |
 | <a name="input_check_cloudwatch_log_group_encrypted"></a> [check\_cloudwatch\_log\_group\_encrypted](#input\_check\_cloudwatch\_log\_group\_encrypted) | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
+| <a name="input_check_cw_loggroup_retention_period"></a> [check\_cw\_loggroup\_retention\_period](#input\_check\_cw\_loggroup\_retention\_period) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
@@ -193,7 +194,6 @@ No modules.
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
-| <a name="input_cw_loggroup_retention_period_check"></a> [cw\_loggroup\_retention\_period\_check](#input\_cw\_loggroup\_retention\_period\_check) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
