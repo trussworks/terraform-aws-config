@@ -308,3 +308,57 @@ variable "check_ec2_imdsv2" {
   type        = bool
   default     = false
 }
+
+variable "check_access_keys_rotated" {
+  description = "Enable access-keys-rotated rule"
+  type        = bool
+  default     = true
+}
+
+variable "access_key_max_age" {
+  description = "Maximum number of days without rotation."
+  type        = number
+  default     = 90
+}
+
+variable "check_cmk_backing_key_rotated" {
+  description = "Enable cmk_backing_key_rotation_enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_backup_plan_min_frequency_and_min_retention" {
+  description = "Enable backup_plan_min_frequency_and_min_retention_check rule"
+  type        = bool
+  default     = false
+}
+
+variable "backup_frequency" {
+  description = "Numerical value for required backup frequency. Maximum of 24 for hours, 31 for days."
+  type        = number
+  default     = 1
+}
+
+variable "retention_days" {
+  description = "Required retention period in days."
+  type        = number
+  default     = 35
+}
+
+variable "backup_frequency_unit_of_time" {
+  description = "Unit of time for required backup frequency. Accepted values: 'hours', 'days'."
+  type        = string
+  default     = "days"
+}
+
+variable "cloud_trail_cloud_watch_logs_enabled" {
+  description = "Enable cloud_trail_cloud_watch_logs_enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "expected_delivery_window_age" {
+  description = "Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance."
+  type        = number
+  default     = 12
+}

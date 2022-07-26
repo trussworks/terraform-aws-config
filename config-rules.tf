@@ -28,6 +28,26 @@ locals {
       cw_loggroup_retention_period = var.cw_loggroup_retention_period
     }
   )
+
+  aws_config_access_key_max_age = templatefile("${path.module}/config-policies/access-keys-rotated.tpl",
+    {
+      access_key_max_age = var.access_key_max_age
+    }
+  )
+
+  aws_config_backup_plan_minimums = templatefile("${path.module}/config-policies/backup_plan_minimums.tpl",
+    {
+      backup_frequency              = var.backup_frequency
+      retention_days                = var.retention_days
+      backup_frequency_unit_of_time = var.backup_frequency_unit_of_time
+    }
+  )
+
+  aws_config_logs_delivery_window = templatefile("${path.module}/config-policies/cloudtrail-cloudwatch-logs-enabled.tpl",
+    {
+      expected_delivery_window_age = var.expected_delivery_window_age
+    }
+  )
 }
 
 
@@ -498,6 +518,77 @@ resource "aws_config_config_rule" "restricted_ssh" {
     owner             = "AWS"
     source_identifier = "INCOMING_SSH_DISABLED"
   }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "access_keys_rotated" {
+  count            = var.check_access_keys_rotated ? 1 : 0
+  name             = "access-keys-rotated"
+  description      = "Checks if the active access keys are rotated within the number of days specified in maxAccessKeyAge. The rule is NON_COMPLIANT if the access keys have not been rotated for more than maxAccessKeyAge number of days."
+  input_parameters = local.aws_config_access_key_max_age
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ACCESS_KEYS_ROTATED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "cmk_backing_key_rotation_enabled" {
+  count       = var.check_cmk_backing_key_rotated ? 1 : 0
+  name        = "cmk-backing-key-rotation-enabled"
+  description = "Checks if automatic key rotation is enabled for every AWS Key Management Service customer managed symmetric encryption key. The rule is NON_COMPLIANT if automatic key rotation is not enabled for an AWS KMS customer managed symmetric encryption key."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CMK_BACKING_KEY_ROTATION_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "backup_plan_min_frequency_and_min_retention_check" {
+  count            = var.check_backup_plan_min_frequency_and_min_retention ? 1 : 0
+  name             = "backup-plan-min-frequency-and-min-retention-check"
+  description      = "Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. The rule is NON_COMPLIANT if recovery points are not created at least as often as the specified frequency or expire before the specified period. "
+  input_parameters = local.aws_config_backup_plan_minimums
+
+  source {
+    owner             = "AWS"
+    source_identifier = "BACKUP_PLAN_MIN_FREQUENCY_AND_MIN_RETENTION_CHECK"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "cloud-trail-cloud-watch-logs-enabled" {
+  count            = var.cloud_trail_cloud_watch_logs_enabled ? 1 : 0
+  name             = "cloud-trail-cloud-watch-logs-enabled"
+  description      = "Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs. The trail is non-compliant if the CloudWatchLogsLogGroupArn property of the trail is empty. "
+  input_parameters = local.aws_config_logs_delivery_window
+
+  source {
+    owner             = "AWS"
+    source_identifier = "CLOUD_TRAIL_CLOUD_WATCH_LOGS_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
