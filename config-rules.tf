@@ -623,8 +623,6 @@ resource "aws_config_config_rule" "ecr-private-image-scanning-enabled" {
     source_identifier = "ECR_PRIVATE_IMAGE_SCANNING_ENABLED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -639,8 +637,6 @@ resource "aws_config_config_rule" "ecr-private-lifecycle-policy-configured" {
     owner             = "AWS"
     source_identifier = "ECR_PRIVATE_LIFECYCLE_POLICY_CONFIGURED"
   }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
