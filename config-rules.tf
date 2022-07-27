@@ -642,3 +642,38 @@ resource "aws_config_config_rule" "ecr-private-lifecycle-policy-configured" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "ecs-awsvpc-networking-enabled" {
+  count       = var.check_ecs_awsvpc_networking_enabled ? 1 : 0
+  name        = "ecs-awsvpc-networking-enabled"
+  description = "Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. This rule is NON_COMPLIANT if active ECSTaskDefinitions is not set to ‘awsvpc’. "
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECS_AWSVPC_NETWORKING_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" " ecs-containers-nonprivileged" {
+  count            = var.check_ecs_containers_nonprivileged ? 1 : 0
+  name             = "ecs-containers-nonprivileged"
+  description      = "Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. The rule is NON_COMPLIANT if the privileged parameter is ‘true’. "
+  input_parameters = local.aws_config_changeme
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECS_CONTAINERS_NONPRIVILEGED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

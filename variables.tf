@@ -386,3 +386,15 @@ variable "check_ecr_private_lifecycle_policy_configured" {
   type        = bool
   default     = true
 }
+
+variable "check_ecs_awsvpc_networking_enabled" {
+  description = "Enable ecs-awsvpc-networking-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_containers_nonprivileged" {
+  description = "Enable ecs-containers-nonprivileged rule"
+  type        = bool
+  default     = true
+}

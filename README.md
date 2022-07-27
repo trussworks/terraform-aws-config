@@ -105,6 +105,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_config_config_rule. ecs-containers-nonprivileged](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.access_keys_rotated](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.acm-certificate-expiration-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.approved-amis-by-tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -123,6 +124,7 @@ No modules.
 | [aws_config_config_rule.ec2-volume-inuse-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ecr-private-image-scanning-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ecr-private-lifecycle-policy-configured](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecs-awsvpc-networking-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.eip_attached](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.guardduty-enabled-centralized](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-group-has-users-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -184,6 +186,8 @@ No modules.
 | <a name="input_check_ec2_volume_inuse_check"></a> [check\_ec2\_volume\_inuse\_check](#input\_check\_ec2\_volume\_inuse\_check) | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
 | <a name="input_check_ecr_private_image_scanning_enabled"></a> [check\_ecr\_private\_image\_scanning\_enabled](#input\_check\_ecr\_private\_image\_scanning\_enabled) | Enable ecr-private-image-scanning-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ecr_private_lifecycle_policy_configured"></a> [check\_ecr\_private\_lifecycle\_policy\_configured](#input\_check\_ecr\_private\_lifecycle\_policy\_configured) | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
+| <a name="input_check_ecs_awsvpc_networking_enabled"></a> [check\_ecs\_awsvpc\_networking\_enabled](#input\_check\_ecs\_awsvpc\_networking\_enabled) | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
+| <a name="input_check_ecs_containers_nonprivileged"></a> [check\_ecs\_containers\_nonprivileged](#input\_check\_ecs\_containers\_nonprivileged) | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_guard_duty"></a> [check\_guard\_duty](#input\_check\_guard\_duty) | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | <a name="input_check_iam_group_has_users_check"></a> [check\_iam\_group\_has\_users\_check](#input\_check\_iam\_group\_has\_users\_check) | Enable iam-group-has-users-check rule | `bool` | `true` | no |
