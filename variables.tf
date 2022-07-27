@@ -362,3 +362,27 @@ variable "expected_delivery_window_age" {
   type        = number
   default     = 12
 }
+
+variable "check_dynamodb_table_encryption_enabled" {
+  description = "Enable checkdynamodb-table-encryption-enabled rule"
+  type        = bool
+  default     = false
+}
+
+variable "dynamodb_arm_encryption_list" {
+  description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
+  type        = string
+  default     = ""
+}
+
+variable "check_ecr_private_image_scanning_enabled" {
+  description = "Enable ecr-private-image-scanning-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecr_private_lifecycle_policy_configured" {
+  description = "Enable ecr-private-lifecycle-policy-configured rule"
+  type        = bool
+  default     = true
+}

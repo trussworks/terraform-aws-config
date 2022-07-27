@@ -116,10 +116,13 @@ No modules.
 | [aws_config_config_rule.cloudwatch_log_group_encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cmk_backing_key_rotation_enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cw_loggroup_retention_period_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.dynamodb-table-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-imdsv2-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-volume-inuse-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecr-private-image-scanning-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecr-private-lifecycle-policy-configured](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.eip_attached](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.guardduty-enabled-centralized](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-group-has-users-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -174,10 +177,13 @@ No modules.
 | <a name="input_check_cloudwatch_log_group_encrypted"></a> [check\_cloudwatch\_log\_group\_encrypted](#input\_check\_cloudwatch\_log\_group\_encrypted) | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
 | <a name="input_check_cmk_backing_key_rotated"></a> [check\_cmk\_backing\_key\_rotated](#input\_check\_cmk\_backing\_key\_rotated) | Enable cmk\_backing\_key\_rotation\_enabled rule | `bool` | `true` | no |
 | <a name="input_check_cw_loggroup_retention_period"></a> [check\_cw\_loggroup\_retention\_period](#input\_check\_cw\_loggroup\_retention\_period) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
+| <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
 | <a name="input_check_ec2_volume_inuse_check"></a> [check\_ec2\_volume\_inuse\_check](#input\_check\_ec2\_volume\_inuse\_check) | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
+| <a name="input_check_ecr_private_image_scanning_enabled"></a> [check\_ecr\_private\_image\_scanning\_enabled](#input\_check\_ecr\_private\_image\_scanning\_enabled) | Enable ecr-private-image-scanning-enabled rule | `bool` | `true` | no |
+| <a name="input_check_ecr_private_lifecycle_policy_configured"></a> [check\_ecr\_private\_lifecycle\_policy\_configured](#input\_check\_ecr\_private\_lifecycle\_policy\_configured) | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_guard_duty"></a> [check\_guard\_duty](#input\_check\_guard\_duty) | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | <a name="input_check_iam_group_has_users_check"></a> [check\_iam\_group\_has\_users\_check](#input\_check\_iam\_group\_has\_users\_check) | Enable iam-group-has-users-check rule | `bool` | `true` | no |
@@ -205,6 +211,7 @@ No modules.
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
+| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `""` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |

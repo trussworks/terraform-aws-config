@@ -594,3 +594,55 @@ resource "aws_config_config_rule" "cloud-trail-cloud-watch-logs-enabled" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "dynamodb-table-encryption-enabled" {
+  count            = var.check_dynamodb_table_encryption_enabled ? 1 : 0
+  name             = "dynamodb-table-encryption-enabled"
+  description      = "Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS). NON_COMPLIANT if DynamoDB table is not encrypted with AWS KMS. Also NON_COMPLIANT if the encrypted AWS KMS key is not present in kmsKeyArns input parameter."
+  input_parameters = var.dynamodb_arm_encryption_list
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DYNAMODB_TABLE_ENCRYPTED_KMS"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ecr-private-image-scanning-enabled" {
+  count       = var.check_ecr_private_image_scanning_enabled ? 1 : 0
+  name        = "ecr-private-image-scanning-enabled"
+  description = "Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. The rule is NON_COMPLIANT if image scanning is not enabled for the private ECR repository. "
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECR_PRIVATE_IMAGE_SCANNING_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ecr-private-lifecycle-policy-configured" {
+  count       = var.check_ecr_private_lifecycle_policy_configured ? 1 : 0
+  name        = "ecr-private-lifecycle-policy-configured"
+  description = "Checks if a private Amazon Elastic Container Registry (ECR) repository has at least one lifecycle policy configured. The rule is NON_COMPLIANT if no lifecycle policy is configured for the ECR private repository."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECR_PRIVATE_LIFECYCLE_POLICY_CONFIGURED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
