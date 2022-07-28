@@ -732,3 +732,20 @@ resource "aws_config_config_rule" "efs-encrypted-check" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "elb-deletion-protection-enabled" {
+  count       = var.check_elb_deletion_protection_enabled ? 1 : 0
+  name        = "elb-deletion-protection-enabled"
+  description = "Checks if Elastic Load Balancing has deletion protection enabled. The rule is NON_COMPLIANT if deletion_protection.enabled is false."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ELB_DELETION_PROTECTION_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

@@ -422,3 +422,9 @@ variable "kms_key_id" {
   type        = string
   default     = ""
 }
+
+variable "check_elb_deletion_protection_enabled" {
+  description = "Enable elb-deletion-protection-enabled rule"
+  type        = bool
+  default     = true
+}

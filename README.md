@@ -129,6 +129,7 @@ No modules.
 | [aws_config_config_rule.ecs-no-environment-secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.efs-encrypted-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.eip_attached](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.elb-deletion-protection-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.guardduty-enabled-centralized](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-group-has-users-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-password-policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -194,6 +195,7 @@ No modules.
 | <a name="input_check_ecs_containers_readonly_access"></a> [check\_ecs\_containers\_readonly\_access](#input\_check\_ecs\_containers\_readonly\_access) | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
 | <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `true` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
+| <a name="input_check_elb_deletion_protection_enabled"></a> [check\_elb\_deletion\_protection\_enabled](#input\_check\_elb\_deletion\_protection\_enabled) | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
 | <a name="input_check_guard_duty"></a> [check\_guard\_duty](#input\_check\_guard\_duty) | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | <a name="input_check_iam_group_has_users_check"></a> [check\_iam\_group\_has\_users\_check](#input\_check\_iam\_group\_has\_users\_check) | Enable iam-group-has-users-check rule | `bool` | `true` | no |
 | <a name="input_check_iam_password_policy"></a> [check\_iam\_password\_policy](#input\_check\_iam\_password\_policy) | Enable iam-password-policy rule | `bool` | `true` | no |
