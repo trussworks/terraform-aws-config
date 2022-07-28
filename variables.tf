@@ -428,3 +428,33 @@ variable "check_elb_deletion_protection_enabled" {
   type        = bool
   default     = true
 }
+
+variable "check_elb_logging_enabled" {
+  description = "Enable elb-logging-enabled rule"
+  type        = bool
+  default     = false
+}
+
+variable "elb_logging_s3_buckets" {
+  description = "Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files."
+  type        = string
+  default     = ""
+}
+
+variable "check_iam_policy_no_statements_with_admin_access" {
+  description = "Enable iam-policy-no-statements-with-admin-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_iam_policy_no_statements_with_full_access" {
+  description = "Enable iam-policy-no-statements-with-full-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "exclude_permission_boundary" {
+  description = "Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.'"
+  type        = bool
+  default     = true
+}

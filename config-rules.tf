@@ -54,6 +54,18 @@ locals {
       kms_key_id = var.kms_key_id
     }
   )
+
+  aws_config_elb_logging_s3_buckets = templatefile("${path.module}/config-policies/elb-logging-enabled.tpl",
+    {
+      elb_logging_s3_buckets = var.elb_logging_s3_buckets
+    }
+  )
+
+  aws_config_exclude_permission_boundary = templatefile("${path.module}/config-policies/exclude_permission_boundary.tpl",
+    {
+      exclude_permission_boundary = var.exclude_permission_boundary
+    }
+  )
 }
 
 
@@ -741,6 +753,59 @@ resource "aws_config_config_rule" "elb-deletion-protection-enabled" {
   source {
     owner             = "AWS"
     source_identifier = "ELB_DELETION_PROTECTION_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "elb-logging-enabled" {
+  count            = var.check_elb_logging_enabled ? 1 : 0
+  name             = "elb-logging-enabled"
+  description      = "Checks if the Application Load Balancer and the Classic Load Balancer have logging enabled. The rule is NON_COMPLIANT if the access_logs.s3.enabled is false or access_logs.S3.bucket is not equal to the s3BucketName that you provided."
+  input_parameters = local.aws_config_elb_logging_s3_buckets
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ELB_LOGGING_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "iam-policy-no-statements-with-admin-access" {
+  count       = var.check_iam_policy_no_statements_with_admin_access ? 1 : 0
+  name        = "iam-policy-no-statements-with-admin-access"
+  description = "Checks the IAM policies that you create for Allow statements that grant permissions to all actions on all resources. The rule is NON_COMPLIANT if any policy statement includes \"Effect\": \"Allow\" with \"Action\": \"*\" over \"Resource\": \"*\"."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_POLICY_NO_STATEMENTS_WITH_ADMIN_ACCESS"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "iam-policy-no-statements-with-full-access" {
+  count            = var.check_iam_policy_no_statements_with_full_access ? 1 : 0
+  name             = "iam-policy-no-statements-with-full-access"
+  description      = "changeme"
+  input_parameters = local.aws_config_exclude_permission_boundary
+
+  source {
+    owner             = "AWS"
+    source_identifier = "IAM_POLICY_NO_STATEMENTS_WITH_FULL_ACCESS"
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency

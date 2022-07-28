@@ -130,9 +130,12 @@ No modules.
 | [aws_config_config_rule.efs-encrypted-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.eip_attached](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.elb-deletion-protection-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.elb-logging-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.guardduty-enabled-centralized](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-group-has-users-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-password-policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.iam-policy-no-statements-with-admin-access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.iam-policy-no-statements-with-full-access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-user-no-policies-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam_root_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.instances-in-vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -196,9 +199,12 @@ No modules.
 | <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `true` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_elb_deletion_protection_enabled"></a> [check\_elb\_deletion\_protection\_enabled](#input\_check\_elb\_deletion\_protection\_enabled) | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
+| <a name="input_check_elb_logging_enabled"></a> [check\_elb\_logging\_enabled](#input\_check\_elb\_logging\_enabled) | Enable elb-logging-enabled rule | `bool` | `false` | no |
 | <a name="input_check_guard_duty"></a> [check\_guard\_duty](#input\_check\_guard\_duty) | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | <a name="input_check_iam_group_has_users_check"></a> [check\_iam\_group\_has\_users\_check](#input\_check\_iam\_group\_has\_users\_check) | Enable iam-group-has-users-check rule | `bool` | `true` | no |
 | <a name="input_check_iam_password_policy"></a> [check\_iam\_password\_policy](#input\_check\_iam\_password\_policy) | Enable iam-password-policy rule | `bool` | `true` | no |
+| <a name="input_check_iam_policy_no_statements_with_admin_access"></a> [check\_iam\_policy\_no\_statements\_with\_admin\_access](#input\_check\_iam\_policy\_no\_statements\_with\_admin\_access) | Enable iam-policy-no-statements-with-admin-access rule | `bool` | `true` | no |
+| <a name="input_check_iam_policy_no_statements_with_full_access"></a> [check\_iam\_policy\_no\_statements\_with\_full\_access](#input\_check\_iam\_policy\_no\_statements\_with\_full\_access) | Enable iam-policy-no-statements-with-full-access rule | `bool` | `true` | no |
 | <a name="input_check_iam_root_access_key"></a> [check\_iam\_root\_access\_key](#input\_check\_iam\_root\_access\_key) | Enable iam-root-access-key rule | `bool` | `true` | no |
 | <a name="input_check_iam_user_no_policies_check"></a> [check\_iam\_user\_no\_policies\_check](#input\_check\_iam\_user\_no\_policies\_check) | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
 | <a name="input_check_instances_in_vpc"></a> [check\_instances\_in\_vpc](#input\_check\_instances\_in\_vpc) | Enable instances-in-vpc rule | `bool` | `true` | no |
@@ -223,8 +229,10 @@ No modules.
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
 | <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `""` | no |
+| <a name="input_elb_logging_s3_buckets"></a> [elb\_logging\_s3\_buckets](#input\_elb\_logging\_s3\_buckets) | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `""` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
 | <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `true` | no |
+| <a name="input_exclude_permission_boundary"></a> [exclude\_permission\_boundary](#input\_exclude\_permission\_boundary) | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `true` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `""` | no |
