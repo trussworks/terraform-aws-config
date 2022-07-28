@@ -1,6 +1,6 @@
 linters:
   enable:
     - gosec
-    - revive
+    - golint
     - gofmt
     - goimports
