@@ -6,7 +6,7 @@ jobs:
       - auth:
           password: $DOCKER_PASSWORD
           username: $DOCKER_USERNAME
-        image: trussworks/circleci:1ca44c817fda75f2dea3235d88ac94aaf3e83965
+        image: trussworks/circleci:69a541086c781d73a453962bed8553defe4ba6c6
   watch:
     steps:
       - buildevents/watch_build_and_finish
@@ -14,13 +14,13 @@ jobs:
       - auth:
           password: $DOCKER_PASSWORD
           username: $DOCKER_USERNAME
-        image: trussworks/circleci:1ca44c817fda75f2dea3235d88ac94aaf3e83965
+        image: trussworks/circleci:69a541086c781d73a453962bed8553defe4ba6c6
   terratest:
     docker:
       - auth:
           password: $DOCKER_PASSWORD
           username: $DOCKER_USERNAME
-        image: trussworks/circleci:1ca44c817fda75f2dea3235d88ac94aaf3e83965
+        image: trussworks/circleci:69a541086c781d73a453962bed8553defe4ba6c6
     steps:
       - buildevents/with_job_span:
           steps:
