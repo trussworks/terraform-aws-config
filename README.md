@@ -105,7 +105,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_config_config_rule. ecs-containers-nonprivileged](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.access_keys_rotated](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.acm-certificate-expiration-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.approved-amis-by-tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -125,6 +124,10 @@ No modules.
 | [aws_config_config_rule.ecr-private-image-scanning-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ecr-private-lifecycle-policy-configured](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ecs-awsvpc-networking-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecs-containers-nonprivileged](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecs-containers-readonly-access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ecs-no-environment-secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.efs-encrypted-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.eip_attached](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.guardduty-enabled-centralized](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-group-has-users-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -188,6 +191,8 @@ No modules.
 | <a name="input_check_ecr_private_lifecycle_policy_configured"></a> [check\_ecr\_private\_lifecycle\_policy\_configured](#input\_check\_ecr\_private\_lifecycle\_policy\_configured) | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
 | <a name="input_check_ecs_awsvpc_networking_enabled"></a> [check\_ecs\_awsvpc\_networking\_enabled](#input\_check\_ecs\_awsvpc\_networking\_enabled) | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ecs_containers_nonprivileged"></a> [check\_ecs\_containers\_nonprivileged](#input\_check\_ecs\_containers\_nonprivileged) | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
+| <a name="input_check_ecs_containers_readonly_access"></a> [check\_ecs\_containers\_readonly\_access](#input\_check\_ecs\_containers\_readonly\_access) | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
+| <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `true` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_guard_duty"></a> [check\_guard\_duty](#input\_check\_guard\_duty) | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
 | <a name="input_check_iam_group_has_users_check"></a> [check\_iam\_group\_has\_users\_check](#input\_check\_iam\_group\_has\_users\_check) | Enable iam-group-has-users-check rule | `bool` | `true` | no |
@@ -217,8 +222,10 @@ No modules.
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
 | <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `""` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
+| <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `true` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `""` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
 | <a name="input_password_min_length"></a> [password\_min\_length](#input\_password\_min\_length) | Password minimum length. | `number` | `14` | no |
 | <a name="input_password_require_lowercase"></a> [password\_require\_lowercase](#input\_password\_require\_lowercase) | Require at least one lowercase character in password. | `bool` | `true` | no |

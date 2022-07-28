@@ -48,6 +48,12 @@ locals {
       expected_delivery_window_age = var.expected_delivery_window_age
     }
   )
+
+  aws_config_efs_encrypted_check = templatefile("${path.module}/config-policies/efs-encrypted-check.tpl",
+    {
+      kms_key_id = var.kms_key_id
+    }
+  )
 }
 
 
@@ -653,6 +659,21 @@ resource "aws_config_config_rule" "ecs-awsvpc-networking-enabled" {
     source_identifier = "ECS_AWSVPC_NETWORKING_ENABLED"
   }
 
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ecs-containers-nonprivileged" {
+  count       = var.check_ecs_containers_nonprivileged ? 1 : 0
+  name        = "ecs-containers-nonprivileged"
+  description = "Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. The rule is NON_COMPLIANT if the privileged parameter is ‘true’. "
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECS_CONTAINERS_NONPRIVILEGED"
+  }
+
   maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
@@ -660,15 +681,49 @@ resource "aws_config_config_rule" "ecs-awsvpc-networking-enabled" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
-resource "aws_config_config_rule" " ecs-containers-nonprivileged" {
-  count            = var.check_ecs_containers_nonprivileged ? 1 : 0
-  name             = "ecs-containers-nonprivileged"
-  description      = "Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. The rule is NON_COMPLIANT if the privileged parameter is ‘true’. "
-  input_parameters = local.aws_config_changeme
+resource "aws_config_config_rule" "ecs-containers-readonly-access" {
+  count       = var.check_ecs_containers_readonly_access ? 1 : 0
+  name        = "ecs-containers-readonly-access"
+  description = "Checks if Amazon Elastic Container Service (Amazon ECS) Containers only have read-only access to its root filesystems. The rule NON_COMPLIANT if readonlyRootFilesystem parameter in the container definition of ECSTaskDefinitions is set to ‘false’."
 
   source {
     owner             = "AWS"
-    source_identifier = "ECS_CONTAINERS_NONPRIVILEGED"
+    source_identifier = "ECS_CONTAINERS_READONLY_ACCESS"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "ecs-no-environment-secrets" {
+  count       = var.check_ecs_no_environment_secrets ? 1 : 0
+  name        = "ecs-no-environment-secrets"
+  description = "Checks if secrets are passed as container environment variables. Rule is NON_COMPLIANT if 1 or more environment variable key matches a key listed in the 'secretKeys' parameter (excluding env variables from other locations such as Amazon S3)."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "ECS_NO_ENVIRONMENT_SECRETS"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "efs-encrypted-check" {
+  count            = var.enable_efs_encrypted_check ? 1 : 0
+  name             = "efs-encrypted-check"
+  description      = "Checks if Amazon Elastic File System is configured to encrypt file data using AWS Key Management Service. NON_COMPLIANT if encrypted key set to false on DescribeFileSystems or KmsKeyId key on DescribeFileSystems does not match the KmsKeyId parameter"
+  input_parameters = local.aws_config_efs_encrypted_check
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EFS_ENCRYPTED_CHECK"
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency

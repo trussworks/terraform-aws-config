@@ -398,3 +398,27 @@ variable "check_ecs_containers_nonprivileged" {
   type        = bool
   default     = true
 }
+
+variable "check_ecs_containers_readonly_access" {
+  description = "Enable ecs-containers-readonly-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_no_environment_secrets" {
+  description = "Enable ecs-no-environment-secrets rule"
+  type        = bool
+  default     = true
+}
+
+variable "enable_efs_encrypted_check" {
+  description = "Enable efs-encrypted-check rule"
+  type        = bool
+  default     = true
+}
+
+variable "kms_key_id" {
+  description = "Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system."
+  type        = string
+  default     = ""
+}
