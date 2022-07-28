@@ -116,6 +116,7 @@ No modules.
 | [aws_config_config_rule.cloudwatch_log_group_encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cmk_backing_key_rotation_enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cw_loggroup_retention_period_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.db-instance-backup-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.dynamodb-table-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -139,14 +140,19 @@ No modules.
 | [aws_config_config_rule.iam-user-no-policies-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam_root_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.instances-in-vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.internet-gateway-authorized-vpc-only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.mfa_enabled_for_iam_console_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.multi-region-cloud-trail-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.nacl-no-unrestricted-ssh-rdp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.rds-cluster-deletion-protection-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.rds-instance-public-access-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.rds-snapshot-encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.rds-snapshots-public-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.rds-storage-encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.required-tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.restricted_ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.root-account-mfa-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.s3-bucket-level-public-access-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-public-write-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3_bucket_ssl_requests_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.vpc_default_security_group_closed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -174,6 +180,7 @@ No modules.
 | <a name="input_acm_days_to_expiration"></a> [acm\_days\_to\_expiration](#input\_acm\_days\_to\_expiration) | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
 | <a name="input_aggregate_organization"></a> [aggregate\_organization](#input\_aggregate\_organization) | Aggregate compliance data by organization | `bool` | `false` | no |
 | <a name="input_ami_required_tag_key_value"></a> [ami\_required\_tag\_key\_value](#input\_ami\_required\_tag\_key\_value) | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
+| <a name="input_authorized_vpc_ids"></a> [authorized\_vpc\_ids](#input\_authorized\_vpc\_ids) | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `bool` | `true` | no |
 | <a name="input_backup_frequency"></a> [backup\_frequency](#input\_backup\_frequency) | Numerical value for required backup frequency. Maximum of 24 for hours, 31 for days. | `number` | `1` | no |
 | <a name="input_backup_frequency_unit_of_time"></a> [backup\_frequency\_unit\_of\_time](#input\_backup\_frequency\_unit\_of\_time) | Unit of time for required backup frequency. Accepted values: 'hours', 'days'. | `string` | `"days"` | no |
 | <a name="input_check_access_keys_rotated"></a> [check\_access\_keys\_rotated](#input\_check\_access\_keys\_rotated) | Enable access-keys-rotated rule | `bool` | `true` | no |
@@ -186,6 +193,7 @@ No modules.
 | <a name="input_check_cloudwatch_log_group_encrypted"></a> [check\_cloudwatch\_log\_group\_encrypted](#input\_check\_cloudwatch\_log\_group\_encrypted) | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
 | <a name="input_check_cmk_backing_key_rotated"></a> [check\_cmk\_backing\_key\_rotated](#input\_check\_cmk\_backing\_key\_rotated) | Enable cmk\_backing\_key\_rotation\_enabled rule | `bool` | `true` | no |
 | <a name="input_check_cw_loggroup_retention_period"></a> [check\_cw\_loggroup\_retention\_period](#input\_check\_cw\_loggroup\_retention\_period) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
+| <a name="input_check_db_instance_backup_enabled"></a> [check\_db\_instance\_backup\_enabled](#input\_check\_db\_instance\_backup\_enabled) | Enable db-instance-backup-enabled rule | `bool` | `true` | no |
 | <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
@@ -196,7 +204,7 @@ No modules.
 | <a name="input_check_ecs_awsvpc_networking_enabled"></a> [check\_ecs\_awsvpc\_networking\_enabled](#input\_check\_ecs\_awsvpc\_networking\_enabled) | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ecs_containers_nonprivileged"></a> [check\_ecs\_containers\_nonprivileged](#input\_check\_ecs\_containers\_nonprivileged) | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
 | <a name="input_check_ecs_containers_readonly_access"></a> [check\_ecs\_containers\_readonly\_access](#input\_check\_ecs\_containers\_readonly\_access) | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
-| <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `true` | no |
+| <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `false` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_elb_deletion_protection_enabled"></a> [check\_elb\_deletion\_protection\_enabled](#input\_check\_elb\_deletion\_protection\_enabled) | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
 | <a name="input_check_elb_logging_enabled"></a> [check\_elb\_logging\_enabled](#input\_check\_elb\_logging\_enabled) | Enable elb-logging-enabled rule | `bool` | `false` | no |
@@ -208,14 +216,19 @@ No modules.
 | <a name="input_check_iam_root_access_key"></a> [check\_iam\_root\_access\_key](#input\_check\_iam\_root\_access\_key) | Enable iam-root-access-key rule | `bool` | `true` | no |
 | <a name="input_check_iam_user_no_policies_check"></a> [check\_iam\_user\_no\_policies\_check](#input\_check\_iam\_user\_no\_policies\_check) | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
 | <a name="input_check_instances_in_vpc"></a> [check\_instances\_in\_vpc](#input\_check\_instances\_in\_vpc) | Enable instances-in-vpc rule | `bool` | `true` | no |
+| <a name="input_check_internet_gateway_authorized_vpc_only"></a> [check\_internet\_gateway\_authorized\_vpc\_only](#input\_check\_internet\_gateway\_authorized\_vpc\_only) | Enable internet-gateway-authorized-vpc-only rule | `bool` | `true` | no |
 | <a name="input_check_mfa_enabled_for_iam_console_access"></a> [check\_mfa\_enabled\_for\_iam\_console\_access](#input\_check\_mfa\_enabled\_for\_iam\_console\_access) | Enable mfa-enabled-for-iam-console-access rule | `bool` | `false` | no |
 | <a name="input_check_multi_region_cloud_trail"></a> [check\_multi\_region\_cloud\_trail](#input\_check\_multi\_region\_cloud\_trail) | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
+| <a name="input_check_nacl_no_unrestricted_ssh_rdp"></a> [check\_nacl\_no\_unrestricted\_ssh\_rdp](#input\_check\_nacl\_no\_unrestricted\_ssh\_rdp) | Enable nacl-no-unrestricted-ssh-rdp rule | `bool` | `true` | no |
+| <a name="input_check_rds_cluster_deletion_protection_enabled"></a> [check\_rds\_cluster\_deletion\_protection\_enabled](#input\_check\_rds\_cluster\_deletion\_protection\_enabled) | Enable rds-cluster-deletion-protection-enabled rule | `bool` | `true` | no |
 | <a name="input_check_rds_public_access"></a> [check\_rds\_public\_access](#input\_check\_rds\_public\_access) | Enable rds-instance-public-access-check rule | `bool` | `false` | no |
+| <a name="input_check_rds_snapshot_encrypted"></a> [check\_rds\_snapshot\_encrypted](#input\_check\_rds\_snapshot\_encrypted) | Enable rds-snapshot-encrypted rule | `bool` | `true` | no |
 | <a name="input_check_rds_snapshots_public_prohibited"></a> [check\_rds\_snapshots\_public\_prohibited](#input\_check\_rds\_snapshots\_public\_prohibited) | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_rds_storage_encrypted"></a> [check\_rds\_storage\_encrypted](#input\_check\_rds\_storage\_encrypted) | Enable rds-storage-encrypted rule | `bool` | `true` | no |
 | <a name="input_check_required_tags"></a> [check\_required\_tags](#input\_check\_required\_tags) | Enable required-tags rule | `bool` | `false` | no |
 | <a name="input_check_restricted_ssh"></a> [check\_restricted\_ssh](#input\_check\_restricted\_ssh) | Enable restricted-ssh rule | `bool` | `false` | no |
 | <a name="input_check_root_account_mfa_enabled"></a> [check\_root\_account\_mfa\_enabled](#input\_check\_root\_account\_mfa\_enabled) | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
+| <a name="input_check_s3_bucket_level_public_access_prohibited"></a> [check\_s3\_bucket\_level\_public\_access\_prohibited](#input\_check\_s3\_bucket\_level\_public\_access\_prohibited) | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
 | <a name="input_check_s3_bucket_public_write_prohibited"></a> [check\_s3\_bucket\_public\_write\_prohibited](#input\_check\_s3\_bucket\_public\_write\_prohibited) | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_ssl_requests_only"></a> [check\_s3\_bucket\_ssl\_requests\_only](#input\_check\_s3\_bucket\_ssl\_requests\_only) | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
 | <a name="input_check_vpc_default_security_group_closed"></a> [check\_vpc\_default\_security\_group\_closed](#input\_check\_vpc\_default\_security\_group\_closed) | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
@@ -228,14 +241,15 @@ No modules.
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
-| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `""` | no |
+| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"ARN,CSV"` | no |
+| <a name="input_ecs_no_environment_secrets"></a> [ecs\_no\_environment\_secrets](#input\_ecs\_no\_environment\_secrets) | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `"keys,csv"` | no |
 | <a name="input_elb_logging_s3_buckets"></a> [elb\_logging\_s3\_buckets](#input\_elb\_logging\_s3\_buckets) | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `""` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
-| <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `true` | no |
+| <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `false` | no |
 | <a name="input_exclude_permission_boundary"></a> [exclude\_permission\_boundary](#input\_exclude\_permission\_boundary) | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `true` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
-| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `""` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `"keys,csv"` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
 | <a name="input_password_min_length"></a> [password\_min\_length](#input\_password\_min\_length) | Password minimum length. | `number` | `14` | no |
 | <a name="input_password_require_lowercase"></a> [password\_require\_lowercase](#input\_password\_require\_lowercase) | Require at least one lowercase character in password. | `bool` | `true` | no |
@@ -246,6 +260,7 @@ No modules.
 | <a name="input_required_tags"></a> [required\_tags](#input\_required\_tags) | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | <a name="input_required_tags_resource_types"></a> [required\_tags\_resource\_types](#input\_required\_tags\_resource\_types) | Resource types to check for tags. | `list(string)` | `[]` | no |
 | <a name="input_retention_days"></a> [retention\_days](#input\_retention\_days) | Required retention period in days. | `number` | `35` | no |
+| <a name="input_s3_bucket_public_access_prohibited_exclusion"></a> [s3\_bucket\_public\_access\_prohibited\_exclusion](#input\_s3\_bucket\_public\_access\_prohibited\_exclusion) | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"bucket_names,csv"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 
 ## Outputs

@@ -35,7 +35,7 @@ locals {
     }
   )
 
-  aws_config_backup_plan_minimums = templatefile("${path.module}/config-policies/backup_plan_minimums.tpl",
+  aws_config_backup_plan_minimums = templatefile("${path.module}/config-policies/backup-plan-minimums.tpl",
     {
       backup_frequency              = var.backup_frequency
       retention_days                = var.retention_days
@@ -61,9 +61,27 @@ locals {
     }
   )
 
-  aws_config_exclude_permission_boundary = templatefile("${path.module}/config-policies/exclude_permission_boundary.tpl",
+  aws_config_exclude_permission_boundary = templatefile("${path.module}/config-policies/exclude-permission-boundary.tpl",
     {
       exclude_permission_boundary = var.exclude_permission_boundary
+    }
+  )
+
+  aws_config_authorized_vpc_ids = templatefile("${path.module}/config-policies/internet-gateway-authorized-vpc-only.tpl",
+    {
+      authorized_vpc_ids = var.authorized_vpc_ids
+    }
+  )
+
+  aws_config_ecs_no_environment_secrets = templatefile("${path.module}/config-policies/ecs-no-environment-secrets.tpl",
+    {
+      ecs_no_environment_secrets = var.ecs_no_environment_secrets
+    }
+  )
+
+  aws_config_s3_bucket_public_access_prohibited_exclusion = templatefile("${path.module}/config-policies/s3_public_access_exclusion.tpl",
+    {
+      s3_bucket_public_access_prohibited_exclusion = var.s3_bucket_public_access_prohibited_exclusion
     }
   )
 }
@@ -580,7 +598,7 @@ resource "aws_config_config_rule" "cmk_backing_key_rotation_enabled" {
 resource "aws_config_config_rule" "backup_plan_min_frequency_and_min_retention_check" {
   count            = var.check_backup_plan_min_frequency_and_min_retention ? 1 : 0
   name             = "backup-plan-min-frequency-and-min-retention-check"
-  description      = "Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. The rule is NON_COMPLIANT if recovery points are not created at least as often as the specified frequency or expire before the specified period. "
+  description      = "Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. The rule is NON_COMPLIANT if recovery points are not created at least as often as the specified frequency or expire before the specified period."
   input_parameters = local.aws_config_backup_plan_minimums
 
   source {
@@ -598,7 +616,7 @@ resource "aws_config_config_rule" "backup_plan_min_frequency_and_min_retention_c
 resource "aws_config_config_rule" "cloud-trail-cloud-watch-logs-enabled" {
   count            = var.cloud_trail_cloud_watch_logs_enabled ? 1 : 0
   name             = "cloud-trail-cloud-watch-logs-enabled"
-  description      = "Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs. The trail is non-compliant if the CloudWatchLogsLogGroupArn property of the trail is empty. "
+  description      = "Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs. The trail is non-compliant if the CloudWatchLogsLogGroupArn property of the trail is empty."
   input_parameters = local.aws_config_logs_delivery_window
 
   source {
@@ -634,7 +652,7 @@ resource "aws_config_config_rule" "dynamodb-table-encryption-enabled" {
 resource "aws_config_config_rule" "ecr-private-image-scanning-enabled" {
   count       = var.check_ecr_private_image_scanning_enabled ? 1 : 0
   name        = "ecr-private-image-scanning-enabled"
-  description = "Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. The rule is NON_COMPLIANT if image scanning is not enabled for the private ECR repository. "
+  description = "Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. The rule is NON_COMPLIANT if image scanning is not enabled for the private ECR repository."
 
   source {
     owner             = "AWS"
@@ -664,7 +682,7 @@ resource "aws_config_config_rule" "ecr-private-lifecycle-policy-configured" {
 resource "aws_config_config_rule" "ecs-awsvpc-networking-enabled" {
   count       = var.check_ecs_awsvpc_networking_enabled ? 1 : 0
   name        = "ecs-awsvpc-networking-enabled"
-  description = "Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. This rule is NON_COMPLIANT if active ECSTaskDefinitions is not set to ‘awsvpc’. "
+  description = "Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. This rule is NON_COMPLIANT if active ECSTaskDefinitions is not set to ‘awsvpc’."
 
   source {
     owner             = "AWS"
@@ -679,14 +697,12 @@ resource "aws_config_config_rule" "ecs-awsvpc-networking-enabled" {
 resource "aws_config_config_rule" "ecs-containers-nonprivileged" {
   count       = var.check_ecs_containers_nonprivileged ? 1 : 0
   name        = "ecs-containers-nonprivileged"
-  description = "Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. The rule is NON_COMPLIANT if the privileged parameter is ‘true’. "
+  description = "Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. The rule is NON_COMPLIANT if the privileged parameter is ‘true’."
 
   source {
     owner             = "AWS"
     source_identifier = "ECS_CONTAINERS_NONPRIVILEGED"
   }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
@@ -703,24 +719,21 @@ resource "aws_config_config_rule" "ecs-containers-readonly-access" {
     source_identifier = "ECS_CONTAINERS_READONLY_ACCESS"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "ecs-no-environment-secrets" {
-  count       = var.check_ecs_no_environment_secrets ? 1 : 0
-  name        = "ecs-no-environment-secrets"
-  description = "Checks if secrets are passed as container environment variables. Rule is NON_COMPLIANT if 1 or more environment variable key matches a key listed in the 'secretKeys' parameter (excluding env variables from other locations such as Amazon S3)."
+  count            = var.check_ecs_no_environment_secrets ? 1 : 0
+  name             = "ecs-no-environment-secrets"
+  description      = "Checks if secrets are passed as container environment variables. Rule is NON_COMPLIANT if 1 or more environment variable key matches a key listed in the 'secretKeys' parameter (excluding env variables from other locations such as Amazon S3)."
+  input_parameters = local.aws_config_ecs_no_environment_secrets
 
   source {
     owner             = "AWS"
     source_identifier = "ECS_NO_ENVIRONMENT_SECRETS"
   }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
@@ -755,8 +768,6 @@ resource "aws_config_config_rule" "elb-deletion-protection-enabled" {
     source_identifier = "ELB_DELETION_PROTECTION_ENABLED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -790,8 +801,6 @@ resource "aws_config_config_rule" "iam-policy-no-statements-with-admin-access" {
     source_identifier = "IAM_POLICY_NO_STATEMENTS_WITH_ADMIN_ACCESS"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -800,12 +809,104 @@ resource "aws_config_config_rule" "iam-policy-no-statements-with-admin-access" {
 resource "aws_config_config_rule" "iam-policy-no-statements-with-full-access" {
   count            = var.check_iam_policy_no_statements_with_full_access ? 1 : 0
   name             = "iam-policy-no-statements-with-full-access"
-  description      = "changeme"
+  description      = "Checks if AWS Identity and Access Management (IAM) policies grant permissions to all actions on individual AWS resources. The rule is NON_COMPLIANT if the managed IAM policy allows full access to at least 1 AWS service. "
   input_parameters = local.aws_config_exclude_permission_boundary
 
   source {
     owner             = "AWS"
     source_identifier = "IAM_POLICY_NO_STATEMENTS_WITH_FULL_ACCESS"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "nacl-no-unrestricted-ssh-rdp" {
+  count       = var.check_nacl_no_unrestricted_ssh_rdp ? 1 : 0
+  name        = "nacl-no-unrestricted-ssh-rdp"
+  description = "Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. The rule is NON_COMPLIANT if a NACL inbound entry allows a source TCP or UDP CIDR block for ports 22 or 3389."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "NACL_NO_UNRESTRICTED_SSH_RDP"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "internet-gateway-authorized-vpc-only" {
+  count            = var.check_internet_gateway_authorized_vpc_only ? 1 : 0
+  name             = "internet-gateway-authorized-vpc-only"
+  description      = "Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs). The rule is NON_COMPLIANT if IGWs are not attached to an authorized VPC."
+  input_parameters = local.aws_config_authorized_vpc_ids
+
+  source {
+    owner             = "AWS"
+    source_identifier = "INTERNET_GATEWAY_AUTHORIZED_VPC_ONLY"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "rds-snapshot-encrypted" {
+  count       = var.check_rds_snapshot_encrypted ? 1 : 0
+  name        = "rds-snapshot-encrypted"
+  description = "Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted. The rule is NON_COMPLIANT, if the Amazon RDS DB snapshots are not encrypted. "
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_SNAPSHOT_ENCRYPTED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "rds-cluster-deletion-protection-enabled" {
+  count       = var.check_rds_cluster_deletion_protection_enabled ? 1 : 0
+  name        = "rds-cluster-deletion-protection-enabled"
+  description = "Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted. The rule is NON_COMPLIANT, if the Amazon RDS DB snapshots are not encrypted."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RDS_SNAPSHOT_ENCRYPTED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "db-instance-backup-enabled" {
+  count       = var.check_db_instance_backup_enabled ? 1 : 0
+  name        = "db-instance-backup-enabled"
+  description = "Checks if RDS DB instances have backups enabled. Optionally, the rule checks the backup retention period and the backup window."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DB_INSTANCE_BACKUP_ENABLED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "s3-bucket-level-public-access-prohibited" {
+  count            = var.check_s3_bucket_level_public_access_prohibited ? 1 : 0
+  name             = "s3-bucket-level-public-access-prohibited"
+  description      = "Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. This rule is NON_COMPLIANT if an Amazon S3 bucket is not listed in the excludedPublicBuckets parameter and bucket level settings are public. "
+  input_parameters = local.aws_config_s3_bucket_public_access_prohibited_exclusion
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_LEVEL_PUBLIC_ACCESS_PROHIBITED"
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency

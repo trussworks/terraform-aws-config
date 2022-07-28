@@ -372,7 +372,7 @@ variable "check_dynamodb_table_encryption_enabled" {
 variable "dynamodb_arm_encryption_list" {
   description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
   type        = string
-  default     = ""
+  default     = "ARN,CSV"
 }
 
 variable "check_ecr_private_image_scanning_enabled" {
@@ -408,19 +408,25 @@ variable "check_ecs_containers_readonly_access" {
 variable "check_ecs_no_environment_secrets" {
   description = "Enable ecs-no-environment-secrets rule"
   type        = bool
-  default     = true
+  default     = false
+}
+
+variable "ecs_no_environment_secrets" {
+  description = "Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed."
+  type        = string
+  default     = "keys,csv"
 }
 
 variable "enable_efs_encrypted_check" {
   description = "Enable efs-encrypted-check rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "kms_key_id" {
   description = "Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system."
   type        = string
-  default     = ""
+  default     = "keys,csv"
 }
 
 variable "check_elb_deletion_protection_enabled" {
@@ -457,4 +463,52 @@ variable "exclude_permission_boundary" {
   description = "Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.'"
   type        = bool
   default     = true
+}
+
+variable "check_nacl_no_unrestricted_ssh_rdp" {
+  description = "Enable nacl-no-unrestricted-ssh-rdp rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_internet_gateway_authorized_vpc_only" {
+  description = "Enable internet-gateway-authorized-vpc-only rule"
+  type        = bool
+  default     = true
+}
+
+variable "authorized_vpc_ids" {
+  description = "Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT."
+  type        = bool
+  default     = true
+}
+
+variable "check_rds_snapshot_encrypted" {
+  description = "Enable rds-snapshot-encrypted rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_rds_cluster_deletion_protection_enabled" {
+  description = "Enable rds-cluster-deletion-protection-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_db_instance_backup_enabled" {
+  description = "Enable db-instance-backup-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_s3_bucket_level_public_access_prohibited" {
+  description = "Enable s3-bucket-level-public-access-prohibited rule"
+  type        = bool
+  default     = false
+}
+
+variable "s3_bucket_public_access_prohibited_exclusion" {
+  description = "Comma-separated list of known allowed public Amazon S3 bucket names."
+  type        = string
+  default     = "bucket_names,csv"
 }
