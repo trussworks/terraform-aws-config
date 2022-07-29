@@ -89,7 +89,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 * access_keys_rotated: Checks if the active access keys are rotated within the number of days specified in maxAccessKeyAge.
 * cmk_backing_key_rotation_enabled: Checks if automatic key rotation is enabled for every AWS Key Management Service customer managed symmetric encryption key.
 * nacl-no-unrestricted-ssh-rdp: Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. *No* *GOVcloud*
-* nternet-gateway-authorized-vpc-only: Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs).
+* internet-gateway-authorized-vpc-only: Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs).
 
 ### Tagging
 
