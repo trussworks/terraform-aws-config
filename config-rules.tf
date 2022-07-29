@@ -915,3 +915,54 @@ resource "aws_config_config_rule" "s3-bucket-level-public-access-prohibited" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "s3-bucket-acl-prohibited" {
+  count       = var.check_s3_bucket_acl_prohibited ? 1 : 0
+  name        = "s3-bucket-acl-prohibited"
+  description = "Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). The rule is NON_COMPLIANT if ACLs are configured for user access in Amazon S3 Buckets."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_ACL_PROHIBITED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
+  count       = var.check_s3_bucket_server_side_encryption_enabled ? 1 : 0
+  name        = "s3-bucket-server-side-encryption-enabled"
+  description = "Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS. The rule is NON_COMPLIANT if your Amazon S3 bucket is not encrypted by default."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "vpc-sg-open-only-to-authorized-ports" {
+  count       = var.check_vpc_sg_open_only_to_authorized_ports ? 1 : 0
+  name        = "vpc-sg-open-only-to-authorized-ports"
+  description = "Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible. The rule is NON_COMPLIANT when a security group with inbound 0.0.0.0/0 has a port accessible which is not specified in the rule parameters. "
+
+  source {
+    owner             = "AWS"
+    source_identifier = "VPC_SG_OPEN_ONLY_TO_AUTHORIZED_PORTS"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}

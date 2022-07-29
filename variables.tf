@@ -512,3 +512,21 @@ variable "s3_bucket_public_access_prohibited_exclusion" {
   type        = string
   default     = "bucket_names,csv"
 }
+
+variable "check_s3_bucket_acl_prohibited" {
+  description = "Enable s3-bucket-acl-prohibited rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_s3_bucket_server_side_encryption_enabled" {
+  description = "Enable s3-bucket-server-side-encryption-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_vpc_sg_open_only_to_authorized_ports" {
+  description = "Enable vpc-sg-open-only-to-authorized-ports rule"
+  type        = bool
+  default     = true
+}

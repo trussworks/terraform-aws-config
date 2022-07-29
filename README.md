@@ -152,9 +152,12 @@ No modules.
 | [aws_config_config_rule.required-tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.restricted_ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.root-account-mfa-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.s3-bucket-acl-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-level-public-access-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-public-write-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.s3-bucket-server-side-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3_bucket_ssl_requests_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.vpc-sg-open-only-to-authorized-ports](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.vpc_default_security_group_closed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_configuration_aggregator.organization](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_aggregator) | resource |
 | [aws_config_configuration_recorder.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder) | resource |
@@ -228,10 +231,13 @@ No modules.
 | <a name="input_check_required_tags"></a> [check\_required\_tags](#input\_check\_required\_tags) | Enable required-tags rule | `bool` | `false` | no |
 | <a name="input_check_restricted_ssh"></a> [check\_restricted\_ssh](#input\_check\_restricted\_ssh) | Enable restricted-ssh rule | `bool` | `false` | no |
 | <a name="input_check_root_account_mfa_enabled"></a> [check\_root\_account\_mfa\_enabled](#input\_check\_root\_account\_mfa\_enabled) | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
+| <a name="input_check_s3_bucket_acl_prohibited"></a> [check\_s3\_bucket\_acl\_prohibited](#input\_check\_s3\_bucket\_acl\_prohibited) | Enable s3-bucket-acl-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_level_public_access_prohibited"></a> [check\_s3\_bucket\_level\_public\_access\_prohibited](#input\_check\_s3\_bucket\_level\_public\_access\_prohibited) | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
 | <a name="input_check_s3_bucket_public_write_prohibited"></a> [check\_s3\_bucket\_public\_write\_prohibited](#input\_check\_s3\_bucket\_public\_write\_prohibited) | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
+| <a name="input_check_s3_bucket_server_side_encryption_enabled"></a> [check\_s3\_bucket\_server\_side\_encryption\_enabled](#input\_check\_s3\_bucket\_server\_side\_encryption\_enabled) | Enable s3-bucket-server-side-encryption-enabled rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_ssl_requests_only"></a> [check\_s3\_bucket\_ssl\_requests\_only](#input\_check\_s3\_bucket\_ssl\_requests\_only) | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
 | <a name="input_check_vpc_default_security_group_closed"></a> [check\_vpc\_default\_security\_group\_closed](#input\_check\_vpc\_default\_security\_group\_closed) | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
+| <a name="input_check_vpc_sg_open_only_to_authorized_ports"></a> [check\_vpc\_sg\_open\_only\_to\_authorized\_ports](#input\_check\_vpc\_sg\_open\_only\_to\_authorized\_ports) | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `true` | no |
 | <a name="input_cloud_trail_cloud_watch_logs_enabled"></a> [cloud\_trail\_cloud\_watch\_logs\_enabled](#input\_cloud\_trail\_cloud\_watch\_logs\_enabled) | Enable cloud\_trail\_cloud\_watch\_logs\_enabled rule | `bool` | `true` | no |
 | <a name="input_config_aggregator_name"></a> [config\_aggregator\_name](#input\_config\_aggregator\_name) | The name of the aggregator. | `string` | `"organization"` | no |
 | <a name="input_config_delivery_frequency"></a> [config\_delivery\_frequency](#input\_config\_delivery\_frequency) | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
