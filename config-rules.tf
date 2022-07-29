@@ -462,7 +462,7 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
-resource "aws_config_config_rule" "cw_loggroup_retention_period_check" {
+resource "aws_config_config_rule" "cw-loggroup-retention-period-check" {
   count = var.check_cw_loggroup_retention_period ? 1 : 0
 
   name        = "cloudwatch_log_group-retention"
@@ -595,7 +595,7 @@ resource "aws_config_config_rule" "cmk_backing_key_rotation_enabled" {
   depends_on = [aws_config_configuration_recorder.main]
 }
 
-resource "aws_config_config_rule" "backup_plan_min_frequency_and_min_retention_check" {
+resource "aws_config_config_rule" "backup-plan-min-frequency-and-min-retention-check" {
   count            = var.check_backup_plan_min_frequency_and_min_retention ? 1 : 0
   name             = "backup-plan-min-frequency-and-min-retention-check"
   description      = "Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. The rule is NON_COMPLIANT if recovery points are not created at least as often as the specified frequency or expire before the specified period."

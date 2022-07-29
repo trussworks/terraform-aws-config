@@ -14,7 +14,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### Backup Plan
 
-* backup_plan_min_frequency_and_min_retention_check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. *No* *GOVcloud*
+* backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. *No* *GOVcloud*
 
 ### CloudTrail
 
@@ -31,7 +31,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### DynamoDB
 
-*dynamodb-table-encryption-enabled: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
+* dynamodb-table-encryption-enabled: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
 
 ### EC2
 
@@ -158,14 +158,14 @@ No modules.
 | [aws_config_config_rule.access_keys_rotated](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.acm-certificate-expiration-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.approved-amis-by-tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
-| [aws_config_config_rule.backup_plan_min_frequency_and_min_retention_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.backup-plan-min-frequency-and-min-retention-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-cloud-watch-logs-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-log-file-validation-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloudtrail-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloudwatch_log_group_encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cmk_backing_key_rotation_enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
-| [aws_config_config_rule.cw_loggroup_retention_period_check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.cw-loggroup-retention-period-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.db-instance-backup-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.dynamodb-table-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
