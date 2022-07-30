@@ -13,7 +13,7 @@ jobs:
     if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: reattach HEAD to Head Ref
         # b/c checkout action leaves in detached head state https://github.com/actions/checkout/issues/6
         run: git checkout "$(echo ${{ github.head_ref }})"
