@@ -926,8 +926,6 @@ resource "aws_config_config_rule" "s3-bucket-acl-prohibited" {
     source_identifier = "S3_BUCKET_ACL_PROHIBITED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -943,8 +941,6 @@ resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
     source_identifier = "S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -959,8 +955,6 @@ resource "aws_config_config_rule" "vpc-sg-open-only-to-authorized-ports" {
     owner             = "AWS"
     source_identifier = "VPC_SG_OPEN_ONLY_TO_AUTHORIZED_PORTS"
   }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
