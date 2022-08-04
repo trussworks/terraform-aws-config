@@ -26,7 +26,7 @@ repos:
     rev: v1.47.2
     hooks:
       - id: golangci-lint
-        entry: golangci-lint run --fix --timeout 300s
+        entry: golangci-lint run --fix --timeout 600s
         types: [go]
         language: golang
         pass_filenames: false
