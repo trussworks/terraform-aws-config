@@ -270,13 +270,13 @@ variable "check_s3_bucket_ssl_requests_only" {
 variable "check_mfa_enabled_for_iam_console_access" {
   description = "Enable mfa-enabled-for-iam-console-access rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "check_restricted_ssh" {
   description = "Enable restricted-ssh rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "tags" {
@@ -366,7 +366,7 @@ variable "expected_delivery_window_age" {
 variable "check_dynamodb_table_encryption_enabled" {
   description = "Enable checkdynamodb-table-encryption-enabled rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "dynamodb_arm_encryption_list" {
@@ -408,7 +408,7 @@ variable "check_ecs_containers_readonly_access" {
 variable "check_ecs_no_environment_secrets" {
   description = "Enable ecs-no-environment-secrets rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "ecs_no_environment_secrets" {
@@ -420,7 +420,7 @@ variable "ecs_no_environment_secrets" {
 variable "enable_efs_encrypted_check" {
   description = "Enable efs-encrypted-check rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -462,7 +462,7 @@ variable "check_iam_policy_no_statements_with_full_access" {
 variable "exclude_permission_boundary" {
   description = "Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.'"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "check_nacl_no_unrestricted_ssh_rdp" {
@@ -474,13 +474,13 @@ variable "check_nacl_no_unrestricted_ssh_rdp" {
 variable "check_internet_gateway_authorized_vpc_only" {
   description = "Enable internet-gateway-authorized-vpc-only rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "authorized_vpc_ids" {
   description = "Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT."
-  type        = bool
-  default     = true
+  type        = string
+  default     = "keys,csv"
 }
 
 variable "check_rds_snapshot_encrypted" {
@@ -498,7 +498,7 @@ variable "check_rds_cluster_deletion_protection_enabled" {
 variable "check_db_instance_backup_enabled" {
   description = "Enable db-instance-backup-enabled rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "check_s3_bucket_level_public_access_prohibited" {

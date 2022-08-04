@@ -449,7 +449,7 @@ resource "aws_config_config_rule" "ec2-encrypted-volumes" {
 resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
   count = var.check_cloudwatch_log_group_encrypted ? 1 : 0
 
-  name        = "cloudwatch_log_group-encrypted"
+  name        = "cloudwatch-log-group-encrypted"
   description = "Checks whether a log group in Amazon CloudWatch Logs is encrypted. The rule is NON_COMPLIANT if CloudWatch Logs has a log group without encryption enabled"
 
   source {
@@ -465,7 +465,7 @@ resource "aws_config_config_rule" "cloudwatch_log_group_encrypted" {
 resource "aws_config_config_rule" "cw-loggroup-retention-period-check" {
   count = var.check_cw_loggroup_retention_period ? 1 : 0
 
-  name        = "cloudwatch_log_group-retention"
+  name        = "cloudwatch-log-group-retention"
   description = "Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days. The rule is NON_COMPLIANT if the retention period is not set or is less than the configured retention period."
 
   input_parameters = local.aws_config_cloudwatch_log_group_retention_period
