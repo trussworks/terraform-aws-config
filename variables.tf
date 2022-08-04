@@ -366,7 +366,7 @@ variable "expected_delivery_window_age" {
 variable "check_dynamodb_table_encryption_enabled" {
   description = "Enable checkdynamodb-table-encryption-enabled rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "dynamodb_arm_encryption_list" {

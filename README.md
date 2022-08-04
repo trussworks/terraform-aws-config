@@ -247,7 +247,7 @@ No modules.
 | <a name="input_check_cmk_backing_key_rotated"></a> [check\_cmk\_backing\_key\_rotated](#input\_check\_cmk\_backing\_key\_rotated) | Enable cmk\_backing\_key\_rotation\_enabled rule | `bool` | `true` | no |
 | <a name="input_check_cw_loggroup_retention_period"></a> [check\_cw\_loggroup\_retention\_period](#input\_check\_cw\_loggroup\_retention\_period) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
 | <a name="input_check_db_instance_backup_enabled"></a> [check\_db\_instance\_backup\_enabled](#input\_check\_db\_instance\_backup\_enabled) | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
-| <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `true` | no |
+| <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
