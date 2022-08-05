@@ -26,8 +26,8 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### CloudWatch Logs
 
-* cloudwatch-log-group-encryption: Ensure that CloudWatch Logs are encrypted.
-* cw_loggroup_retention_period_check: Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days.
+* cloudwatch-log-group-encrypted: Ensure that CloudWatch Logs are encrypted.
+* cw-loggroup-retention-period-check: Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days.
 
 ### DynamoDB
 
@@ -101,7 +101,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 * rds-snapshots-public-prohibited: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public.
 * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
 * rds-snapshot-encrypted: Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted.
-* rds-cluster-deletion-protection-enabled: Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted.
+* rds-cluster-deletion-protection-enabled: Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. *No* *GOVcloud*
 * db-instance-backup-enabled: Checks if RDS DB instances have backups enabled.
 
 ### S3
@@ -236,6 +236,7 @@ No modules.
 | <a name="input_authorized_vpc_ids"></a> [authorized\_vpc\_ids](#input\_authorized\_vpc\_ids) | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `string` | `"keys,csv"` | no |
 | <a name="input_backup_frequency"></a> [backup\_frequency](#input\_backup\_frequency) | Numerical value for required backup frequency. Maximum of 24 for hours, 31 for days. | `number` | `1` | no |
 | <a name="input_backup_frequency_unit_of_time"></a> [backup\_frequency\_unit\_of\_time](#input\_backup\_frequency\_unit\_of\_time) | Unit of time for required backup frequency. Accepted values: 'hours', 'days'. | `string` | `"days"` | no |
+| <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Required retention period in days. | `number` | `35` | no |
 | <a name="input_check_access_keys_rotated"></a> [check\_access\_keys\_rotated](#input\_check\_access\_keys\_rotated) | Enable access-keys-rotated rule | `bool` | `true` | no |
 | <a name="input_check_acm_certificate_expiration_check"></a> [check\_acm\_certificate\_expiration\_check](#input\_check\_acm\_certificate\_expiration\_check) | Enable acm-certificate-expiration-check rule | `bool` | `true` | no |
 | <a name="input_check_approved_amis_by_tag"></a> [check\_approved\_amis\_by\_tag](#input\_check\_approved\_amis\_by\_tag) | Enable approved-amis-by-tag rule | `bool` | `false` | no |
@@ -315,7 +316,6 @@ No modules.
 | <a name="input_password_reuse_prevention"></a> [password\_reuse\_prevention](#input\_password\_reuse\_prevention) | Number of passwords before allowing reuse. | `number` | `24` | no |
 | <a name="input_required_tags"></a> [required\_tags](#input\_required\_tags) | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | <a name="input_required_tags_resource_types"></a> [required\_tags\_resource\_types](#input\_required\_tags\_resource\_types) | Resource types to check for tags. | `list(string)` | `[]` | no |
-| <a name="input_retention_days"></a> [retention\_days](#input\_retention\_days) | Required retention period in days. | `number` | `35` | no |
 | <a name="input_s3_bucket_public_access_prohibited_exclusion"></a> [s3\_bucket\_public\_access\_prohibited\_exclusion](#input\_s3\_bucket\_public\_access\_prohibited\_exclusion) | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"bucket_names,csv"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 

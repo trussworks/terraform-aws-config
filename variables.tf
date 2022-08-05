@@ -339,7 +339,7 @@ variable "backup_frequency" {
   default     = 1
 }
 
-variable "retention_days" {
+variable "backup_retention_days" {
   description = "Required retention period in days."
   type        = number
   default     = 35

@@ -38,7 +38,7 @@ locals {
   aws_config_backup_plan_minimums = templatefile("${path.module}/config-policies/backup-plan-minimums.tpl",
     {
       backup_frequency              = var.backup_frequency
-      retention_days                = var.retention_days
+      backup_retention_days         = var.backup_retention_days
       backup_frequency_unit_of_time = var.backup_frequency_unit_of_time
     }
   )
