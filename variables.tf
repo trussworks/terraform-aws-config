@@ -372,11 +372,11 @@ variable "check_dynamodb_table_encryption_enabled" {
 variable "dynamodb_arm_encryption_list" {
   description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
   type        = string
-  default     = "ARN,CSV"
+  default     = ""
 }
 
 variable "check_ecr_private_image_scanning_enabled" {
-  description = "Enable ecr-private-image-scanning-enabled rule"
+  description = "Enable ecr-prsivate-image-scanning-enabled rule"
   type        = bool
   default     = true
 }
@@ -414,7 +414,7 @@ variable "check_ecs_no_environment_secrets" {
 variable "ecs_no_environment_secrets" {
   description = "Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed."
   type        = string
-  default     = "keys,csv"
+  default     = ""
 }
 
 variable "enable_efs_encrypted_check" {
@@ -426,7 +426,7 @@ variable "enable_efs_encrypted_check" {
 variable "kms_key_id" {
   description = "Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system."
   type        = string
-  default     = "keys,csv"
+  default     = ""
 }
 
 variable "check_elb_deletion_protection_enabled" {
@@ -480,7 +480,7 @@ variable "check_internet_gateway_authorized_vpc_only" {
 variable "authorized_vpc_ids" {
   description = "Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT."
   type        = string
-  default     = "keys,csv"
+  default     = ""
 }
 
 variable "check_rds_snapshot_encrypted" {
@@ -510,7 +510,7 @@ variable "check_s3_bucket_level_public_access_prohibited" {
 variable "s3_bucket_public_access_prohibited_exclusion" {
   description = "Comma-separated list of known allowed public Amazon S3 bucket names."
   type        = string
-  default     = "bucket_names,csv"
+  default     = ""
 }
 
 variable "check_s3_bucket_acl_prohibited" {
