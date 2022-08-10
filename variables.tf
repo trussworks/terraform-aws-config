@@ -366,17 +366,23 @@ variable "expected_delivery_window_age" {
 variable "check_dynamodb_table_encryption_enabled" {
   description = "Enable checkdynamodb-table-encryption-enabled rule"
   type        = bool
+  default     = true
+}
+
+variable "check_dynamodb_table_encrypted_kms" {
+  description = "Enable dynamodb-table-encrypted-kms rule"
+  type        = bool
   default     = false
 }
 
-variable "dynamodb_arm_encryption_list" {
+variable "dynamodb_arn_encryption_list" {
   description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
   type        = string
   default     = "example,CSV"
 }
 
 variable "check_ecr_private_image_scanning_enabled" {
-  description = "Enable ecr-prsivate-image-scanning-enabled rule"
+  description = "Enable ecr-private-image-scanning-enabled rule"
   type        = bool
   default     = true
 }
@@ -408,7 +414,7 @@ variable "check_ecs_containers_readonly_access" {
 variable "check_ecs_no_environment_secrets" {
   description = "Enable ecs-no-environment-secrets rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "ecs_no_environment_secrets" {
@@ -420,7 +426,7 @@ variable "ecs_no_environment_secrets" {
 variable "enable_efs_encrypted_check" {
   description = "Enable efs-encrypted-check rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "kms_key_id" {

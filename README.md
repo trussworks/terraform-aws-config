@@ -31,7 +31,8 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### DynamoDB
 
-* dynamodb-table-encryption-enabled: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
+* dynamodb-table-encrypted-kms: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
+* dynamodb-table-encryption-enabled: Checks if the Amazon DynamoDB tables are encrypted and checks their status. The rule is COMPLIANT if the status is enabled or enabling. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-table-encryption-enabled.html)
 
 ### EC2
 
@@ -167,6 +168,7 @@ No modules.
 | [aws_config_config_rule.cmk_backing_key_rotation_enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cw-loggroup-retention-period-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.db-instance-backup-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.dynamodb-table-encrypted-kms](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.dynamodb-table-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -248,17 +250,18 @@ No modules.
 | <a name="input_check_cmk_backing_key_rotated"></a> [check\_cmk\_backing\_key\_rotated](#input\_check\_cmk\_backing\_key\_rotated) | Enable cmk\_backing\_key\_rotation\_enabled rule | `bool` | `true` | no |
 | <a name="input_check_cw_loggroup_retention_period"></a> [check\_cw\_loggroup\_retention\_period](#input\_check\_cw\_loggroup\_retention\_period) | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
 | <a name="input_check_db_instance_backup_enabled"></a> [check\_db\_instance\_backup\_enabled](#input\_check\_db\_instance\_backup\_enabled) | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
-| <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `false` | no |
+| <a name="input_check_dynamodb_table_encrypted_kms"></a> [check\_dynamodb\_table\_encrypted\_kms](#input\_check\_dynamodb\_table\_encrypted\_kms) | Enable dynamodb-table-encrypted-kms rule | `bool` | `false` | no |
+| <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
 | <a name="input_check_ec2_volume_inuse_check"></a> [check\_ec2\_volume\_inuse\_check](#input\_check\_ec2\_volume\_inuse\_check) | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
-| <a name="input_check_ecr_private_image_scanning_enabled"></a> [check\_ecr\_private\_image\_scanning\_enabled](#input\_check\_ecr\_private\_image\_scanning\_enabled) | Enable ecr-prsivate-image-scanning-enabled rule | `bool` | `true` | no |
+| <a name="input_check_ecr_private_image_scanning_enabled"></a> [check\_ecr\_private\_image\_scanning\_enabled](#input\_check\_ecr\_private\_image\_scanning\_enabled) | Enable ecr-private-image-scanning-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ecr_private_lifecycle_policy_configured"></a> [check\_ecr\_private\_lifecycle\_policy\_configured](#input\_check\_ecr\_private\_lifecycle\_policy\_configured) | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
 | <a name="input_check_ecs_awsvpc_networking_enabled"></a> [check\_ecs\_awsvpc\_networking\_enabled](#input\_check\_ecs\_awsvpc\_networking\_enabled) | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
 | <a name="input_check_ecs_containers_nonprivileged"></a> [check\_ecs\_containers\_nonprivileged](#input\_check\_ecs\_containers\_nonprivileged) | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
 | <a name="input_check_ecs_containers_readonly_access"></a> [check\_ecs\_containers\_readonly\_access](#input\_check\_ecs\_containers\_readonly\_access) | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
-| <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `true` | no |
+| <a name="input_check_ecs_no_environment_secrets"></a> [check\_ecs\_no\_environment\_secrets](#input\_check\_ecs\_no\_environment\_secrets) | Enable ecs-no-environment-secrets rule | `bool` | `false` | no |
 | <a name="input_check_eip_attached"></a> [check\_eip\_attached](#input\_check\_eip\_attached) | Enable eip-attached rule | `bool` | `false` | no |
 | <a name="input_check_elb_deletion_protection_enabled"></a> [check\_elb\_deletion\_protection\_enabled](#input\_check\_elb\_deletion\_protection\_enabled) | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
 | <a name="input_check_elb_logging_enabled"></a> [check\_elb\_logging\_enabled](#input\_check\_elb\_logging\_enabled) | Enable elb-logging-enabled rule | `bool` | `false` | no |
@@ -298,11 +301,11 @@ No modules.
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
-| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"example,CSV"` | no |
+| <a name="input_dynamodb_arn_encryption_list"></a> [dynamodb\_arn\_encryption\_list](#input\_dynamodb\_arn\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"example,CSV"` | no |
 | <a name="input_ecs_no_environment_secrets"></a> [ecs\_no\_environment\_secrets](#input\_ecs\_no\_environment\_secrets) | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `"example,CSV"` | no |
 | <a name="input_elb_logging_s3_buckets"></a> [elb\_logging\_s3\_buckets](#input\_elb\_logging\_s3\_buckets) | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `"example,CSV"` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
-| <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `true` | no |
+| <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `false` | no |
 | <a name="input_exclude_permission_boundary"></a> [exclude\_permission\_boundary](#input\_exclude\_permission\_boundary) | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `false` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |

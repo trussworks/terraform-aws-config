@@ -29,6 +29,12 @@ locals {
     }
   )
 
+  aws_config_dynamodb_arn_encryption_list = templatefile("${path.module}/config-policies/dynamodb_arn_encryption_list.tpl",
+    {
+      dynamodb_arn_encryption_list = var.dynamodb_arn_encryption_list
+    }
+  )
+
   aws_config_access_key_max_age = templatefile("${path.module}/config-policies/access-keys-rotated.tpl",
     {
       access_key_max_age = var.access_key_max_age
@@ -632,10 +638,27 @@ resource "aws_config_config_rule" "cloud-trail-cloud-watch-logs-enabled" {
 }
 
 resource "aws_config_config_rule" "dynamodb-table-encryption-enabled" {
-  count            = var.check_dynamodb_table_encryption_enabled ? 1 : 0
-  name             = "dynamodb-table-encryption-enabled"
+  count       = var.check_dynamodb_table_encryption_enabled ? 1 : 0
+  name        = "dynamodb-table-encryption-enabled"
+  description = "Checks if the Amazon DynamoDB tables are encrypted and checks their status. The rule is COMPLIANT if the status is enabled or enabling."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "DYNAMODB_TABLE_ENCRYPTION_ENABLED"
+  }
+
+  maximum_execution_frequency = var.config_max_execution_frequency
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "dynamodb-table-encrypted-kms" {
+  count            = var.check_dynamodb_table_encrypted_kms ? 1 : 0
+  name             = "dynamodb-table-encrypted-kms"
   description      = "Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS). NON_COMPLIANT if DynamoDB table is not encrypted with AWS KMS. Also NON_COMPLIANT if the encrypted AWS KMS key is not present in kmsKeyArns input parameter."
-  input_parameters = var.dynamodb_arm_encryption_list
+  input_parameters = local.aws_config_dynamodb_arn_encryption_list
 
   source {
     owner             = "AWS"
