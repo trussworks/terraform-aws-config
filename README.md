@@ -6,112 +6,111 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### ACM
 
-* acm-certificate-expiration-check: Ensure ACM Certificates in your account are marked for expiration within the specified number of days.
+- acm-certificate-expiration-check: Ensure ACM Certificates in your account are marked for expiration within the specified number of days.
 
 ### AMI
 
-* approved-amis-by-tag: Checks whether running instances are using specified AMIs.
+- approved-amis-by-tag: Checks whether running instances are using specified AMIs.
 
 ### Backup Plan
 
-* backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/backup-plan-min-frequency-and-min-retention-check.html)
+- backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/backup-plan-min-frequency-and-min-retention-check.html)
 
 ### CloudTrail
 
-* cloudtrail-enabled: Ensure CloudTrail is enabled.
-* cloud-trail-encryption-enabled: Ensure CloudTrail is configured to use server side encryption (SSE) with AWS KMS or CMK encryption.
-* cloud-trail-log-file-validation-enabled: Checks whether AWS CloudTrail creates a signed digest file with logs.
-* multi-region-cloud-trail-enabled: Ensure that there is at least one multi-region AWS CloudTrail enabled.
-* cloud-trail-cloud-watch-logs-enabled: Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs.
+- cloudtrail-enabled: Ensure CloudTrail is enabled.
+- cloud-trail-encryption-enabled: Ensure CloudTrail is configured to use server side encryption (SSE) with AWS KMS or CMK encryption.
+- cloud-trail-log-file-validation-enabled: Checks whether AWS CloudTrail creates a signed digest file with logs.
+- multi-region-cloud-trail-enabled: Ensure that there is at least one multi-region AWS CloudTrail enabled.
+- cloud-trail-cloud-watch-logs-enabled: Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs.
 
 ### CloudWatch Logs
 
-* cloudwatch-log-group-encrypted: Ensure that CloudWatch Logs are encrypted.
-* cw-loggroup-retention-period-check: Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days.
+- cloudwatch-log-group-encrypted: Ensure that CloudWatch Logs are encrypted.
+- cw-loggroup-retention-period-check: Checks whether Amazon CloudWatch LogGroup retention period is set to specific number of days.
 
 ### DynamoDB
 
-* dynamodb-table-encrypted-kms: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
-* dynamodb-table-encryption-enabled: Checks if the Amazon DynamoDB tables are encrypted and checks their status. The rule is COMPLIANT if the status is enabled or enabling. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-table-encryption-enabled.html)
+- dynamodb-table-encryption-enabled: Checks if the Amazon DynamoDB tables are encrypted and checks their status. The rule is COMPLIANT if the status is enabled or enabling. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-table-encryption-enabled.html)
+- dynamodb-table-encrypted-kms: Checks if Amazon DynamoDB table is encrypted with AWS Key Management Service (KMS)
 
 ### EC2
 
-* ec2-encrypted-volumes: Evaluates whether EBS volumes that are in an attached state are encrypted.
-* ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances.
-* ebs-snapshot-public-restorable-check: Checks whether Amazon Elastic Block Store snapshots are not publicly restorable.
+- ec2-encrypted-volumes: Evaluates whether EBS volumes that are in an attached state are encrypted.
+- ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances.
+- ebs-snapshot-public-restorable-check: Checks whether Amazon Elastic Block Store snapshots are not publicly restorable.
 
 ### ECR
 
-* ecr-private-image-scanning-enabled: Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-image-scanning-enabled.html)
-* ecr-private-lifecycle-policy-configured: Checks if a private Amazon Elastic Container Registry (ECR) repository has at least one lifecycle policy configured. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-lifecycle-policy-configured.html)
+- ecr-private-image-scanning-enabled: Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-image-scanning-enabled.html)
+- ecr-private-lifecycle-policy-configured: Checks if a private Amazon Elastic Container Registry (ECR) repository has at least one lifecycle policy configured. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-lifecycle-policy-configured.html)
 
 ### ECS
 
-* ecs-awsvpc-networking-enabled: Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-awsvpc-networking-enabled.html)
-* ecs-containers-nonprivileged: Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-nonprivileged.html)
-* ecs-containers-readonly-access: Checks if Amazon Elastic Container Service (Amazon ECS) Containers only have read-only access to its root filesystems. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-readonly-access.html)
-* ecs-no-environment-secrets: Checks if secrets are passed as container environment variables. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-no-environment-secrets.html)
+- ecs-awsvpc-networking-enabled: Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecs-awsvpc-networking-enabled.html)
+- ecs-containers-nonprivileged: Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-nonprivileged.html)
+- ecs-containers-readonly-access: Checks if Amazon Elastic Container Service (Amazon ECS) Containers only have read-only access to its root filesystems. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-readonly-access.html)
+- ecs-no-environment-secrets: Checks if secrets are passed as container environment variables. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/ecs-no-environment-secrets.html)
 
 ### EFS
 
-* efs-encrypted-check: Checks if Amazon Elastic File System is configured to encrypt file data using AWS Key Management Service.
+- efs-encrypted-check: Checks if Amazon Elastic File System is configured to encrypt file data using AWS Key Management Service.
 
 ### ELB
 
-* elb-logging-enabled: Checks if the Application Load Balancer and the Classic Load Balancer have logging enabled.
-* elb-deletion-protection-enabled: Checks if Elastic Load Balancing has deletion protection enabled.
-
+- elb-logging-enabled: Checks if the Application Load Balancer and the Classic Load Balancer have logging enabled.
+- elb-deletion-protection-enabled: Checks if Elastic Load Balancing has deletion protection enabled.
 
 ### VPC
 
-* eip-attached: Checks whether all EIP addresses that are allocated to a VPC are attached to EC2 or in-use ENIs.
-* instances-in-vpc: Ensure all EC2 instances run in a VPC.
-* vpc-default-security-group-closed: Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic.
-* vpc-sg-open-only-to-authorized-ports: Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible.
+- eip-attached: Checks whether all EIP addresses that are allocated to a VPC are attached to EC2 or in-use ENIs.
+- instances-in-vpc: Ensure all EC2 instances run in a VPC.
+- vpc-default-security-group-closed: Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic.
+- vpc-sg-open-only-to-authorized-ports: Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible.
 
 ### GuardDuty
 
-* guardduty-enabled-centralized: Checks whether Amazon GuardDuty is enabled in your AWS account and region.
+- guardduty-enabled-centralized: Checks whether Amazon GuardDuty is enabled in your AWS account and region.
 
 ### IAM
 
-* iam-password-policy: Ensure the account password policy for IAM users meets the specified requirements.
-* iam-user-no-policies-check: Ensure that none of your IAM users have policies attached; IAM users must inherit permissions from IAM groups or roles.
-* iam-group-has-users-check: Checks whether IAM groups have at least one IAM user.
-* root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
-* iam-root-access-key: Ensure root AWS account does not have Access Keys.
-* mfa_enabled_for_iam_console_access: Checks whether AWS Multi-Factor Authentication (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password.
-* iam-policy-no-statements-with-admin-access: Checks the IAM policies that you create for Allow statements that grant permissions to all actions on all resources.
-* iam-policy-no-statements-with-full-access: Checks if AWS Identity and Access Management (IAM) policies grant permissions to all actions on individual AWS resources. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
+- iam-password-policy: Ensure the account password policy for IAM users meets the specified requirements.
+- iam-user-no-policies-check: Ensure that none of your IAM users have policies attached; IAM users must inherit permissions from IAM groups or roles.
+- iam-group-has-users-check: Checks whether IAM groups have at least one IAM user.
+- root-account-mfa-enabled: Ensure root AWS account has MFA enabled.
+- iam-root-access-key: Ensure root AWS account does not have Access Keys.
+- mfa_enabled_for_iam_console_access: Checks whether AWS Multi-Factor Authentication (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password.
+- iam-policy-no-statements-with-admin-access: Checks the IAM policies that you create for Allow statements that grant permissions to all actions on all resources.
+- iam-policy-no-statements-with-full-access: Checks if AWS Identity and Access Management (IAM) policies grant permissions to all actions on individual AWS resources. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
 
 ### Misc Security
 
-* restricted-ssh: Checks whether security groups that are in use disallow unrestricted incoming SSH traffic.
-* access_keys_rotated: Checks if the active access keys are rotated within the number of days specified in maxAccessKeyAge.
-* cmk_backing_key_rotation_enabled: Checks if automatic key rotation is enabled for every AWS Key Management Service customer managed symmetric encryption key.
-* nacl-no-unrestricted-ssh-rdp: Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/nacl-no-unrestricted-ssh-rdp.html)
-* internet-gateway-authorized-vpc-only: Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs).
+- restricted-ssh: Checks whether security groups that are in use disallow unrestricted incoming SSH traffic.
+- access_keys_rotated: Checks if the active access keys are rotated within the number of days specified in maxAccessKeyAge.
+- cmk_backing_key_rotation_enabled: Checks if automatic key rotation is enabled for every AWS Key Management Service customer managed symmetric encryption key.
+- nacl-no-unrestricted-ssh-rdp: Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/nacl-no-unrestricted-ssh-rdp.html)
+- internet-gateway-authorized-vpc-only: Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs).
 
 ### Tagging
 
-* required-tags: Checks if resources are deployed with configured tags.
+- required-tags: Checks if resources are deployed with configured tags.
 
 ### RDS
 
-* rds-instance-public-access-check: Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible.
-* rds-snapshots-public-prohibited: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public.
-* rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
-* rds-snapshot-encrypted: Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted.
-* rds-cluster-deletion-protection-enabled: Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
-* db-instance-backup-enabled: Checks if RDS DB instances have backups enabled.
+- rds-instance-public-access-check: Checks whether the Amazon Relational Database Service (RDS) instances are not publicly accessible.
+- rds-snapshots-public-prohibited: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public.
+- rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
+- rds-snapshot-encrypted: Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted.
+- rds-cluster-deletion-protection-enabled: Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
+- db-instance-backup-enabled: Checks if RDS DB instances have backups enabled.
 
 ### S3
 
-* s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
-* s3-bucket-ssl-requests-only: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
-* s3-bucket-level-public-access-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
-* s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
-* s3-bucket-server-side-encryption-enabled: Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS.
+- s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
+- s3-bucket-ssl-requests-only: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
+- s3-bucket-level-public-access-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
+- s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
+- s3-bucket-server-side-encryption-enabled: Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS.
 
 ## Terraform Versions
 
@@ -123,7 +122,7 @@ Terraform 0.12. Pin module version to ~> 3.0. Submit pull-requests to terraform0
 
 **Note: This module sets up AWS IAM Roles and Policies, which are globally namespaced. If you plan to have multiple instances of AWS Config, make sure they have unique values for `config_name`.**
 
-**Note: If you use this module in multiple regions, be sure to disable duplicative checks and global resource types.**
+**Note: If you use this module in multiple regions, be sure to disable duplicate checks and global resource types.**
 
 ```hcl
 module "aws_config" {
@@ -335,14 +334,13 @@ No modules.
 
 ### Upgrading from 2.3.0 to 2.4.x
 
-Version 2.4.0 changed how AWS Config IAM polcies would be attached to IAM roles. When applying the upgrade, you will likely see a race condition resulting in the following error
+Version 2.4.0 changed how AWS Config IAM polices would be attached to IAM roles. When applying the upgrade, you will likely see a race condition resulting in the following error
 
 ```text
 Error: Provider produced inconsistent result after apply
 ```
 
 A second `terraform apply` should resolve the issue.
-
 
 ## Developer Setup
 
