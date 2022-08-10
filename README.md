@@ -14,7 +14,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### Backup Plan
 
-* backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. *No* *GOVcloud*
+* backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/backup-plan-min-frequency-and-min-retention-check.html)
 
 ### CloudTrail
 
@@ -41,15 +41,15 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 ### ECR
 
-* ecr-private-image-scanning-enabled: Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. *No* *GOVcloud*
-* ecr-private-lifecycle-policy-configured: Checks if a private Amazon Elastic Container Registry (ECR) repository has at least one lifecycle policy configured. *No* *GOVcloud*
+* ecr-private-image-scanning-enabled: Checks if a private Amazon Elastic Container Registry (ECR) repository has image scanning enabled. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-image-scanning-enabled.html)
+* ecr-private-lifecycle-policy-configured: Checks if a private Amazon Elastic Container Registry (ECR) repository has at least one lifecycle policy configured. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-lifecycle-policy-configured.html)
 
 ### ECS
 
-* ecs-awsvpc-networking-enabled: Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. *No* *GOVcloud*
-* ecs-containers-nonprivileged: Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. *No* *GOVcloud*
-* ecs-containers-readonly-access: Checks if Amazon Elastic Container Service (Amazon ECS) Containers only have read-only access to its root filesystems. *No* *GOVcloud*
-* ecs-no-environment-secrets: Checks if secrets are passed as container environment variables. *No* *GOVcloud*
+* ecs-awsvpc-networking-enabled: Checks if the networking mode for active ECSTaskDefinitions is set to ‘awsvpc’. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-awsvpc-networking-enabled.html)
+* ecs-containers-nonprivileged: Checks if the privileged parameter in the container definition of ECSTaskDefinitions is set to ‘true’. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-nonprivileged.html)
+* ecs-containers-readonly-access: Checks if Amazon Elastic Container Service (Amazon ECS) Containers only have read-only access to its root filesystems. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-readonly-access.html)
+* ecs-no-environment-secrets: Checks if secrets are passed as container environment variables. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/ecs-no-environment-secrets.html)
 
 ### EFS
 
@@ -81,14 +81,14 @@ Enables AWS Config and adds managed config rules with good defaults.
 * iam-root-access-key: Ensure root AWS account does not have Access Keys.
 * mfa_enabled_for_iam_console_access: Checks whether AWS Multi-Factor Authentication (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password.
 * iam-policy-no-statements-with-admin-access: Checks the IAM policies that you create for Allow statements that grant permissions to all actions on all resources.
-* iam-policy-no-statements-with-full-access: Checks if AWS Identity and Access Management (IAM) policies grant permissions to all actions on individual AWS resources. *No* *GOVcloud*
+* iam-policy-no-statements-with-full-access: Checks if AWS Identity and Access Management (IAM) policies grant permissions to all actions on individual AWS resources. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
 
 ### Misc Security
 
 * restricted-ssh: Checks whether security groups that are in use disallow unrestricted incoming SSH traffic.
 * access_keys_rotated: Checks if the active access keys are rotated within the number of days specified in maxAccessKeyAge.
 * cmk_backing_key_rotation_enabled: Checks if automatic key rotation is enabled for every AWS Key Management Service customer managed symmetric encryption key.
-* nacl-no-unrestricted-ssh-rdp: Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. *No* *GOVcloud*
+* nacl-no-unrestricted-ssh-rdp: Checks if default ports for SSH/RDP ingress traffic for network access control lists (NACLs) is unrestricted. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/nacl-no-unrestricted-ssh-rdp.html)
 * internet-gateway-authorized-vpc-only: Checks that Internet gateways (IGWs) are only attached to an authorized Amazon Virtual Private Cloud (VPCs).
 
 ### Tagging
@@ -101,15 +101,15 @@ Enables AWS Config and adds managed config rules with good defaults.
 * rds-snapshots-public-prohibited: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public.
 * rds-storage-encrypted: Checks whether storage encryption is enabled for your RDS DB instances.
 * rds-snapshot-encrypted: Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted.
-* rds-cluster-deletion-protection-enabled: Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. *No* *GOVcloud*
+* rds-cluster-deletion-protection-enabled: Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
 * db-instance-backup-enabled: Checks if RDS DB instances have backups enabled.
 
 ### S3
 
 * s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
 * s3-bucket-ssl-requests-only: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
-* s3-bucket-level-public-access-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. *No* *GOVcloud*
-* s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). *No* *GOVcloud*
+* s3-bucket-level-public-access-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
+* s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). [*Not supported in all regions*](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
 * s3-bucket-server-side-encryption-enabled: Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS.
 
 ## Terraform Versions
