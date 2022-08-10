@@ -334,7 +334,7 @@ variable "check_backup_plan_min_frequency_and_min_retention" {
 }
 
 variable "backup_frequency" {
-  description = "Numerical value for required backup frequency. Maximum of 24 for hours, 31 for days."
+  description = "Numerical value for required backup frequency. Default value of 'backup_frequency_unit_of_time' is days. Maximum of 24 for hours, 31 for days."
   type        = number
   default     = 1
 }
@@ -372,7 +372,7 @@ variable "check_dynamodb_table_encryption_enabled" {
 variable "dynamodb_arm_encryption_list" {
   description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "check_ecr_private_image_scanning_enabled" {
@@ -414,7 +414,7 @@ variable "check_ecs_no_environment_secrets" {
 variable "ecs_no_environment_secrets" {
   description = "Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "enable_efs_encrypted_check" {
@@ -426,7 +426,7 @@ variable "enable_efs_encrypted_check" {
 variable "kms_key_id" {
   description = "Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "check_elb_deletion_protection_enabled" {
@@ -444,7 +444,7 @@ variable "check_elb_logging_enabled" {
 variable "elb_logging_s3_buckets" {
   description = "Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "check_iam_policy_no_statements_with_admin_access" {
@@ -480,7 +480,7 @@ variable "check_internet_gateway_authorized_vpc_only" {
 variable "authorized_vpc_ids" {
   description = "Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "check_rds_snapshot_encrypted" {
@@ -510,7 +510,7 @@ variable "check_s3_bucket_level_public_access_prohibited" {
 variable "s3_bucket_public_access_prohibited_exclusion" {
   description = "Comma-separated list of known allowed public Amazon S3 bucket names."
   type        = string
-  default     = ""
+  default     = "example,CSV"
 }
 
 variable "check_s3_bucket_acl_prohibited" {

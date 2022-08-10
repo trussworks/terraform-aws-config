@@ -233,8 +233,8 @@ No modules.
 | <a name="input_acm_days_to_expiration"></a> [acm\_days\_to\_expiration](#input\_acm\_days\_to\_expiration) | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
 | <a name="input_aggregate_organization"></a> [aggregate\_organization](#input\_aggregate\_organization) | Aggregate compliance data by organization | `bool` | `false` | no |
 | <a name="input_ami_required_tag_key_value"></a> [ami\_required\_tag\_key\_value](#input\_ami\_required\_tag\_key\_value) | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
-| <a name="input_authorized_vpc_ids"></a> [authorized\_vpc\_ids](#input\_authorized\_vpc\_ids) | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `string` | `""` | no |
-| <a name="input_backup_frequency"></a> [backup\_frequency](#input\_backup\_frequency) | Numerical value for required backup frequency. Maximum of 24 for hours, 31 for days. | `number` | `1` | no |
+| <a name="input_authorized_vpc_ids"></a> [authorized\_vpc\_ids](#input\_authorized\_vpc\_ids) | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `string` | `"example,CSV"` | no |
+| <a name="input_backup_frequency"></a> [backup\_frequency](#input\_backup\_frequency) | Numerical value for required backup frequency. Default value of 'backup\_frequency\_unit\_of\_time' is days. Maximum of 24 for hours, 31 for days. | `number` | `1` | no |
 | <a name="input_backup_frequency_unit_of_time"></a> [backup\_frequency\_unit\_of\_time](#input\_backup\_frequency\_unit\_of\_time) | Unit of time for required backup frequency. Accepted values: 'hours', 'days'. | `string` | `"days"` | no |
 | <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Required retention period in days. | `number` | `35` | no |
 | <a name="input_check_access_keys_rotated"></a> [check\_access\_keys\_rotated](#input\_check\_access\_keys\_rotated) | Enable access-keys-rotated rule | `bool` | `true` | no |
@@ -298,15 +298,15 @@ No modules.
 | <a name="input_config_name"></a> [config\_name](#input\_config\_name) | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
-| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `""` | no |
-| <a name="input_ecs_no_environment_secrets"></a> [ecs\_no\_environment\_secrets](#input\_ecs\_no\_environment\_secrets) | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `""` | no |
-| <a name="input_elb_logging_s3_buckets"></a> [elb\_logging\_s3\_buckets](#input\_elb\_logging\_s3\_buckets) | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `""` | no |
+| <a name="input_dynamodb_arm_encryption_list"></a> [dynamodb\_arm\_encryption\_list](#input\_dynamodb\_arm\_encryption\_list) | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"example,CSV"` | no |
+| <a name="input_ecs_no_environment_secrets"></a> [ecs\_no\_environment\_secrets](#input\_ecs\_no\_environment\_secrets) | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `"example,CSV"` | no |
+| <a name="input_elb_logging_s3_buckets"></a> [elb\_logging\_s3\_buckets](#input\_elb\_logging\_s3\_buckets) | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `"example,CSV"` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
 | <a name="input_enable_efs_encrypted_check"></a> [enable\_efs\_encrypted\_check](#input\_enable\_efs\_encrypted\_check) | Enable efs-encrypted-check rule | `bool` | `true` | no |
 | <a name="input_exclude_permission_boundary"></a> [exclude\_permission\_boundary](#input\_exclude\_permission\_boundary) | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `false` | no |
 | <a name="input_expected_delivery_window_age"></a> [expected\_delivery\_window\_age](#input\_expected\_delivery\_window\_age) | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
-| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `""` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `"example,CSV"` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
 | <a name="input_password_min_length"></a> [password\_min\_length](#input\_password\_min\_length) | Password minimum length. | `number` | `14` | no |
 | <a name="input_password_require_lowercase"></a> [password\_require\_lowercase](#input\_password\_require\_lowercase) | Require at least one lowercase character in password. | `bool` | `true` | no |
@@ -316,7 +316,7 @@ No modules.
 | <a name="input_password_reuse_prevention"></a> [password\_reuse\_prevention](#input\_password\_reuse\_prevention) | Number of passwords before allowing reuse. | `number` | `24` | no |
 | <a name="input_required_tags"></a> [required\_tags](#input\_required\_tags) | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | <a name="input_required_tags_resource_types"></a> [required\_tags\_resource\_types](#input\_required\_tags\_resource\_types) | Resource types to check for tags. | `list(string)` | `[]` | no |
-| <a name="input_s3_bucket_public_access_prohibited_exclusion"></a> [s3\_bucket\_public\_access\_prohibited\_exclusion](#input\_s3\_bucket\_public\_access\_prohibited\_exclusion) | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `""` | no |
+| <a name="input_s3_bucket_public_access_prohibited_exclusion"></a> [s3\_bucket\_public\_access\_prohibited\_exclusion](#input\_s3\_bucket\_public\_access\_prohibited\_exclusion) | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 
 ## Outputs
