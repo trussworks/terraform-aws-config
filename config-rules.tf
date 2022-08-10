@@ -647,8 +647,6 @@ resource "aws_config_config_rule" "dynamodb-table-encryption-enabled" {
     source_identifier = "DYNAMODB_TABLE_ENCRYPTION_ENABLED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
