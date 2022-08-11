@@ -327,30 +327,6 @@ variable "check_cmk_backing_key_rotated" {
   default     = true
 }
 
-variable "check_backup_plan_min_frequency_and_min_retention" {
-  description = "Enable backup_plan_min_frequency_and_min_retention_check rule"
-  type        = bool
-  default     = false
-}
-
-variable "backup_frequency" {
-  description = "Numerical value for required backup frequency. Default value of 'backup_frequency_unit_of_time' is days. Maximum of 24 for hours, 31 for days."
-  type        = number
-  default     = 1
-}
-
-variable "backup_retention_days" {
-  description = "Required retention period in days."
-  type        = number
-  default     = 35
-}
-
-variable "backup_frequency_unit_of_time" {
-  description = "Unit of time for required backup frequency. Accepted values: 'hours', 'days'."
-  type        = string
-  default     = "days"
-}
-
 variable "cloud_trail_cloud_watch_logs_enabled" {
   description = "Enable cloud_trail_cloud_watch_logs_enabled rule"
   type        = bool

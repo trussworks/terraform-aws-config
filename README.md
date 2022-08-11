@@ -12,10 +12,6 @@ Enables AWS Config and adds managed config rules with good defaults.
 
 - approved-amis-by-tag: Checks whether running instances are using specified AMIs.
 
-### Backup Plan
-
-- backup-plan-min-frequency-and-min-retention-check: Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/backup-plan-min-frequency-and-min-retention-check.html)
-
 ### CloudTrail
 
 - cloudtrail-enabled: Ensure CloudTrail is enabled.
@@ -158,7 +154,6 @@ No modules.
 | [aws_config_config_rule.access_keys_rotated](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.acm-certificate-expiration-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.approved-amis-by-tag](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
-| [aws_config_config_rule.backup-plan-min-frequency-and-min-retention-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-cloud-watch-logs-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.cloud-trail-log-file-validation-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -235,13 +230,9 @@ No modules.
 | <a name="input_aggregate_organization"></a> [aggregate\_organization](#input\_aggregate\_organization) | Aggregate compliance data by organization | `bool` | `false` | no |
 | <a name="input_ami_required_tag_key_value"></a> [ami\_required\_tag\_key\_value](#input\_ami\_required\_tag\_key\_value) | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
 | <a name="input_authorized_vpc_ids"></a> [authorized\_vpc\_ids](#input\_authorized\_vpc\_ids) | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `string` | `"example,CSV"` | no |
-| <a name="input_backup_frequency"></a> [backup\_frequency](#input\_backup\_frequency) | Numerical value for required backup frequency. Default value of 'backup\_frequency\_unit\_of\_time' is days. Maximum of 24 for hours, 31 for days. | `number` | `1` | no |
-| <a name="input_backup_frequency_unit_of_time"></a> [backup\_frequency\_unit\_of\_time](#input\_backup\_frequency\_unit\_of\_time) | Unit of time for required backup frequency. Accepted values: 'hours', 'days'. | `string` | `"days"` | no |
-| <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Required retention period in days. | `number` | `35` | no |
 | <a name="input_check_access_keys_rotated"></a> [check\_access\_keys\_rotated](#input\_check\_access\_keys\_rotated) | Enable access-keys-rotated rule | `bool` | `true` | no |
 | <a name="input_check_acm_certificate_expiration_check"></a> [check\_acm\_certificate\_expiration\_check](#input\_check\_acm\_certificate\_expiration\_check) | Enable acm-certificate-expiration-check rule | `bool` | `true` | no |
 | <a name="input_check_approved_amis_by_tag"></a> [check\_approved\_amis\_by\_tag](#input\_check\_approved\_amis\_by\_tag) | Enable approved-amis-by-tag rule | `bool` | `false` | no |
-| <a name="input_check_backup_plan_min_frequency_and_min_retention"></a> [check\_backup\_plan\_min\_frequency\_and\_min\_retention](#input\_check\_backup\_plan\_min\_frequency\_and\_min\_retention) | Enable backup\_plan\_min\_frequency\_and\_min\_retention\_check rule | `bool` | `false` | no |
 | <a name="input_check_cloud_trail_encryption"></a> [check\_cloud\_trail\_encryption](#input\_check\_cloud\_trail\_encryption) | Enable cloud-trail-encryption-enabled rule | `bool` | `false` | no |
 | <a name="input_check_cloud_trail_log_file_validation"></a> [check\_cloud\_trail\_log\_file\_validation](#input\_check\_cloud\_trail\_log\_file\_validation) | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
 | <a name="input_check_cloudtrail_enabled"></a> [check\_cloudtrail\_enabled](#input\_check\_cloudtrail\_enabled) | Enable cloudtrail-enabled rule | `bool` | `true` | no |

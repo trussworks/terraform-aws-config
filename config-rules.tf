@@ -41,14 +41,6 @@ locals {
     }
   )
 
-  aws_config_backup_plan_minimums = templatefile("${path.module}/config-policies/backup-plan-minimums.tpl",
-    {
-      backup_frequency              = var.backup_frequency
-      backup_retention_days         = var.backup_retention_days
-      backup_frequency_unit_of_time = var.backup_frequency_unit_of_time
-    }
-  )
-
   aws_config_logs_delivery_window = templatefile("${path.module}/config-policies/cloudtrail-cloudwatch-logs-enabled.tpl",
     {
       expected_delivery_window_age = var.expected_delivery_window_age
@@ -592,24 +584,6 @@ resource "aws_config_config_rule" "cmk_backing_key_rotation_enabled" {
   source {
     owner             = "AWS"
     source_identifier = "CMK_BACKING_KEY_ROTATION_ENABLED"
-  }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
-
-  tags = var.tags
-
-  depends_on = [aws_config_configuration_recorder.main]
-}
-
-resource "aws_config_config_rule" "backup-plan-min-frequency-and-min-retention-check" {
-  count            = var.check_backup_plan_min_frequency_and_min_retention ? 1 : 0
-  name             = "backup-plan-min-frequency-and-min-retention-check"
-  description      = "Checks if a backup plan has a backup rule that satisfies the required frequency and retention period. The rule is NON_COMPLIANT if recovery points are not created at least as often as the specified frequency or expire before the specified period."
-  input_parameters = local.aws_config_backup_plan_minimums
-
-  source {
-    owner             = "AWS"
-    source_identifier = "BACKUP_PLAN_MIN_FREQUENCY_AND_MIN_RETENTION_CHECK"
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency
