@@ -64,4 +64,4 @@ workflows:
             - org-global
   version: 2.1
 orbs:
-  buildevents: honeycombio/buildevents@0.8.0
+  buildevents: honeycombio/buildevents@0.8.1
