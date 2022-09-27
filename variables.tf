@@ -308,3 +308,9 @@ variable "check_ec2_imdsv2" {
   type        = bool
   default     = false
 }
+
+variable "enable_multi_account_logs" {
+  description = "Enable sending of logs and snapshots from different Config accounts / regions into a single bucket"
+  type        = bool
+  default     = false
+}
