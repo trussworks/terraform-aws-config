@@ -1,8 +1,6 @@
 .PHONY: ensure_pre_commit
-ensure_pre_commit: .git/hooks/pre-commit ## Ensure pre-commit is installed
-.git/hooks/pre-commit: /usr/local/bin/pre-commit
-	pre-commit install
-	pre-commit install-hooks
+ensure_pre_commit:
+	[ -f .git/hooks/pre-commit ] && echo "Hook ready" || pre-commit install || echo "Please install pre-commit (https://pre-commit.com/)"
 
 .PHONY: pre_commit_tests
 pre_commit_tests: ensure_pre_commit ## Run pre-commit tests

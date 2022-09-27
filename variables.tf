@@ -309,6 +309,12 @@ variable "check_ec2_imdsv2" {
   default     = false
 }
 
+variable "resource_types" {
+  description = "A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types."
+  type        = list(string)
+  default     = []
+}
+
 variable "enable_multi_account_logs" {
   description = "Enable sending of logs and snapshots from different Config accounts / regions into a single bucket"
   type        = bool
