@@ -512,3 +512,9 @@ variable "check_vpc_sg_open_only_to_authorized_ports" {
   type        = bool
   default     = true
 }
+
+variable "resource_types" {
+  description = "A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types."
+  type        = list(string)
+  default     = []
+}
