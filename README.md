@@ -195,6 +195,7 @@ No modules.
 | <a name="input_config_sns_topic_arn"></a> [config\_sns\_topic\_arn](#input\_config\_sns\_topic\_arn) | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | <a name="input_cw_loggroup_retention_period"></a> [cw\_loggroup\_retention\_period](#input\_cw\_loggroup\_retention\_period) | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
 | <a name="input_enable_config_recorder"></a> [enable\_config\_recorder](#input\_enable\_config\_recorder) | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
+| <a name="input_enable_multi_account_logs"></a> [enable\_multi\_account\_logs](#input\_enable\_multi\_account\_logs) | Enable sending of logs and snapshots from different Config accounts / regions into a single bucket | `bool` | `false` | no |
 | <a name="input_include_global_resource_types"></a> [include\_global\_resource\_types](#input\_include\_global\_resource\_types) | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
 | <a name="input_password_max_age"></a> [password\_max\_age](#input\_password\_max\_age) | Number of days before password expiration. | `number` | `90` | no |
 | <a name="input_password_min_length"></a> [password\_min\_length](#input\_password\_min\_length) | Password minimum length. | `number` | `14` | no |
@@ -205,8 +206,8 @@ No modules.
 | <a name="input_password_reuse_prevention"></a> [password\_reuse\_prevention](#input\_password\_reuse\_prevention) | Number of passwords before allowing reuse. | `number` | `24` | no |
 | <a name="input_required_tags"></a> [required\_tags](#input\_required\_tags) | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
 | <a name="input_required_tags_resource_types"></a> [required\_tags\_resource\_types](#input\_required\_tags\_resource\_types) | Resource types to check for tags. | `list(string)` | `[]` | no |
+| <a name="input_resource_types"></a> [resource\_types](#input\_resource\_types) | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
-| <a name="input\_resource\_types"></a> [resource_types](#input\_resource\_types) | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types." | `map(string)` | `{}` | no |
 
 ## Outputs
 

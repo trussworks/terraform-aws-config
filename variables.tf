@@ -314,3 +314,9 @@ variable "resource_types" {
   type        = list(string)
   default     = []
 }
+
+variable "enable_multi_account_logs" {
+  description = "Enable sending of logs and snapshots from different Config accounts / regions into a single bucket"
+  type        = bool
+  default     = false
+}
