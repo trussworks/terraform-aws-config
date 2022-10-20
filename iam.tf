@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "aws_config_policy" {
         var.config_logs_bucket,
         var.config_logs_prefix == "" ? "" : "/",
         var.config_logs_prefix,
-        data.aws_caller_identity.current.account_id
+        var.enable_multi_account_logs ? "*" : data.aws_caller_identity.current.account_id
       )
     ]
     condition {
