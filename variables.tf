@@ -270,13 +270,13 @@ variable "check_s3_bucket_ssl_requests_only" {
 variable "check_mfa_enabled_for_iam_console_access" {
   description = "Enable mfa-enabled-for-iam-console-access rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "check_restricted_ssh" {
   description = "Enable restricted-ssh rule"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "tags" {
@@ -307,6 +307,210 @@ variable "check_ec2_imdsv2" {
   description = "Enable IMDSv2 rule"
   type        = bool
   default     = false
+}
+
+variable "check_access_keys_rotated" {
+  description = "Enable access-keys-rotated rule"
+  type        = bool
+  default     = true
+}
+
+variable "access_key_max_age" {
+  description = "Maximum number of days without rotation."
+  type        = number
+  default     = 90
+}
+
+variable "check_cmk_backing_key_rotated" {
+  description = "Enable cmk_backing_key_rotation_enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "cloud_trail_cloud_watch_logs_enabled" {
+  description = "Enable cloud_trail_cloud_watch_logs_enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "expected_delivery_window_age" {
+  description = "Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance."
+  type        = number
+  default     = 12
+}
+
+variable "check_dynamodb_table_encryption_enabled" {
+  description = "Enable checkdynamodb-table-encryption-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_dynamodb_table_encrypted_kms" {
+  description = "Enable dynamodb-table-encrypted-kms rule"
+  type        = bool
+  default     = false
+}
+
+variable "dynamodb_arn_encryption_list" {
+  description = "Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "check_ecr_private_image_scanning_enabled" {
+  description = "Enable ecr-private-image-scanning-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecr_private_lifecycle_policy_configured" {
+  description = "Enable ecr-private-lifecycle-policy-configured rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_awsvpc_networking_enabled" {
+  description = "Enable ecs-awsvpc-networking-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_containers_nonprivileged" {
+  description = "Enable ecs-containers-nonprivileged rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_containers_readonly_access" {
+  description = "Enable ecs-containers-readonly-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_ecs_no_environment_secrets" {
+  description = "Enable ecs-no-environment-secrets rule"
+  type        = bool
+  default     = false
+}
+
+variable "ecs_no_environment_secrets" {
+  description = "Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "enable_efs_encrypted_check" {
+  description = "Enable efs-encrypted-check rule"
+  type        = bool
+  default     = false
+}
+
+variable "kms_key_id" {
+  description = "Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "check_elb_deletion_protection_enabled" {
+  description = "Enable elb-deletion-protection-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_elb_logging_enabled" {
+  description = "Enable elb-logging-enabled rule"
+  type        = bool
+  default     = false
+}
+
+variable "elb_logging_s3_buckets" {
+  description = "Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "check_iam_policy_no_statements_with_admin_access" {
+  description = "Enable iam-policy-no-statements-with-admin-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_iam_policy_no_statements_with_full_access" {
+  description = "Enable iam-policy-no-statements-with-full-access rule"
+  type        = bool
+  default     = true
+}
+
+variable "exclude_permission_boundary" {
+  description = "Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.'"
+  type        = bool
+  default     = false
+}
+
+variable "check_nacl_no_unrestricted_ssh_rdp" {
+  description = "Enable nacl-no-unrestricted-ssh-rdp rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_internet_gateway_authorized_vpc_only" {
+  description = "Enable internet-gateway-authorized-vpc-only rule"
+  type        = bool
+  default     = false
+}
+
+variable "authorized_vpc_ids" {
+  description = "Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "check_rds_snapshot_encrypted" {
+  description = "Enable rds-snapshot-encrypted rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_rds_cluster_deletion_protection_enabled" {
+  description = "Enable rds-cluster-deletion-protection-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_db_instance_backup_enabled" {
+  description = "Enable db-instance-backup-enabled rule"
+  type        = bool
+  default     = false
+}
+
+variable "check_s3_bucket_level_public_access_prohibited" {
+  description = "Enable s3-bucket-level-public-access-prohibited rule"
+  type        = bool
+  default     = false
+}
+
+variable "s3_bucket_public_access_prohibited_exclusion" {
+  description = "Comma-separated list of known allowed public Amazon S3 bucket names."
+  type        = string
+  default     = "example,CSV"
+}
+
+variable "check_s3_bucket_acl_prohibited" {
+  description = "Enable s3-bucket-acl-prohibited rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_s3_bucket_server_side_encryption_enabled" {
+  description = "Enable s3-bucket-server-side-encryption-enabled rule"
+  type        = bool
+  default     = true
+}
+
+variable "check_vpc_sg_open_only_to_authorized_ports" {
+  description = "Enable vpc-sg-open-only-to-authorized-ports rule"
+  type        = bool
+  default     = true
 }
 
 variable "resource_types" {
