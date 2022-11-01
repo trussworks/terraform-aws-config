@@ -779,8 +779,6 @@ resource "aws_config_config_rule" "elb-logging-enabled" {
     source_identifier = "ELB_LOGGING_ENABLED"
   }
 
-  maximum_execution_frequency = var.config_max_execution_frequency
-
   tags = var.tags
 
   depends_on = [aws_config_configuration_recorder.main]
@@ -903,8 +901,6 @@ resource "aws_config_config_rule" "s3-bucket-level-public-access-prohibited" {
     owner             = "AWS"
     source_identifier = "S3_BUCKET_LEVEL_PUBLIC_ACCESS_PROHIBITED"
   }
-
-  maximum_execution_frequency = var.config_max_execution_frequency
 
   tags = var.tags
 
