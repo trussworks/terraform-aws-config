@@ -35,6 +35,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 - ec2-encrypted-volumes: Evaluates whether EBS volumes that are in an attached state are encrypted.
 - ec2-volume-inuse-check: Checks whether EBS volumes are attached to EC2 instances.
 - ebs-snapshot-public-restorable-check: Checks whether Amazon Elastic Block Store snapshots are not publicly restorable.
+- ebs-optimized-instance: Checks if EBS optimization is enabled for your EC2 instances that can be EBS-optimized.
 
 ### ECR
 
@@ -63,6 +64,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 - instances-in-vpc: Ensure all EC2 instances run in a VPC.
 - vpc-default-security-group-closed: Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic.
 - vpc-sg-open-only-to-authorized-ports: Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible.
+- restricted-common-ports: Checks if the security groups in use do not allow unrestricted incoming TCP traffic to the specified ports.
 
 ### GuardDuty
 
@@ -103,6 +105,7 @@ Enables AWS Config and adds managed config rules with good defaults.
 ### S3
 
 - s3-bucket-public-write-prohibited: Checks that your S3 buckets do not allow public write access.
+- s3-bucket-public-read-prohibited: Checks if your Amazon S3 buckets do not allow public read access.
 - s3-bucket-ssl-requests-only: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
 - s3-bucket-level-public-access-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) buckets are publicly accessible. [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
 - s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
@@ -164,6 +167,7 @@ No modules.
 | [aws_config_config_rule.db-instance-backup-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.dynamodb-table-encrypted-kms](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.dynamodb-table-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.ebs-optimized-instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ebs_snapshot_public_restorable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-encrypted-volumes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.ec2-imdsv2-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -196,10 +200,12 @@ No modules.
 | [aws_config_config_rule.rds-snapshots-public-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.rds-storage-encrypted](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.required-tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.restricted-common-ports](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.restricted_ssh](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.root-account-mfa-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-acl-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-level-public-access-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
+| [aws_config_config_rule.s3-bucket-public-read-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-public-write-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-server-side-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3_bucket_ssl_requests_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -242,6 +248,7 @@ No modules.
 | <a name="input_check_db_instance_backup_enabled"></a> [check\_db\_instance\_backup\_enabled](#input\_check\_db\_instance\_backup\_enabled) | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
 | <a name="input_check_dynamodb_table_encrypted_kms"></a> [check\_dynamodb\_table\_encrypted\_kms](#input\_check\_dynamodb\_table\_encrypted\_kms) | Enable dynamodb-table-encrypted-kms rule | `bool` | `false` | no |
 | <a name="input_check_dynamodb_table_encryption_enabled"></a> [check\_dynamodb\_table\_encryption\_enabled](#input\_check\_dynamodb\_table\_encryption\_enabled) | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `true` | no |
+| <a name="input_check_ebs_optimized_instance"></a> [check\_ebs\_optimized\_instance](#input\_check\_ebs\_optimized\_instance) | Enable ebs-optimized-instance-check rule | `bool` | `false` | no |
 | <a name="input_check_ebs_snapshot_public_restorable"></a> [check\_ebs\_snapshot\_public\_restorable](#input\_check\_ebs\_snapshot\_public\_restorable) | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
 | <a name="input_check_ec2_encrypted_volumes"></a> [check\_ec2\_encrypted\_volumes](#input\_check\_ec2\_encrypted\_volumes) | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
 | <a name="input_check_ec2_imdsv2"></a> [check\_ec2\_imdsv2](#input\_check\_ec2\_imdsv2) | Enable IMDSv2 rule | `bool` | `false` | no |
@@ -273,10 +280,12 @@ No modules.
 | <a name="input_check_rds_snapshots_public_prohibited"></a> [check\_rds\_snapshots\_public\_prohibited](#input\_check\_rds\_snapshots\_public\_prohibited) | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_rds_storage_encrypted"></a> [check\_rds\_storage\_encrypted](#input\_check\_rds\_storage\_encrypted) | Enable rds-storage-encrypted rule | `bool` | `true` | no |
 | <a name="input_check_required_tags"></a> [check\_required\_tags](#input\_check\_required\_tags) | Enable required-tags rule | `bool` | `false` | no |
+| <a name="input_check_restricted_common_ports"></a> [check\_restricted\_common\_ports](#input\_check\_restricted\_common\_ports) | Enable restricted-common-ports-check | `bool` | `false` | no |
 | <a name="input_check_restricted_ssh"></a> [check\_restricted\_ssh](#input\_check\_restricted\_ssh) | Enable restricted-ssh rule | `bool` | `true` | no |
 | <a name="input_check_root_account_mfa_enabled"></a> [check\_root\_account\_mfa\_enabled](#input\_check\_root\_account\_mfa\_enabled) | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
 | <a name="input_check_s3_bucket_acl_prohibited"></a> [check\_s3\_bucket\_acl\_prohibited](#input\_check\_s3\_bucket\_acl\_prohibited) | Enable s3-bucket-acl-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_level_public_access_prohibited"></a> [check\_s3\_bucket\_level\_public\_access\_prohibited](#input\_check\_s3\_bucket\_level\_public\_access\_prohibited) | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
+| <a name="input_check_s3_bucket_public_read_prohibited"></a> [check\_s3\_bucket\_public\_read\_prohibited](#input\_check\_s3\_bucket\_public\_read\_prohibited) | Enable s3-bucket-public-read-prohibited rule | `bool` | `false` | no |
 | <a name="input_check_s3_bucket_public_write_prohibited"></a> [check\_s3\_bucket\_public\_write\_prohibited](#input\_check\_s3\_bucket\_public\_write\_prohibited) | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_server_side_encryption_enabled"></a> [check\_s3\_bucket\_server\_side\_encryption\_enabled](#input\_check\_s3\_bucket\_server\_side\_encryption\_enabled) | Enable s3-bucket-server-side-encryption-enabled rule | `bool` | `true` | no |
 | <a name="input_check_s3_bucket_ssl_requests_only"></a> [check\_s3\_bucket\_ssl\_requests\_only](#input\_check\_s3\_bucket\_ssl\_requests\_only) | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |

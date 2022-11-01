@@ -955,3 +955,48 @@ resource "aws_config_config_rule" "vpc-sg-open-only-to-authorized-ports" {
 
   depends_on = [aws_config_configuration_recorder.main]
 }
+
+resource "aws_config_config_rule" "ebs-optimized-instance" {
+  count       = var.check_ebs_optimized_instance ? 1 : 0
+  name        = "ebs-optimized-instance"
+  description = "Checks if EBS optimization is enabled for your EC2 instances that can be EBS-optimized."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "EBS_OPTIMIZED_INSTANCE"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "s3-bucket-public-read-prohibited" {
+  count       = var.check_s3_bucket_public_read_prohibited ? 1 : 0
+  name        = "s3-bucket-public-read-prohibited"
+  description = "Checks that your S3 buckets do not allow public read access."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "S3_BUCKET_PUBLIC_READ_PROHIBITED"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
+
+resource "aws_config_config_rule" "restricted-common-ports" {
+  count       = var.check_restricted_common_ports ? 1 : 0
+  name        = "restricted-common-ports"
+  description = "Checks if the security groups in use do not allow unrestricted incoming TCP traffic to the specified ports."
+
+  source {
+    owner             = "AWS"
+    source_identifier = "RESTRICTED_INCOMING_TRAFFIC"
+  }
+
+  tags = var.tags
+
+  depends_on = [aws_config_configuration_recorder.main]
+}
