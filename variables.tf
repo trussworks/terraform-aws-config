@@ -524,3 +524,21 @@ variable "enable_multi_account_logs" {
   type        = bool
   default     = false
 }
+
+variable "check_restricted_common_ports" {
+  description = "Enable restricted-common-ports-check"
+  type        = bool
+  default     = false
+}
+
+variable "check_s3_bucket_public_read_prohibited" {
+  description = "Enable s3-bucket-public-read-prohibited rule"
+  type        = bool
+  default     = false
+}
+
+variable "check_ebs_optimized_instance" {
+  description = "Enable ebs-optimized-instance-check rule"
+  type        = bool
+  default     = false
+}
