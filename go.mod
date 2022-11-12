@@ -3,7 +3,7 @@ module github.com/trussworks/terraform-aws-config
 go 1.19
 
 require (
-	github.com/gruntwork-io/terratest v0.40.24
+	github.com/gruntwork-io/terratest v0.41.0
 	github.com/stretchr/testify v1.8.1
 )
 
