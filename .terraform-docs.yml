@@ -1,0 +1,4 @@
+settings:
+  html: false
+  anchor: false
+formatter: "markdown table"

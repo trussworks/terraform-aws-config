@@ -32,9 +32,7 @@
       "groupName": "dependencies",
       "managers": [
         "terraform",
-        "gomod",
         "pre-commit",
-        "circleci",
         "dockerfile",
         "github-actions"
       ],
@@ -43,9 +41,6 @@
         "patch"
       ]
     }
-  ],
-  "postUpdateOptions": [
-    "gomodTidy"
   ],
   "prConcurrentLimit": 2,
   "schedule": [
