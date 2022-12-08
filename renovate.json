@@ -42,7 +42,6 @@
       ]
     }
   ],
-  "prConcurrentLimit": 2,
   "schedule": [
     "every weekend"
   ],
