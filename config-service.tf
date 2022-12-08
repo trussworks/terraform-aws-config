@@ -16,6 +16,7 @@ resource "aws_config_delivery_channel" "main" {
   name           = var.config_name
   s3_bucket_name = var.config_logs_bucket
   s3_key_prefix  = var.config_logs_prefix
+  s3_kms_key_arn = var.config_logs_bucket_kms_key_arn
   sns_topic_arn  = var.config_sns_topic_arn
 
   snapshot_delivery_properties {

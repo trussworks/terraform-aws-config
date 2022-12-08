@@ -27,6 +27,12 @@ variable "config_logs_prefix" {
   default     = "config"
 }
 
+variable "config_logs_bucket_kms_key_arn" {
+  description = "The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket."
+  type        = string
+  default     = null
+}
+
 variable "config_max_execution_frequency" {
   description = "The maximum frequency with which AWS Config runs evaluations for a rule."
   type        = string
