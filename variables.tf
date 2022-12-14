@@ -16,6 +16,12 @@ variable "aggregate_organization" {
   default     = false
 }
 
+variable "config_role_permissions_boundary" {
+  description = "The ARN of the permissions boundary to apply to IAM roles created for AWS Config"
+  type        = string
+  default     = null
+}
+
 variable "config_logs_bucket" {
   description = "The S3 bucket for AWS Config logs. If you have set enable_config_recorder to false then this can be an empty string."
   type        = string
