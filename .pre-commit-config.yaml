@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v4.4.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -25,7 +25,7 @@ repos:
         exclude: README.m(ark)?d(own)?
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.32.2
+    rev: v0.33.0
     hooks:
       - id: markdownlint
 
@@ -34,10 +34,13 @@ repos:
     hooks:
       - id: shell-lint
 
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.76.0
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.16.0"
     hooks:
-      - id: terraform_docs
-        args:
-          - --args=--config=.terraform-docs.yml
+      - id: terraform-docs-go
+        args: ["markdown", "table", "--output-file", "README.md", "."]
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.77.1
+    hooks:
       - id: terraform_fmt
