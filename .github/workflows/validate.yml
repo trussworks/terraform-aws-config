@@ -11,5 +11,3 @@ on:
 jobs:
   validate-tf:
     uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@main
-    with:
-      go-version: 1.19
