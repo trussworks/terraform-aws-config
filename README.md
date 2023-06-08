@@ -111,12 +111,6 @@ Enables AWS Config and adds managed config rules with good defaults.
 - s3-bucket-acl-prohibited: Checks if Amazon Simple Storage Service (Amazon S3) Buckets allow user permissions through access control lists (ACLs). [_Not supported in all regions_](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
 - s3-bucket-server-side-encryption-enabled: Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS.
 
-## Terraform Versions
-
-Terraform 0.13 and newer. Pin module version to ~> 4.x. Submit pull-requests to master branch.
-
-Terraform 0.12. Pin module version to ~> 3.0. Submit pull-requests to terraform012 branch.
-
 ## Usage
 
 **Note: This module sets up AWS IAM Roles and Policies, which are globally namespaced. If you plan to have multiple instances of AWS Config, make sure they have unique values for `config_name`.**
@@ -137,7 +131,7 @@ module "aws_config" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.7 |
+| terraform | >= 1.0 |
 | aws | >= 2.70 |
 
 ## Providers
