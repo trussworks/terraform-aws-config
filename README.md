@@ -131,7 +131,7 @@ module "aws_config" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.7 |
+| terraform | >= 1.0 |
 | aws | >= 2.70 |
 
 ## Providers
