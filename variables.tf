@@ -522,7 +522,7 @@ variable "check_s3_bucket_server_side_encryption_enabled" {
 variable "check_vpc_sg_open_only_to_authorized_ports" {
   description = "Enable vpc-sg-open-only-to-authorized-ports rule"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "resource_types" {
