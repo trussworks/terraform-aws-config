@@ -554,3 +554,15 @@ variable "check_ebs_optimized_instance" {
   type        = bool
   default     = false
 }
+
+variable "vpc_sg_authorized_TCP_ports" {
+  description = "Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  type        = string
+  default     = "example,443,1020-1025"
+}
+
+variable "vpc_sg_authorized_UDP_ports" {
+  description = "Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  type        = string
+  default     = "example,500,1020-1025"
+}
