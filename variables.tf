@@ -525,6 +525,18 @@ variable "check_vpc_sg_open_only_to_authorized_ports" {
   default     = false
 }
 
+variable "vpc_sg_authorized_TCP_ports" {
+  description = "Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  type        = string
+  default     = "example,443,1020-1025"
+}
+
+variable "vpc_sg_authorized_UDP_ports" {
+  description = "Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  type        = string
+  default     = "example,500,1020-1025"
+}
+
 variable "resource_types" {
   description = "A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types."
   type        = list(string)
@@ -553,16 +565,4 @@ variable "check_ebs_optimized_instance" {
   description = "Enable ebs-optimized-instance-check rule"
   type        = bool
   default     = false
-}
-
-variable "vpc_sg_authorized_TCP_ports" {
-  description = "Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
-  type        = string
-  default     = "example,443,1020-1025"
-}
-
-variable "vpc_sg_authorized_UDP_ports" {
-  description = "Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
-  type        = string
-  default     = "example,500,1020-1025"
 }
