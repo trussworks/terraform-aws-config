@@ -945,7 +945,7 @@ resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
 resource "aws_config_config_rule" "vpc-sg-open-only-to-authorized-ports" {
   count            = var.check_vpc_sg_open_only_to_authorized_ports ? 1 : 0
   name             = "vpc-sg-open-only-to-authorized-ports"
-  description      = "Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible. The rule is NON_COMPLIANT when a security group with inbound 0.0.0.0/0 has a port accessible which is not specified in the rule parameters. "
+  description      = "Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible. NON_COMPLIANT when a security group with inbound 0.0.0.0/0 has a port accessible which is not specified in the rule parameters. If enabled, requires vpc_sg_authorized_TCP_ports and vpc_sg_authorized_UDP_ports declared in terraform"
   input_parameters = local.aws_config_vpc_sg_authorized_ports
 
   source {
