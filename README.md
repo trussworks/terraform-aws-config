@@ -318,8 +318,8 @@ No modules.
 | resource\_types | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
 | s3\_bucket\_public\_access\_prohibited\_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
-| vpc\_sg\_authorized\_TCP\_ports | Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025'. vpc\_sg\_authorized\_UDP\_ports required as well | `string` | `"example,CSV"` | no |
-| vpc\_sg\_authorized\_UDP\_ports | Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '500,1020-1025'. vpc\_sg\_authorized\_TCP\_ports required as well | `string` | `"example,CSV"` | no |
+| vpc\_sg\_authorized\_TCP\_ports | Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | `string` | `null` | no |
+| vpc\_sg\_authorized\_UDP\_ports | Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '500,1020-1025' | `string` | `null` | no |
 
 ## Outputs
 
