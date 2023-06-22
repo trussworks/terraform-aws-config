@@ -526,15 +526,15 @@ variable "check_vpc_sg_open_only_to_authorized_ports" {
 }
 
 variable "vpc_sg_authorized_TCP_ports" {
-  description = "Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  description = "Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025'"
   type        = string
-  default     = "example,443,1020-1025"
+  default     = "example,CSV"
 }
 
 variable "vpc_sg_authorized_UDP_ports" {
-  description = "Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash."
+  description = "Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '500,1020-1025'"
   type        = string
-  default     = "example,500,1020-1025"
+  default     = "example,CSV"
 }
 
 variable "resource_types" {
