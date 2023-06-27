@@ -82,6 +82,13 @@ locals {
       s3_bucket_public_access_prohibited_exclusion = var.s3_bucket_public_access_prohibited_exclusion
     }
   )
+
+  aws_config_vpc_sg_authorized_ports = templatefile("${path.module}/config-policies/vpc_sg_authorized_ports.tpl",
+    {
+      vpc_sg_authorized_TCP_ports = var.vpc_sg_authorized_TCP_ports
+      vpc_sg_authorized_UDP_ports = var.vpc_sg_authorized_UDP_ports
+    }
+  )
 }
 
 
@@ -936,9 +943,10 @@ resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
 }
 
 resource "aws_config_config_rule" "vpc-sg-open-only-to-authorized-ports" {
-  count       = var.check_vpc_sg_open_only_to_authorized_ports ? 1 : 0
-  name        = "vpc-sg-open-only-to-authorized-ports"
-  description = "Checks whether any security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible. The rule is NON_COMPLIANT when a security group with inbound 0.0.0.0/0 has a port accessible which is not specified in the rule parameters. "
+  count            = var.check_vpc_sg_open_only_to_authorized_ports ? 1 : 0
+  name             = "vpc-sg-open-only-to-authorized-ports"
+  description      = "Checks if security groups with inbound 0.0.0.0/0 have TCP or UDP ports accessible. NON_COMPLIANT if security group with inbound 0.0.0.0/0 has a port accessible which is not specified in rule parameters.(both Terraform inputs required if enabled)"
+  input_parameters = local.aws_config_vpc_sg_authorized_ports
 
   source {
     owner             = "AWS"

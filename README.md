@@ -284,7 +284,7 @@ No modules.
 | check\_s3\_bucket\_server\_side\_encryption\_enabled | Enable s3-bucket-server-side-encryption-enabled rule | `bool` | `true` | no |
 | check\_s3\_bucket\_ssl\_requests\_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
 | check\_vpc\_default\_security\_group\_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
-| check\_vpc\_sg\_open\_only\_to\_authorized\_ports | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `true` | no |
+| check\_vpc\_sg\_open\_only\_to\_authorized\_ports | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `false` | no |
 | cloud\_trail\_cloud\_watch\_logs\_enabled | Enable cloud\_trail\_cloud\_watch\_logs\_enabled rule | `bool` | `true` | no |
 | config\_aggregator\_name | The name of the aggregator. | `string` | `"organization"` | no |
 | config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
@@ -318,6 +318,8 @@ No modules.
 | resource\_types | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
 | s3\_bucket\_public\_access\_prohibited\_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
+| vpc\_sg\_authorized\_TCP\_ports | Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | `string` | `"none"` | no |
+| vpc\_sg\_authorized\_UDP\_ports | Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '500,1020-1025' | `string` | `"none"` | no |
 
 ## Outputs
 
