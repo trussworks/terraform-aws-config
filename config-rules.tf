@@ -869,11 +869,11 @@ resource "aws_config_config_rule" "rds-snapshot-encrypted" {
 resource "aws_config_config_rule" "rds-cluster-deletion-protection-enabled" {
   count       = var.check_rds_cluster_deletion_protection_enabled ? 1 : 0
   name        = "rds-cluster-deletion-protection-enabled"
-  description = "Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted. The rule is NON_COMPLIANT, if the Amazon RDS DB snapshots are not encrypted."
+  description = "Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. The rule is NON_COMPLIANT if an Amazon RDS cluster does not have deletion protection enabled."
 
   source {
     owner             = "AWS"
-    source_identifier = "RDS_SNAPSHOT_ENCRYPTED"
+    source_identifier = "RDS_CLUSTER_DELETION_PROTECTION_ENABLED"
   }
 
   tags = var.tags
