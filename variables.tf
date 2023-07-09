@@ -568,3 +568,9 @@ variable "check_ebs_optimized_instance" {
   type        = bool
   default     = false
 }
+
+variable "sns_kms_key_id" {
+  description = "The ARN of the KMS key used to encrypt the Amazon SNS topic."
+  type        = string
+  default     = null
+}
