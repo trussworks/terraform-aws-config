@@ -83,12 +83,8 @@ locals {
     }
   )
 
-  aws_config_vpc_sg_authorized_ports = templatefile("${path.module}/config-policies/vpc_sg_authorized_ports.tpl",
-    {
-      vpc_sg_authorized_TCP_ports = var.vpc_sg_authorized_TCP_ports
-      vpc_sg_authorized_UDP_ports = var.vpc_sg_authorized_UDP_ports
-    }
-  )
+  aws_config_vpc_sg_authorized_ports = jsonencode({ for k, v in var.vpc_sg_authorized_ports : k => tostring(v) if v != null })
+
 }
 
 
