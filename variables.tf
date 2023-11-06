@@ -165,12 +165,6 @@ variable "required_tags" {
   default     = {}
 }
 
-variable "check_instances_in_vpc" {
-  description = "Enable instances-in-vpc rule"
-  type        = bool
-  default     = true
-}
-
 variable "check_acm_certificate_expiration_check" {
   description = "Enable acm-certificate-expiration-check rule"
   type        = bool
@@ -509,12 +503,6 @@ variable "s3_bucket_public_access_prohibited_exclusion" {
 
 variable "check_s3_bucket_acl_prohibited" {
   description = "Enable s3-bucket-acl-prohibited rule"
-  type        = bool
-  default     = true
-}
-
-variable "check_s3_bucket_server_side_encryption_enabled" {
-  description = "Enable s3-bucket-server-side-encryption-enabled rule"
   type        = bool
   default     = true
 }
