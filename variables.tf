@@ -551,3 +551,9 @@ variable "vpc_sg_authorized_ports" {
   })
   default = {}
 }
+
+variable "sns_kms_key_id" {
+  description = "The ARN of the KMS key used to encrypt the Amazon SNS topic."
+  type        = string
+  default     = null
+}

@@ -17,6 +17,30 @@ data "aws_iam_policy_document" "aws_config_policy" {
     ]
   }
 
+  dynamic "statement" {
+    for_each = var.sns_kms_key_id != null ? [1] : []
+    content {
+      sid    = "AWSAllowKMSKeyUsage"
+      effect = "Allow"
+      actions = [
+        "kms:Decrypt",
+        "kms:GenerateDataKey*"
+      ]
+      resources = [var.sns_kms_key_id]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.sns_kms_key_id != null ? [1] : []
+    content {
+      sid    = "AWSAllowSNSPublish"
+      effect = "Allow"
+      actions = [
+        "sns:Publish"
+      ]
+      resources = [var.config_sns_topic_arn]
+    }
+  }
 
   statement {
     sid    = "AWSConfigBucketExistenceCheck"

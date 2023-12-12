@@ -313,6 +313,7 @@ No modules.
 | required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
 | resource\_types | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
 | s3\_bucket\_public\_access\_prohibited\_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
+| sns\_kms\_key\_id | The ARN of the KMS key used to encrypt the Amazon SNS topic. | `string` | `null` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
 | vpc\_sg\_authorized\_ports | Object with values as Comma-separated list of ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | ```object({ authorizedTcpPorts = optional(string, null) authorizedUdpPorts = optional(string, null) })``` | `{}` | no |
 
