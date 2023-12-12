@@ -183,7 +183,6 @@ No modules.
 | [aws_config_config_rule.iam-policy-no-statements-with-full-access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam-user-no-policies-check](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.iam_root_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
-| [aws_config_config_rule.instances-in-vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.internet-gateway-authorized-vpc-only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.mfa_enabled_for_iam_console_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.multi-region-cloud-trail-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -201,7 +200,6 @@ No modules.
 | [aws_config_config_rule.s3-bucket-level-public-access-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-public-read-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3-bucket-public-write-prohibited](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
-| [aws_config_config_rule.s3-bucket-server-side-encryption-enabled](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.s3_bucket_ssl_requests_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.vpc-sg-open-only-to-authorized-ports](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
 | [aws_config_config_rule.vpc_default_security_group_closed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_config_rule) | resource |
@@ -263,7 +261,6 @@ No modules.
 | check\_iam\_policy\_no\_statements\_with\_full\_access | Enable iam-policy-no-statements-with-full-access rule | `bool` | `true` | no |
 | check\_iam\_root\_access\_key | Enable iam-root-access-key rule | `bool` | `true` | no |
 | check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
-| check\_instances\_in\_vpc | Enable instances-in-vpc rule | `bool` | `true` | no |
 | check\_internet\_gateway\_authorized\_vpc\_only | Enable internet-gateway-authorized-vpc-only rule | `bool` | `false` | no |
 | check\_mfa\_enabled\_for\_iam\_console\_access | Enable mfa-enabled-for-iam-console-access rule | `bool` | `true` | no |
 | check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
@@ -281,7 +278,6 @@ No modules.
 | check\_s3\_bucket\_level\_public\_access\_prohibited | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
 | check\_s3\_bucket\_public\_read\_prohibited | Enable s3-bucket-public-read-prohibited rule | `bool` | `false` | no |
 | check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
-| check\_s3\_bucket\_server\_side\_encryption\_enabled | Enable s3-bucket-server-side-encryption-enabled rule | `bool` | `true` | no |
 | check\_s3\_bucket\_ssl\_requests\_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
 | check\_vpc\_default\_security\_group\_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
 | check\_vpc\_sg\_open\_only\_to\_authorized\_ports | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `false` | no |
@@ -319,8 +315,7 @@ No modules.
 | s3\_bucket\_public\_access\_prohibited\_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
 | sns\_kms\_key\_id | The ARN of the KMS key used to encrypt the Amazon SNS topic. | `string` | `null` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
-| vpc\_sg\_authorized\_TCP\_ports | Comma-separated list of TCP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | `string` | `"none"` | no |
-| vpc\_sg\_authorized\_UDP\_ports | Comma-separated list of UDP ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '500,1020-1025' | `string` | `"none"` | no |
+| vpc\_sg\_authorized\_ports | Object with values as Comma-separated list of ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | ```object({ authorizedTcpPorts = optional(string, null) authorizedUdpPorts = optional(string, null) })``` | `{}` | no |
 
 ## Outputs
 

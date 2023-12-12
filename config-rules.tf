@@ -83,12 +83,8 @@ locals {
     }
   )
 
-  aws_config_vpc_sg_authorized_ports = templatefile("${path.module}/config-policies/vpc_sg_authorized_ports.tpl",
-    {
-      vpc_sg_authorized_TCP_ports = var.vpc_sg_authorized_TCP_ports
-      vpc_sg_authorized_UDP_ports = var.vpc_sg_authorized_UDP_ports
-    }
-  )
+  aws_config_vpc_sg_authorized_ports = jsonencode({ for k, v in var.vpc_sg_authorized_ports : k => tostring(v) if v != null })
+
 }
 
 
@@ -176,21 +172,6 @@ resource "aws_config_config_rule" "cloud-trail-log-file-validation-enabled" {
   }
 
   maximum_execution_frequency = var.config_max_execution_frequency
-
-  tags = var.tags
-
-  depends_on = [aws_config_configuration_recorder.main]
-}
-
-resource "aws_config_config_rule" "instances-in-vpc" {
-  count       = var.check_instances_in_vpc ? 1 : 0
-  name        = "instances-in-vpc"
-  description = "Ensure all EC2 instances run in a VPC"
-
-  source {
-    owner             = "AWS"
-    source_identifier = "INSTANCES_IN_VPC"
-  }
 
   tags = var.tags
 
@@ -869,11 +850,11 @@ resource "aws_config_config_rule" "rds-snapshot-encrypted" {
 resource "aws_config_config_rule" "rds-cluster-deletion-protection-enabled" {
   count       = var.check_rds_cluster_deletion_protection_enabled ? 1 : 0
   name        = "rds-cluster-deletion-protection-enabled"
-  description = "Checks whether Amazon Relational Database Service (Amazon RDS) DB snapshots are encrypted. The rule is NON_COMPLIANT, if the Amazon RDS DB snapshots are not encrypted."
+  description = "Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled. The rule is NON_COMPLIANT if an Amazon RDS cluster does not have deletion protection enabled."
 
   source {
     owner             = "AWS"
-    source_identifier = "RDS_SNAPSHOT_ENCRYPTED"
+    source_identifier = "RDS_CLUSTER_DELETION_PROTECTION_ENABLED"
   }
 
   tags = var.tags
@@ -920,21 +901,6 @@ resource "aws_config_config_rule" "s3-bucket-acl-prohibited" {
   source {
     owner             = "AWS"
     source_identifier = "S3_BUCKET_ACL_PROHIBITED"
-  }
-
-  tags = var.tags
-
-  depends_on = [aws_config_configuration_recorder.main]
-}
-
-resource "aws_config_config_rule" "s3-bucket-server-side-encryption-enabled" {
-  count       = var.check_s3_bucket_server_side_encryption_enabled ? 1 : 0
-  name        = "s3-bucket-server-side-encryption-enabled"
-  description = "Checks if S3 bucket either has the S3 default encryption enabled or that S3 policy explicitly denies put-object requests without SSE that uses AES-256 or AWS KMS. The rule is NON_COMPLIANT if your Amazon S3 bucket is not encrypted by default."
-
-  source {
-    owner             = "AWS"
-    source_identifier = "S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED"
   }
 
   tags = var.tags
