@@ -24,7 +24,8 @@ data "aws_iam_policy_document" "aws_config_policy" {
       effect = "Allow"
       actions = [
         "kms:Decrypt",
-        "kms:GenerateDataKey*"
+        "kms:GenerateDataKey*",
+        "kms:DescribeKey"
       ]
       resources = [var.sns_kms_key_id]
     }
