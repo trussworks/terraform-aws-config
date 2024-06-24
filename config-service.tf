@@ -37,4 +37,18 @@ resource "aws_config_configuration_recorder" "main" {
     include_global_resource_types = length(var.resource_types) == 0 ? var.include_global_resource_types : null
     resource_types                = length(var.resource_types) == 0 ? null : var.resource_types
   }
+
+  recording_mode {
+    recording_frequency = var.config_recording_frequency
+
+    dynamic "recording_mode_override" {
+      for_each = var.config_recording_frequency_overrides
+
+      content {
+        description         = recording_mode_override.value.description
+        resource_types      = recording_mode_override.value.resource_types
+        recording_frequency = recording_mode_override.value.recording_frequency
+      }
+    }
+  }
 }
