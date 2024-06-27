@@ -290,7 +290,7 @@ No modules.
 | config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
 | config\_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
 | config\_recording\_frequency | Default recording frequency for the AWS Config | `string` | `"CONTINUOUS"` | no |
-| config\_recording\_frequency\_overrides | Specific overrides of the recording frequency for the AWS Config | ```list(object({ description = optional(string, null) resource_types = list(string) recording_frequency = string }))``` | `[]` | no |
+| config\_recording\_frequency\_overrides | Specific overrides of the recording frequency for the AWS Config | ```set(object({ description = optional(string, null) resource_types = list(string) recording_frequency = string }))``` | `[]` | no |
 | config\_role\_permissions\_boundary | The ARN of the permissions boundary to apply to IAM roles created for AWS Config | `string` | `null` | no |
 | config\_sns\_topic\_arn | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
 | cw\_loggroup\_retention\_period | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
