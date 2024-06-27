@@ -36,6 +36,9 @@ resource "aws_config_configuration_recorder" "main" {
     all_supported                 = length(var.resource_types) == 0 ? true : false
     include_global_resource_types = length(var.resource_types) == 0 ? var.include_global_resource_types : null
     resource_types                = length(var.resource_types) == 0 ? null : var.resource_types
+    recording_strategy {
+      use_only = length(var.resource_types) == 0 ? "ALL_SUPPORTED_RESOURCE_TYPES" : "INCLUSION_BY_RESOURCE_TYPES"
+    }
   }
 
   recording_mode {
