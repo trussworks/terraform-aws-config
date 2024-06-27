@@ -393,6 +393,22 @@ variable "config_name" {
   default     = "aws-config"
 }
 
+variable "config_recording_frequency" {
+  description = "Default recording frequency for the AWS Config"
+  type        = string
+  default     = "CONTINUOUS"
+}
+
+variable "config_recording_frequency_overrides" {
+  description = "Specific overrides of the recording frequency for the AWS Config"
+  type = set(object({
+    description         = optional(string, null)
+    resource_types      = list(string)
+    recording_frequency = string
+  }))
+  default = []
+}
+
 variable "config_role_permissions_boundary" {
   description = "The ARN of the permissions boundary to apply to IAM roles created for AWS Config"
   type        = string
