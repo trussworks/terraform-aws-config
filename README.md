@@ -132,17 +132,13 @@ module "aws_config" {
 | Name | Version |
 |------|---------|
 | terraform | >= 1.0 |
-| aws | >= 2.70 |
+| aws | >= 5.5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.70 |
-
-## Modules
-
-No modules.
+| aws | >= 5.5 |
 
 ## Resources
 
@@ -223,109 +219,111 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_key\_max\_age | Maximum number of days without rotation. | `number` | `90` | no |
-| acm\_days\_to\_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
-| aggregate\_organization | Aggregate compliance data by organization | `bool` | `false` | no |
-| ami\_required\_tag\_key\_value | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
-| authorized\_vpc\_ids | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON\_COMPLIANT. | `string` | `"example,CSV"` | no |
-| check\_access\_keys\_rotated | Enable access-keys-rotated rule | `bool` | `true` | no |
-| check\_acm\_certificate\_expiration\_check | Enable acm-certificate-expiration-check rule | `bool` | `true` | no |
-| check\_approved\_amis\_by\_tag | Enable approved-amis-by-tag rule | `bool` | `false` | no |
-| check\_cloud\_trail\_encryption | Enable cloud-trail-encryption-enabled rule | `bool` | `false` | no |
-| check\_cloud\_trail\_log\_file\_validation | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
-| check\_cloudtrail\_enabled | Enable cloudtrail-enabled rule | `bool` | `true` | no |
-| check\_cloudwatch\_log\_group\_encrypted | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
-| check\_cmk\_backing\_key\_rotated | Enable cmk\_backing\_key\_rotation\_enabled rule | `bool` | `true` | no |
-| check\_cw\_loggroup\_retention\_period | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
-| check\_db\_instance\_backup\_enabled | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
-| check\_dynamodb\_table\_encrypted\_kms | Enable dynamodb-table-encrypted-kms rule | `bool` | `false` | no |
-| check\_dynamodb\_table\_encryption\_enabled | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `true` | no |
-| check\_ebs\_optimized\_instance | Enable ebs-optimized-instance-check rule | `bool` | `false` | no |
-| check\_ebs\_snapshot\_public\_restorable | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
-| check\_ec2\_encrypted\_volumes | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
-| check\_ec2\_imdsv2 | Enable IMDSv2 rule | `bool` | `false` | no |
-| check\_ec2\_volume\_inuse\_check | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
-| check\_ecr\_private\_image\_scanning\_enabled | Enable ecr-private-image-scanning-enabled rule | `bool` | `true` | no |
-| check\_ecr\_private\_lifecycle\_policy\_configured | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
-| check\_ecs\_awsvpc\_networking\_enabled | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
-| check\_ecs\_containers\_nonprivileged | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
-| check\_ecs\_containers\_readonly\_access | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
-| check\_ecs\_no\_environment\_secrets | Enable ecs-no-environment-secrets rule | `bool` | `false` | no |
-| check\_eip\_attached | Enable eip-attached rule | `bool` | `false` | no |
-| check\_elb\_deletion\_protection\_enabled | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
-| check\_elb\_logging\_enabled | Enable elb-logging-enabled rule | `bool` | `false` | no |
-| check\_guard\_duty | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
-| check\_iam\_group\_has\_users\_check | Enable iam-group-has-users-check rule | `bool` | `true` | no |
-| check\_iam\_password\_policy | Enable iam-password-policy rule | `bool` | `true` | no |
-| check\_iam\_policy\_no\_statements\_with\_admin\_access | Enable iam-policy-no-statements-with-admin-access rule | `bool` | `true` | no |
-| check\_iam\_policy\_no\_statements\_with\_full\_access | Enable iam-policy-no-statements-with-full-access rule | `bool` | `true` | no |
-| check\_iam\_root\_access\_key | Enable iam-root-access-key rule | `bool` | `true` | no |
-| check\_iam\_user\_no\_policies\_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
-| check\_internet\_gateway\_authorized\_vpc\_only | Enable internet-gateway-authorized-vpc-only rule | `bool` | `false` | no |
-| check\_mfa\_enabled\_for\_iam\_console\_access | Enable mfa-enabled-for-iam-console-access rule | `bool` | `true` | no |
-| check\_multi\_region\_cloud\_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
-| check\_nacl\_no\_unrestricted\_ssh\_rdp | Enable nacl-no-unrestricted-ssh-rdp rule | `bool` | `true` | no |
-| check\_rds\_cluster\_deletion\_protection\_enabled | Enable rds-cluster-deletion-protection-enabled rule | `bool` | `true` | no |
-| check\_rds\_public\_access | Enable rds-instance-public-access-check rule | `bool` | `false` | no |
-| check\_rds\_snapshot\_encrypted | Enable rds-snapshot-encrypted rule | `bool` | `true` | no |
-| check\_rds\_snapshots\_public\_prohibited | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
-| check\_rds\_storage\_encrypted | Enable rds-storage-encrypted rule | `bool` | `true` | no |
-| check\_required\_tags | Enable required-tags rule | `bool` | `false` | no |
-| check\_restricted\_common\_ports | Enable restricted-common-ports-check | `bool` | `false` | no |
-| check\_restricted\_ssh | Enable restricted-ssh rule | `bool` | `true` | no |
-| check\_root\_account\_mfa\_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
-| check\_s3\_bucket\_acl\_prohibited | Enable s3-bucket-acl-prohibited rule | `bool` | `true` | no |
-| check\_s3\_bucket\_level\_public\_access\_prohibited | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
-| check\_s3\_bucket\_public\_read\_prohibited | Enable s3-bucket-public-read-prohibited rule | `bool` | `false` | no |
-| check\_s3\_bucket\_public\_write\_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
-| check\_s3\_bucket\_ssl\_requests\_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
-| check\_vpc\_default\_security\_group\_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
-| check\_vpc\_sg\_open\_only\_to\_authorized\_ports | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `false` | no |
-| cloud\_trail\_cloud\_watch\_logs\_enabled | Enable cloud\_trail\_cloud\_watch\_logs\_enabled rule | `bool` | `true` | no |
-| config\_aggregator\_name | The name of the aggregator. | `string` | `"organization"` | no |
-| config\_delivery\_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
-| config\_logs\_bucket | The S3 bucket for AWS Config logs. If you have set enable\_config\_recorder to false then this can be an empty string. | `string` | n/a | yes |
-| config\_logs\_bucket\_kms\_key\_arn | The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket. | `string` | `null` | no |
-| config\_logs\_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
-| config\_max\_execution\_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
-| config\_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
-| config\_recording\_frequency | Default recording frequency for the AWS Config | `string` | `"CONTINUOUS"` | no |
-| config\_recording\_frequency\_overrides | Specific overrides of the recording frequency for the AWS Config | ```set(object({ description = optional(string, null) resource_types = list(string) recording_frequency = string }))``` | `[]` | no |
-| config\_role\_permissions\_boundary | The ARN of the permissions boundary to apply to IAM roles created for AWS Config | `string` | `null` | no |
-| config\_sns\_topic\_arn | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
-| cw\_loggroup\_retention\_period | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
-| dynamodb\_arn\_encryption\_list | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"example,CSV"` | no |
-| ecs\_no\_environment\_secrets | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `"example,CSV"` | no |
-| elb\_logging\_s3\_buckets | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `"example,CSV"` | no |
-| enable\_config\_recorder | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
-| enable\_efs\_encrypted\_check | Enable efs-encrypted-check rule | `bool` | `false` | no |
-| enable\_multi\_account\_logs | Enable sending of logs and snapshots from different Config accounts / regions into a single bucket | `bool` | `false` | no |
-| exclude\_permission\_boundary | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `false` | no |
-| expected\_delivery\_window\_age | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
-| include\_global\_resource\_types | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
-| kms\_key\_id | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `"example,CSV"` | no |
-| password\_max\_age | Number of days before password expiration. | `number` | `90` | no |
-| password\_min\_length | Password minimum length. | `number` | `14` | no |
-| password\_require\_lowercase | Require at least one lowercase character in password. | `bool` | `true` | no |
-| password\_require\_numbers | Require at least one number in password. | `bool` | `true` | no |
-| password\_require\_symbols | Require at least one symbol in password. | `bool` | `true` | no |
-| password\_require\_uppercase | Require at least one uppercase character in password. | `bool` | `true` | no |
-| password\_reuse\_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
-| required\_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
-| required\_tags\_resource\_types | Resource types to check for tags. | `list(string)` | `[]` | no |
-| resource\_types | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
-| s3\_bucket\_public\_access\_prohibited\_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
-| sns\_kms\_key\_id | The ARN of the KMS key used to encrypt the Amazon SNS topic. | `string` | `null` | no |
+| config_logs_bucket | The S3 bucket for AWS Config logs. If you have set enable_config_recorder to false then this can be an empty string. | `string` | n/a | yes |
+| access_key_max_age | Maximum number of days without rotation. | `number` | `90` | no |
+| acm_days_to_expiration | Specify the number of days before the rule flags the ACM Certificate as noncompliant. | `number` | `14` | no |
+| aggregate_organization | Aggregate compliance data by organization | `bool` | `false` | no |
+| ami_required_tag_key_value | Tag/s key and value which AMI has to have in order to be compliant: Example: key1:value1,key2:value2 | `string` | `""` | no |
+| authorized_vpc_ids | Comma-separated list of the authorized VPC IDs with attached IGWs. If parameter is not provided all attached IGWs will be NON_COMPLIANT. | `string` | `"example,CSV"` | no |
+| check_access_keys_rotated | Enable access-keys-rotated rule | `bool` | `true` | no |
+| check_acm_certificate_expiration_check | Enable acm-certificate-expiration-check rule | `bool` | `true` | no |
+| check_approved_amis_by_tag | Enable approved-amis-by-tag rule | `bool` | `false` | no |
+| check_cloud_trail_encryption | Enable cloud-trail-encryption-enabled rule | `bool` | `false` | no |
+| check_cloud_trail_log_file_validation | Enable cloud-trail-log-file-validation-enabled rule | `bool` | `false` | no |
+| check_cloudtrail_enabled | Enable cloudtrail-enabled rule | `bool` | `true` | no |
+| check_cloudwatch_log_group_encrypted | Enable cloudwatch-log-group-encryption rule | `bool` | `true` | no |
+| check_cmk_backing_key_rotated | Enable cmk_backing_key_rotation_enabled rule | `bool` | `true` | no |
+| check_cw_loggroup_retention_period | Enable cloudwatch-log-group-retention-period-check rule | `bool` | `false` | no |
+| check_db_instance_backup_enabled | Enable db-instance-backup-enabled rule | `bool` | `false` | no |
+| check_dynamodb_table_encrypted_kms | Enable dynamodb-table-encrypted-kms rule | `bool` | `false` | no |
+| check_dynamodb_table_encryption_enabled | Enable checkdynamodb-table-encryption-enabled rule | `bool` | `true` | no |
+| check_ebs_optimized_instance | Enable ebs-optimized-instance-check rule | `bool` | `false` | no |
+| check_ebs_snapshot_public_restorable | Enable ebs-snapshot-public-restorable rule | `bool` | `true` | no |
+| check_ec2_encrypted_volumes | Enable ec2-encrypted-volumes rule | `bool` | `true` | no |
+| check_ec2_imdsv2 | Enable IMDSv2 rule | `bool` | `false` | no |
+| check_ec2_volume_inuse_check | Enable ec2-volume-inuse-check rule | `bool` | `true` | no |
+| check_ecr_private_image_scanning_enabled | Enable ecr-private-image-scanning-enabled rule | `bool` | `true` | no |
+| check_ecr_private_lifecycle_policy_configured | Enable ecr-private-lifecycle-policy-configured rule | `bool` | `true` | no |
+| check_ecs_awsvpc_networking_enabled | Enable ecs-awsvpc-networking-enabled rule | `bool` | `true` | no |
+| check_ecs_containers_nonprivileged | Enable ecs-containers-nonprivileged rule | `bool` | `true` | no |
+| check_ecs_containers_readonly_access | Enable ecs-containers-readonly-access rule | `bool` | `true` | no |
+| check_ecs_no_environment_secrets | Enable ecs-no-environment-secrets rule | `bool` | `false` | no |
+| check_eip_attached | Enable eip-attached rule | `bool` | `false` | no |
+| check_elb_deletion_protection_enabled | Enable elb-deletion-protection-enabled rule | `bool` | `true` | no |
+| check_elb_logging_enabled | Enable elb-logging-enabled rule | `bool` | `false` | no |
+| check_guard_duty | Enable guardduty-enabled-centralized rule | `bool` | `false` | no |
+| check_iam_group_has_users_check | Enable iam-group-has-users-check rule | `bool` | `true` | no |
+| check_iam_password_policy | Enable iam-password-policy rule | `bool` | `true` | no |
+| check_iam_policy_no_statements_with_admin_access | Enable iam-policy-no-statements-with-admin-access rule | `bool` | `true` | no |
+| check_iam_policy_no_statements_with_full_access | Enable iam-policy-no-statements-with-full-access rule | `bool` | `true` | no |
+| check_iam_root_access_key | Enable iam-root-access-key rule | `bool` | `true` | no |
+| check_iam_user_no_policies_check | Enable iam-user-no-policies-check rule | `bool` | `true` | no |
+| check_internet_gateway_authorized_vpc_only | Enable internet-gateway-authorized-vpc-only rule | `bool` | `false` | no |
+| check_mfa_enabled_for_iam_console_access | Enable mfa-enabled-for-iam-console-access rule | `bool` | `true` | no |
+| check_multi_region_cloud_trail | Enable multi-region-cloud-trail-enabled rule | `bool` | `false` | no |
+| check_nacl_no_unrestricted_ssh_rdp | Enable nacl-no-unrestricted-ssh-rdp rule | `bool` | `true` | no |
+| check_rds_cluster_deletion_protection_enabled | Enable rds-cluster-deletion-protection-enabled rule | `bool` | `true` | no |
+| check_rds_public_access | Enable rds-instance-public-access-check rule | `bool` | `false` | no |
+| check_rds_snapshot_encrypted | Enable rds-snapshot-encrypted rule | `bool` | `true` | no |
+| check_rds_snapshots_public_prohibited | Enable rds-snapshots-public-prohibited rule | `bool` | `true` | no |
+| check_rds_storage_encrypted | Enable rds-storage-encrypted rule | `bool` | `true` | no |
+| check_required_tags | Enable required-tags rule | `bool` | `false` | no |
+| check_restricted_common_ports | Enable restricted-common-ports-check | `bool` | `false` | no |
+| check_restricted_ssh | Enable restricted-ssh rule | `bool` | `true` | no |
+| check_root_account_mfa_enabled | Enable root-account-mfa-enabled rule | `bool` | `false` | no |
+| check_s3_bucket_acl_prohibited | Enable s3-bucket-acl-prohibited rule | `bool` | `true` | no |
+| check_s3_bucket_level_public_access_prohibited | Enable s3-bucket-level-public-access-prohibited rule | `bool` | `false` | no |
+| check_s3_bucket_public_read_prohibited | Enable s3-bucket-public-read-prohibited rule | `bool` | `false` | no |
+| check_s3_bucket_public_write_prohibited | Enable s3-bucket-public-write-prohibited rule | `bool` | `true` | no |
+| check_s3_bucket_ssl_requests_only | Enable s3-bucket-ssl-requests-only rule | `bool` | `true` | no |
+| check_vpc_default_security_group_closed | Enable vpc-default-security-group-closed rule | `bool` | `true` | no |
+| check_vpc_sg_open_only_to_authorized_ports | Enable vpc-sg-open-only-to-authorized-ports rule | `bool` | `false` | no |
+| cloud_trail_cloud_watch_logs_enabled | Enable cloud_trail_cloud_watch_logs_enabled rule | `bool` | `true` | no |
+| config_aggregator_name | The name of the aggregator. | `string` | `"organization"` | no |
+| config_delivery_frequency | The frequency with which AWS Config delivers configuration snapshots. | `string` | `"Six_Hours"` | no |
+| config_logs_bucket_kms_key_arn | The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket. | `string` | `null` | no |
+| config_logs_prefix | The S3 prefix for AWS Config logs. | `string` | `"config"` | no |
+| config_max_execution_frequency | The maximum frequency with which AWS Config runs evaluations for a rule. | `string` | `"TwentyFour_Hours"` | no |
+| config_name | The name of the AWS Config instance. | `string` | `"aws-config"` | no |
+| config_recording_frequency | Default recording frequency for the AWS Config. Allowed values are 'CONTINUOUS' or 'DAILY'. | `string` | `"CONTINUOUS"` | no |
+| config_recording_frequency_overrides | Specific overrides of the recording frequency for the AWS Config | ```set(object({ description = optional(string, null) resource_types = list(string) recording_frequency = string }))``` | `[]` | no |
+| config_role_permissions_boundary | The ARN of the permissions boundary to apply to IAM roles created for AWS Config | `string` | `null` | no |
+| config_sns_topic_arn | An SNS topic to stream configuration changes and notifications to. | `string` | `null` | no |
+| cw_loggroup_retention_period | Retention period for cloudwatch logs in number of days | `number` | `3653` | no |
+| dynamodb_arn_encryption_list | Comma separated list of AWS KMS key ARNs allowed for encrypting Amazon DynamoDB Tables. | `string` | `"example,CSV"` | no |
+| ecs_no_environment_secrets | Comma-separated list of key names to search for in the environment variables of container definitions within Task Definitions. Extra spaces will be removed. | `string` | `"example,CSV"` | no |
+| elb_logging_s3_buckets | Comma-separated list of Amazon S3 bucket names for Amazon ELB to deliver the log files. | `string` | `"example,CSV"` | no |
+| enable_config_recorder | Enables configuring the AWS Config recorder resources in this module. | `bool` | `true` | no |
+| enable_efs_encrypted_check | Enable efs-encrypted-check rule | `bool` | `false` | no |
+| enable_multi_account_logs | Enable sending of logs and snapshots from different Config accounts / regions into a single bucket | `bool` | `false` | no |
+| exclude_permission_boundary | Boolean to exclude the evaluation of IAM policies used as permissions boundaries. If set to 'true', the rule will not include permissions boundaries in the evaluation. Otherwise, all IAM policies in scope are evaluated when set to 'false.' | `bool` | `false` | no |
+| excluded_resource_types | A list that specifies the types of AWS resources for which AWS Config excludes configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
+| expected_delivery_window_age | Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance. | `number` | `12` | no |
+| include_global_resource_types | Specifies whether AWS Config includes all supported types of global resources with the resources that it records. | `bool` | `true` | no |
+| kms_key_id | Amazon Resource Name (ARN) of the KMS key that is used to encrypt the EFS file system. | `string` | `"example,CSV"` | no |
+| password_max_age | Number of days before password expiration. | `number` | `90` | no |
+| password_min_length | Password minimum length. | `number` | `14` | no |
+| password_require_lowercase | Require at least one lowercase character in password. | `bool` | `true` | no |
+| password_require_numbers | Require at least one number in password. | `bool` | `true` | no |
+| password_require_symbols | Require at least one symbol in password. | `bool` | `true` | no |
+| password_require_uppercase | Require at least one uppercase character in password. | `bool` | `true` | no |
+| password_reuse_prevention | Number of passwords before allowing reuse. | `number` | `24` | no |
+| recording_strategy | Specifies the recording strategy of the configuration recorder. Allowed values are `ALL_SUPPORTED_RESOURCE_TYPES`, `INCLUSION_BY_RESOURCE_TYPES`, `EXCLUSION_BY_RESOURCE_TYPES`. | `string` | `null` | no |
+| required_tags | A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional. | `map(string)` | `{}` | no |
+| required_tags_resource_types | Resource types to check for tags. | `list(string)` | `[]` | no |
+| resource_types | A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. | `list(string)` | `[]` | no |
+| s3_bucket_public_access_prohibited_exclusion | Comma-separated list of known allowed public Amazon S3 bucket names. | `string` | `"example,CSV"` | no |
+| sns_kms_key_id | The ARN of the KMS key used to encrypt the Amazon SNS topic. | `string` | `null` | no |
 | tags | Tags to apply to AWS Config resources | `map(string)` | `{}` | no |
-| vpc\_sg\_authorized\_ports | Object with values as Comma-separated list of ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | ```object({ authorizedTcpPorts = optional(string, null) authorizedUdpPorts = optional(string, null) })``` | `{}` | no |
+| vpc_sg_authorized_ports | Object with values as Comma-separated list of ports authorized to be open to 0.0.0.0/0. Ranges are defined by dash. example, '443,1020-1025' | ```object({ authorizedTcpPorts = optional(string, null) authorizedUdpPorts = optional(string, null) })``` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| aws\_config\_role\_arn | The ARN of the AWS config role. |
-| aws\_config\_role\_name | The name of the IAM role used by AWS config |
-| required\_tags\_rule\_arn | The ARN of the required-tags config rule. |
+| aws_config_role_arn | The ARN of the AWS config role. |
+| aws_config_role_name | The name of the IAM role used by AWS config |
+| required_tags_rule_arn | The ARN of the required-tags config rule. |
 <!-- END_TF_DOCS -->
 
 ## Upgrade Paths
