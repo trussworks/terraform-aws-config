@@ -1,14 +1,14 @@
 output "required_tags_rule_arn" {
   description = "The ARN of the required-tags config rule."
-  value       = concat(aws_config_config_rule.required-tags.*.arn, [""])[0]
+  value       = one(aws_config_config_rule.required-tags[*].arn)
 }
 
 output "aws_config_role_arn" {
   description = "The ARN of the AWS config role."
-  value       = concat(aws_iam_role.main.*.arn, [""])[0]
+  value       = one(aws_iam_role.main[*].arn)
 }
 
 output "aws_config_role_name" {
   description = "The name of the IAM role used by AWS config"
-  value       = concat(aws_iam_role.main.*.name, [""])[0]
+  value       = one(aws_iam_role.main[*].name)
 }
