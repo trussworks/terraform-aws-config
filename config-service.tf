@@ -1,3 +1,6 @@
+locals {
+  recording_strategy = length(var.excluded_resource_types) != 0 ? "EXCLUSION_BY_RESOURCE_TYPES" : length(var.resource_types) == 0 ? "ALL_SUPPORTED_RESOURCE_TYPES" : length(var.resource_types) != 0 ? "INCLUSION_BY_RESOURCE_TYPES" : var.recording_strategy
+}
 #
 # AWS Config Service
 #
@@ -33,9 +36,24 @@ resource "aws_config_configuration_recorder" "main" {
   role_arn = aws_iam_role.main[count.index].arn
 
   recording_group {
-    all_supported                 = length(var.resource_types) == 0 ? true : false
-    include_global_resource_types = length(var.resource_types) == 0 ? var.include_global_resource_types : null
-    resource_types                = length(var.resource_types) == 0 ? null : var.resource_types
+    all_supported                 = length(var.resource_types) == 0 || length(var.excluded_resource_types) == 0 ? true : false
+    include_global_resource_types = length(var.resource_types) == 0 || length(var.excluded_resource_types) == 0 ? var.include_global_resource_types : null
+    resource_types                = length(var.resource_types) == 0 || length(var.excluded_resource_types) == 0 ? null : var.resource_types
+
+
+    dynamic "exclusion_by_resource_types" {
+      for_each = length(var.excluded_resource_types) != 0 ? [1] : []
+      content {
+        resource_types = var.excluded_resource_types
+      }
+    }
+
+    dynamic "recording_strategy" {
+      for_each = var.recording_strategy != null ? [1] : []
+      content {
+        use_only = var.recording_strategy
+      }
+    }
   }
 
   recording_mode {

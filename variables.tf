@@ -394,7 +394,7 @@ variable "config_name" {
 }
 
 variable "config_recording_frequency" {
-  description = "Default recording frequency for the AWS Config"
+  description = "Default recording frequency for the AWS Config. Allowed values are 'CONTINUOUS' or 'DAILY'."
   type        = string
   default     = "CONTINUOUS"
 }
@@ -469,6 +469,12 @@ variable "exclude_permission_boundary" {
   default     = false
 }
 
+variable "excluded_resource_types" {
+  description = "A list that specifies the types of AWS resources for which AWS Config excludes configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types."
+  type        = list(string)
+  default     = []
+}
+
 variable "expected_delivery_window_age" {
   description = "Maximum age in hours of the most recent delivery to CloudWatch logs that satisfies compliance."
   type        = number
@@ -529,6 +535,12 @@ variable "password_reuse_prevention" {
   default     = 24
 }
 
+variable "recording_strategy" {
+  description = "Specifies the recording strategy of the configuration recorder. Allowed values are `ALL_SUPPORTED_RESOURCE_TYPES`, `INCLUSION_BY_RESOURCE_TYPES`, `EXCLUSION_BY_RESOURCE_TYPES`."
+  type        = string
+  default     = null
+}
+
 variable "required_tags" {
   description = "A map of required resource tags. Format is tagNKey, tagNValue, where N is int. Values are optional."
   type        = map(string)
@@ -553,6 +565,12 @@ variable "s3_bucket_public_access_prohibited_exclusion" {
   default     = "example,CSV"
 }
 
+variable "sns_kms_key_id" {
+  description = "The ARN of the KMS key used to encrypt the Amazon SNS topic."
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "Tags to apply to AWS Config resources"
   type        = map(string)
@@ -566,10 +584,4 @@ variable "vpc_sg_authorized_ports" {
     authorizedUdpPorts = optional(string, null)
   })
   default = {}
-}
-
-variable "sns_kms_key_id" {
-  description = "The ARN of the KMS key used to encrypt the Amazon SNS topic."
-  type        = string
-  default     = null
 }
