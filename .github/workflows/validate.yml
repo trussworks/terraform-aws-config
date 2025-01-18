@@ -10,4 +10,4 @@ on:
 
 jobs:
   validate-tf:
-    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@3cab03ab95045711da37ad6d63a93c666fc22398 # v0.0.2
+    uses: trussworks/shared-actions/.github/workflows/validate-tf.yml@96186a9bbe353f1c0cd876e9a5c9c3de24f29851 # v0.0.4
