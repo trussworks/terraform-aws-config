@@ -4,5 +4,6 @@
   "first-line-h1": false,
   "line_length": false,
   "no-multiple-blanks": false,
-  "no-inline-html": false
+  "no-inline-html": false,
+  "no-alt-text": false
 }

@@ -1,7 +1,7 @@
 {
   "extends": [
-    "config:base",
-    ":disableDependencyDashboard"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "labels": [
     "dependencies"
@@ -30,10 +30,9 @@
       "automerge": true,
       "description": "Group minor and patch updates into a single PR",
       "groupName": "dependencies",
-      "managers": [
+      "matchManagers": [
         "terraform",
         "pre-commit",
-        "dockerfile",
         "github-actions"
       ],
       "matchUpdateTypes": [

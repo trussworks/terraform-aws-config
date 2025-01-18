@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -14,27 +14,17 @@ repos:
       - id: end-of-file-fixer
       - id: mixed-line-ending
 
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
-    hooks:
-      - id: mdformat
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-toc
-        # mdformat fights with terraform_docs
-        exclude: README.m(ark)?d(own)?
-
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.33.0
+    rev: v0.43.0
     hooks:
       - id: markdownlint
 
-  - repo: https://github.com/detailyang/pre-commit-shell
-    rev: 1.0.5
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.19.0"
     hooks:
-      - id: shell-lint
+      - id: terraform-docs-system
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.77.1
+    rev: v1.96.3
     hooks:
       - id: terraform_fmt
