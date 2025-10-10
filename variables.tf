@@ -408,7 +408,7 @@ variable "config_sns_topic_arn" {
 variable "cw_loggroup_retention_period" {
   description = "Retention period for cloudwatch logs in number of days"
   type        = number
-  default     = 3653
+  default     = 365
 }
 
 variable "dynamodb_arn_encryption_list" {
